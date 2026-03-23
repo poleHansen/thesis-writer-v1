@@ -16,6 +16,8 @@ dependencies = [
   "sqlalchemy>=2.0,<3.0",
   "psycopg[binary]>=3.2,<4.0",
   "httpx>=0.28,<0.29",
+  "pypdf>=5.4,<6.0",
+  "python-docx>=1.1,<2.0",
 ]
 
 [tool.setuptools]
@@ -23,4 +25,4 @@ package-dir = {"" = "."}
 
 [tool.setuptools.packages.find]
 where = ["apps/api/src", "packages/core-types/src"]
-include = ["app*", "core_types*"]
+include = ["app*", "core_types*", "ingestion*"]

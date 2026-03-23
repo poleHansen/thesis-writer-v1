@@ -8,6 +8,8 @@ from app.models.project import GenerateBriefRequest
 from app.models.project import GenerateOutlineRequest
 from app.models.project import GenerateSlidePlanRequest
 from app.models.project import OutlineResponse
+from app.models.project import ParseProjectFilesRequest
+from app.models.project import ParseProjectFilesResponse
 from app.models.project import ProjectFileResponse
 from app.models.project import ProjectDetailResponse
 from app.models.project import ProjectFilesResponse
@@ -16,6 +18,7 @@ from app.models.project import ProjectStatusResponse
 from app.models.project import RegisterProjectFileRequest
 from app.models.project import SlidePlanResponse
 from app.models.project import SourceBundleResponse
+from app.models.project import UploadProjectFileRequest
 from app.services.project_service import ProjectService
 from app.state import get_project_service
 
@@ -65,6 +68,16 @@ def register_project_file(
     return ProjectFileResponse(file=project_file)
 
 
+@router.post("/{project_id}/files:upload", response_model=ProjectFileResponse, status_code=status.HTTP_201_CREATED)
+def upload_project_file(
+    project_id: str,
+    payload: UploadProjectFileRequest,
+    service: ProjectService = Depends(get_project_service),
+) -> ProjectFileResponse:
+    project_file = service.upload_project_file(project_id, payload)
+    return ProjectFileResponse(file=project_file)
+
+
 @router.get("/{project_id}/files", response_model=ProjectFilesResponse)
 def list_project_files(
     project_id: str,
@@ -72,6 +85,16 @@ def list_project_files(
 ) -> ProjectFilesResponse:
     files = service.list_project_files(project_id)
     return ProjectFilesResponse(files=files)
+
+
+@router.post("/{project_id}/files:parse", response_model=ParseProjectFilesResponse)
+def parse_project_files(
+    project_id: str,
+    payload: ParseProjectFilesRequest,
+    service: ProjectService = Depends(get_project_service),
+) -> ParseProjectFilesResponse:
+    files, source_bundle, task_run = service.parse_project_files(project_id, payload)
+    return ParseProjectFilesResponse(files=files, source_bundle=source_bundle, task_run=task_run)
 
 
 @router.post("/{project_id}/brief:generate", response_model=BriefResponse)

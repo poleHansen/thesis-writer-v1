@@ -45,6 +45,14 @@ class RegisterProjectFileRequest(BaseModel):
     metadata: dict = Field(default_factory=dict)
 
 
+class UploadProjectFileRequest(BaseModel):
+    file_name: str = Field(min_length=1, max_length=255)
+    content_base64: str = Field(min_length=1)
+    file_type: ProjectFileType = ProjectFileType.AUTO_DETECTED
+    mime_type: str | None = Field(default=None, max_length=128)
+    metadata: dict = Field(default_factory=dict)
+
+
 class ProjectFileResponse(BaseModel):
     file: ProjectFile
 
@@ -65,6 +73,18 @@ class BriefResponse(BaseModel):
 
 class SourceBundleResponse(BaseModel):
     source_bundle: SourceBundle
+
+
+class ParseProjectFilesRequest(BaseModel):
+    file_ids: list[str] | None = None
+    rebuild_bundle: bool = True
+    user_intent: UserIntent | None = None
+
+
+class ParseProjectFilesResponse(BaseModel):
+    files: list[ProjectFile] = Field(default_factory=list)
+    source_bundle: SourceBundle | None = None
+    task_run: TaskRun
 
 
 class GenerateOutlineRequest(BaseModel):

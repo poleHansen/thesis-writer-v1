@@ -2,7 +2,8 @@
   "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
   "python.analysis.extraPaths": [
     "${workspaceFolder}/apps/api/src",
-    "${workspaceFolder}/packages/core-types/src"
+    "${workspaceFolder}/packages/core-types/src",
+    "${workspaceFolder}/packages/ingestion/src"
   ],
   "python-envs.pythonProjects": [
     {

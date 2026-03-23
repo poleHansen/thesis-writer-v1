@@ -13,6 +13,7 @@ from app.models.project import ProjectStatusResponse
 from app.models.project import RegisterProjectFileRequest
 from app.models.project import SlidePlanResponse
 from app.models.project import SourceBundleResponse
+from app.models.project import UploadProjectFileRequest
 
 __all__ = [
 	"BriefResponse",
@@ -28,4 +29,5 @@ __all__ = [
 	"RegisterProjectFileRequest",
 	"SlidePlanResponse",
 	"SourceBundleResponse",
+	"UploadProjectFileRequest",
 ]

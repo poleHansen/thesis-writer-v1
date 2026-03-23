@@ -41,6 +41,9 @@ class InMemoryProjectRepository:
     def list_project_files(self, project_id: str) -> list[ProjectFile]:
         return []
 
+    def get_project_file(self, project_id: str, file_id: str) -> ProjectFile | None:
+        return None
+
     def create_source_bundle(self, source_bundle: SourceBundle) -> SourceBundle:
         return source_bundle
 
@@ -233,6 +236,28 @@ class SqlAlchemyProjectRepository:
         self._session.add(record)
         self._session.commit()
         return project_file
+
+    def get_project_file(self, project_id: str, file_id: str) -> ProjectFile | None:
+        record = self._session.get(ProjectFileRecord, file_id)
+        if record is None or record.project_id != project_id:
+            return None
+        return ProjectFile(
+            id=record.id,
+            project_id=record.project_id,
+            file_name=record.file_name,
+            file_type=record.file_type,
+            storage_path=record.storage_path,
+            mime_type=record.mime_type,
+            size_bytes=record.size_bytes,
+            checksum=record.checksum,
+            upload_status=record.upload_status,
+            parse_status=record.parse_status,
+            parse_error=record.parse_error,
+            extracted_summary=record.extracted_summary,
+            metadata=record.metadata_json or {},
+            created_at=record.created_at,
+            updated_at=record.updated_at,
+        )
 
     def list_project_files(self, project_id: str) -> list[ProjectFile]:
         stmt = (
@@ -554,6 +579,25 @@ class SqlAlchemyProjectRepository:
             "latest_artifact": latest_artifact,
             "latest_export": latest_export,
         }
+
+    def update_project_file(self, project_file: ProjectFile) -> ProjectFile:
+        record = self._session.get(ProjectFileRecord, project_file.id)
+        if record is None:
+            raise ValueError(f"Project file not found: {project_file.id}")
+        record.file_name = project_file.file_name
+        record.file_type = project_file.file_type
+        record.storage_path = project_file.storage_path
+        record.mime_type = project_file.mime_type
+        record.size_bytes = project_file.size_bytes
+        record.checksum = project_file.checksum
+        record.upload_status = project_file.upload_status
+        record.parse_status = project_file.parse_status
+        record.parse_error = project_file.parse_error
+        record.extracted_summary = project_file.extracted_summary
+        record.metadata_json = project_file.metadata
+        self._session.add(record)
+        self._session.commit()
+        return self.get_project_file(project_file.project_id, project_file.id) or project_file
 
     def update_project_links(
         self,
