@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: thesis-writer-v1
+Version: 0.1.0
+Summary: Thesis writer monorepo for research-to-presentation generation
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: fastapi<1.0,>=0.116
+Requires-Dist: uvicorn[standard]<1.0,>=0.35
+Requires-Dist: pydantic<3.0,>=2.11
+Requires-Dist: pydantic-settings<3.0,>=2.10
+Requires-Dist: sqlalchemy<3.0,>=2.0
+Requires-Dist: psycopg[binary]<4.0,>=3.2
+
+# thesis-writer-v1
+毕业论文初稿自动生成平台

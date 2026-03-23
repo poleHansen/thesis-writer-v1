@@ -1,0 +1,44 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-thesis_writer}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./storage/postgres:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./storage/redis:/data
+
+  api:
+    image: python:3.11-slim
+    working_dir: /workspace
+    env_file:
+      - .env
+    command: >
+      sh -c "pip install --no-cache-dir -e . && uvicorn app.main:app --host 0.0.0.0 --port 8000 --app-dir apps/api/src"
+    volumes:
+      - ./:/workspace
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - redis
+
+  web:
+    image: python:3.11-slim
+    working_dir: /workspace/apps/web
+    command: python server.py
+    volumes:
+      - ./:/workspace
+    ports:
+      - "${WEB_PORT:-3000}:3000"
+    depends_on:
+      - api
