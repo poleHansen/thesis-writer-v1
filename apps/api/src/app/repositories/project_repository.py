@@ -50,6 +50,9 @@ class InMemoryProjectRepository:
     def create_brief(self, brief: PresentationBrief) -> PresentationBrief:
         return brief
 
+    def update_brief(self, brief: PresentationBrief) -> PresentationBrief:
+        return brief
+
     def get_brief(self, brief_id: str) -> PresentationBrief | None:
         return None
 
@@ -57,6 +60,9 @@ class InMemoryProjectRepository:
         return None
 
     def create_outline(self, outline: Outline) -> Outline:
+        return outline
+
+    def update_outline(self, outline: Outline) -> Outline:
         return outline
 
     def get_outline(self, outline_id: str) -> Outline | None:
@@ -68,7 +74,16 @@ class InMemoryProjectRepository:
     def create_slide_plan(self, slide_plan: SlidePlan) -> SlidePlan:
         return slide_plan
 
+    def update_slide_plan(self, slide_plan: SlidePlan) -> SlidePlan:
+        return slide_plan
+
+    def create_slide_artifact(self, artifact: SlideArtifact) -> SlideArtifact:
+        return artifact
+
     def get_slide_plan(self, slide_plan_id: str) -> SlidePlan | None:
+        return None
+
+    def get_latest_slide_plan(self, project_id: str) -> SlidePlan | None:
         return None
 
     def get_latest_source_bundle(self, project_id: str) -> SourceBundle | None:
@@ -100,6 +115,7 @@ class InMemoryProjectRepository:
         latest_brief_id: str | None = None,
         latest_outline_id: str | None = None,
         latest_slide_plan_id: str | None = None,
+        latest_artifact_id: str | None = None,
         status: str | None = None,
     ) -> Project | None:
         project = self.get_project(project_id)
@@ -110,6 +126,7 @@ class InMemoryProjectRepository:
             "latest_brief_id": latest_brief_id,
             "latest_outline_id": latest_outline_id,
             "latest_slide_plan_id": latest_slide_plan_id,
+            "latest_artifact_id": latest_artifact_id,
             "status": status,
         }
         return project.model_copy(update={k: v for k, v in updates.items() if v is not None})
@@ -367,6 +384,25 @@ class SqlAlchemyProjectRepository:
         self._session.commit()
         return brief
 
+    def update_brief(self, brief: PresentationBrief) -> PresentationBrief:
+        record = self._session.get(PresentationBriefRecord, brief.id)
+        if record is None:
+            raise ValueError(f"Brief {brief.id} not found")
+        record.presentation_goal = brief.presentation_goal
+        record.target_audience = brief.target_audience
+        record.core_message = brief.core_message
+        record.storyline = brief.storyline
+        record.recommended_page_count = brief.recommended_page_count
+        record.tone = brief.tone
+        record.style_preferences = brief.style_preferences
+        record.risks = brief.risks
+        record.assumptions = brief.assumptions
+        record.status = brief.status
+        record.metadata_json = brief.metadata
+        record.updated_at = brief.updated_at
+        self._session.commit()
+        return brief
+
     def get_brief(self, brief_id: str) -> PresentationBrief | None:
         record = self._session.get(PresentationBriefRecord, brief_id)
         if record is None:
@@ -418,6 +454,19 @@ class SqlAlchemyProjectRepository:
         self._session.commit()
         return outline
 
+    def update_outline(self, outline: Outline) -> Outline:
+        record = self._session.get(OutlineRecord, outline.id)
+        if record is None:
+            raise ValueError(f"Outline {outline.id} not found")
+        record.title = outline.title
+        record.chapters = [chapter.model_dump() for chapter in outline.chapters]
+        record.summary = outline.summary
+        record.status = outline.status
+        record.metadata_json = outline.metadata
+        record.updated_at = outline.updated_at
+        self._session.commit()
+        return outline
+
     def get_outline(self, outline_id: str) -> Outline | None:
         record = self._session.get(OutlineRecord, outline_id)
         if record is None:
@@ -461,6 +510,19 @@ class SqlAlchemyProjectRepository:
             updated_at=slide_plan.updated_at,
         )
         self._session.add(record)
+        self._session.commit()
+        return slide_plan
+
+    def update_slide_plan(self, slide_plan: SlidePlan) -> SlidePlan:
+        record = self._session.get(SlidePlanRecord, slide_plan.id)
+        if record is None:
+            raise ValueError(f"Slide plan {slide_plan.id} not found")
+        record.page_count = slide_plan.page_count
+        record.slides = [slide.model_dump() for slide in slide_plan.slides]
+        record.design_direction = slide_plan.design_direction
+        record.status = slide_plan.status
+        record.metadata_json = slide_plan.metadata
+        record.updated_at = slide_plan.updated_at
         self._session.commit()
         return slide_plan
 
@@ -512,6 +574,26 @@ class SqlAlchemyProjectRepository:
         self._session.add(record)
         self._session.commit()
         return task_run
+
+    def create_slide_artifact(self, artifact: SlideArtifact) -> SlideArtifact:
+        record = SlideArtifactRecord(
+            id=artifact.id,
+            project_id=artifact.project_id,
+            slide_plan_id=artifact.slide_plan_id,
+            template_id=artifact.template_id,
+            svg_output_dir=artifact.svg_output_dir,
+            svg_final_dir=artifact.svg_final_dir,
+            preview_image_paths=artifact.preview_image_paths,
+            render_status=artifact.render_status,
+            failed_slide_ids=artifact.failed_slide_ids,
+            log_path=artifact.log_path,
+            metadata_json=artifact.metadata,
+            created_at=artifact.created_at,
+            updated_at=artifact.updated_at,
+        )
+        self._session.add(record)
+        self._session.commit()
+        return artifact
 
     def get_slide_artifact(self, artifact_id: str) -> SlideArtifact | None:
         record = self._session.get(SlideArtifactRecord, artifact_id)
@@ -607,6 +689,7 @@ class SqlAlchemyProjectRepository:
         latest_brief_id: str | None = None,
         latest_outline_id: str | None = None,
         latest_slide_plan_id: str | None = None,
+        latest_artifact_id: str | None = None,
         status: str | None = None,
     ) -> Project | None:
         record = self._session.get(ProjectRecord, project_id)
@@ -620,6 +703,8 @@ class SqlAlchemyProjectRepository:
             record.latest_outline_id = latest_outline_id
         if latest_slide_plan_id is not None:
             record.latest_slide_plan_id = latest_slide_plan_id
+        if latest_artifact_id is not None:
+            record.latest_artifact_id = latest_artifact_id
         if status is not None:
             record.status = status
         self._session.add(record)

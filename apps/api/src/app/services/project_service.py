@@ -1,18 +1,23 @@
 from __future__ import annotations
 
 import base64
+from typing import Any
 
 from fastapi import HTTPException, status
 
-from core_types import ContentBlock, ExtractedAsset, Outline, OutlineSection, PresentationBrief, Project, ProjectFile, SlidePlan, SlidePlanItem, SourceBundle, SourceChunk, TaskRun, UserIntent
+from core_types import ExtractedAsset, Outline, OutlineSection, PresentationBrief, Project, ProjectFile, SlideArtifact, SlidePlan, SlidePlanItem, SourceBundle, SourceChunk, TaskRun, TemplateMeta, UserIntent
 from core_types.task.models import TaskRun
-from core_types.enums import BundleStatus, FileUploadStatus, ParseStatus, ProjectStatus, ReviewStatus, TaskStatus, TaskType
+from core_types.enums import BundleStatus, FileUploadStatus, ParseStatus, ProjectStatus, RenderStatus, ReviewStatus, TaskStatus, TaskType
 from ingestion import DocumentNormalizer, IngestionParser
+from methodology_engine import BriefGenerator, OutlineGenerator, SlidePlanner
 
-from app.models.project import CreateProjectRequest, GenerateBriefRequest, GenerateOutlineRequest, GenerateSlidePlanRequest, ParseProjectFilesRequest, RegisterProjectFileRequest
+from app.models.project import CreateProjectRequest, GenerateBriefRequest, GenerateOutlineRequest, GenerateSlideArtifactRequest, GenerateSlidePlanRequest, ParseProjectFilesRequest, RegisterProjectFileRequest, UpdateBriefRequest, UpdateOutlineRequest, UpdateSlidePlanRequest
 from app.models.project import UploadProjectFileRequest
 from app.repositories.project_repository import SqlAlchemyProjectRepository
+from app.services.design_spec_builder import DesignSpecBuilder
 from app.services.file_storage import FileStorageService
+from app.services.svg_renderer import SvgRenderResult, SvgRenderer
+from app.services.template_registry import TemplateRegistryService
 
 
 class ProjectService:
@@ -20,6 +25,12 @@ class ProjectService:
         self._repository = repository
         self._parser = IngestionParser()
         self._normalizer = DocumentNormalizer()
+        self._brief_generator = BriefGenerator()
+        self._outline_generator = OutlineGenerator()
+        self._slide_planner = SlidePlanner()
+        self._template_registry = TemplateRegistryService()
+        self._design_spec_builder = DesignSpecBuilder()
+        self._svg_renderer = SvgRenderer()
         self._storage_service = storage_service or FileStorageService("storage")
 
     def create_project(self, payload: CreateProjectRequest) -> Project:
@@ -48,6 +59,9 @@ class ProjectService:
         project = self.get_project(project_id)
         tasks = self._repository.list_project_tasks(project_id)
         return project, tasks
+
+    def list_templates(self) -> list[TemplateMeta]:
+        return self._template_registry.list_templates()
 
     def register_project_file(self, project_id: str, payload: RegisterProjectFileRequest) -> ProjectFile:
         self.get_project(project_id)
@@ -215,10 +229,13 @@ class ProjectService:
     def generate_brief(self, project_id: str, payload: GenerateBriefRequest) -> tuple[SourceBundle, PresentationBrief, TaskRun]:
         project = self.get_project(project_id)
         project_files = self._repository.list_project_files(project_id)
-        if not project_files:
-            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Project has no files to analyze")
-
-        source_bundle = self._build_source_bundle_from_inputs(
+        latest_source_bundle = self._repository.get_latest_source_bundle(project_id)
+        if latest_source_bundle is not None and not payload.force_regenerate:
+            source_bundle = latest_source_bundle
+        else:
+            if not project_files and not payload.user_intent_override:
+                raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Project has no files or user intent to analyze")
+            source_bundle = self._build_source_bundle_from_inputs(
             project=project,
             project_files=project_files,
             raw_sections=[self._build_raw_markdown(project_files)] if project_files else [],
@@ -230,24 +247,17 @@ class ProjectService:
             warnings_by_file={},
             generated_from="project_files",
         )
-        self._repository.create_source_bundle(source_bundle)
+            self._repository.create_source_bundle(source_bundle)
 
-        brief = PresentationBrief(
-            project_id=project_id,
-            source_bundle_id=source_bundle.id,
-            presentation_goal=self._build_presentation_goal(project, payload.user_intent_override),
-            target_audience=payload.user_intent_override.audience if payload.user_intent_override and payload.user_intent_override.audience else "general audience",
-            core_message=self._build_core_message(project, project_files),
-            storyline=self._build_storyline(project_files),
-            recommended_page_count=payload.user_intent_override.desired_page_count if payload.user_intent_override and payload.user_intent_override.desired_page_count else max(8, min(20, len(project_files) * 3)),
-            tone="professional",
-            style_preferences=payload.user_intent_override.style_preferences if payload.user_intent_override else [],
-            risks=[] if payload.force_regenerate else ["brief is generated from file metadata only"],
-            assumptions=["detailed parsing will be implemented in phase 2"],
-            status=ReviewStatus.DRAFT,
-            metadata={"generation_mode": "skeleton"},
+        brief = self._brief_generator.generate(
+            project=project,
+            source_bundle=source_bundle,
+            project_files=project_files,
+            user_intent=payload.user_intent_override,
+            force_regenerate=payload.force_regenerate,
         )
         self._repository.create_brief(brief)
+        self._persist_project_artifact(project_id, "brief.json", brief)
 
         updated_project = self._repository.update_project_links(
             project_id,
@@ -275,33 +285,14 @@ class ProjectService:
         if brief is None:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Project has no brief to outline")
 
-        chapter_titles = self._derive_outline_titles(brief)
-        chapter_count = max(3, min(len(chapter_titles), brief.recommended_page_count))
-        chapters = [
-            OutlineSection(
-                section_id=f"section-{index + 1}",
-                title=title,
-                objective=f"Explain {title.lower()}",
-                key_message=f"{title} supports the core message: {brief.core_message}",
-                supporting_points=[
-                    brief.presentation_goal,
-                    brief.storyline,
-                    f"Audience focus: {brief.target_audience}",
-                ],
-                estimated_slides=max(1, brief.recommended_page_count // chapter_count),
-            )
-            for index, title in enumerate(chapter_titles[:chapter_count])
-        ]
-        outline = Outline(
-            project_id=project_id,
-            brief_id=brief.id,
-            title=f"{project.name} outline",
-            chapters=chapters,
-            summary=f"Outline generated from brief {brief.id} with {len(chapters)} chapters.",
-            status=ReviewStatus.DRAFT,
-            metadata={"generation_mode": "skeleton", "source": "brief"},
+        source_bundle = self._repository.get_source_bundle(brief.source_bundle_id)
+        outline = self._outline_generator.generate(
+            project=project,
+            brief=brief,
+            source_bundle=source_bundle,
         )
         self._repository.create_outline(outline)
+        self._persist_project_artifact(project_id, "outline.json", outline)
         updated_project = self._repository.update_project_links(
             project_id,
             latest_outline_id=outline.id,
@@ -322,7 +313,7 @@ class ProjectService:
         return outline, task_run
 
     def generate_slide_plan(self, project_id: str, payload: GenerateSlidePlanRequest) -> tuple[SlidePlan, TaskRun]:
-        project = self.get_project(project_id)
+        self.get_project(project_id)
         outline = self._repository.get_outline(payload.outline_id) if payload.outline_id else self._repository.get_latest_outline(project_id)
         if outline is None:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Project has no outline to plan")
@@ -331,18 +322,14 @@ class ProjectService:
         if brief is None:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Outline has no linked brief")
 
-        slides = self._build_slide_plan_items(outline, brief)
-        slide_plan = SlidePlan(
+        slide_plan = self._slide_planner.generate(
             project_id=project_id,
-            brief_id=brief.id,
-            outline_id=outline.id,
-            page_count=len(slides),
-            slides=slides,
-            design_direction=payload.preferred_template_id or "auto-generated skeleton",
-            status=ReviewStatus.DRAFT,
-            metadata={"generation_mode": "skeleton", "source": "outline"},
+            brief=brief,
+            outline=outline,
+            preferred_template_id=payload.preferred_template_id,
         )
         self._repository.create_slide_plan(slide_plan)
+        self._persist_project_artifact(project_id, "slide-plan.json", slide_plan)
         updated_project = self._repository.update_project_links(
             project_id,
             latest_slide_plan_id=slide_plan.id,
@@ -362,6 +349,162 @@ class ProjectService:
         )
         self._repository.create_task_run(task_run)
         return slide_plan, task_run
+
+    def generate_slide_artifact(self, project_id: str, payload: GenerateSlideArtifactRequest) -> tuple[SlideArtifact, TaskRun]:
+        project = self.get_project(project_id)
+        slide_plan = self._repository.get_slide_plan(payload.slide_plan_id) if payload.slide_plan_id else self._repository.get_latest_slide_plan(project_id)
+        if slide_plan is None:
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Project has no slide plan to render")
+
+        try:
+            template = self._template_registry.resolve_template(payload.template_id, slide_plan)
+        except ValueError as exc:
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(exc)) from exc
+
+        artifact = SlideArtifact(
+            project_id=project_id,
+            slide_plan_id=slide_plan.id,
+            template_id=template.id,
+            svg_output_dir="",
+            svg_final_dir="",
+            render_status=RenderStatus.PENDING,
+            metadata={
+                "generated_from": "slide_plan",
+                "page_count": slide_plan.page_count,
+                "design_direction": slide_plan.design_direction,
+                "slide_titles": [slide.title for slide in slide_plan.slides],
+                "render_mode": "placeholder",
+                "template_id": template.template_id,
+                "template_name": template.name,
+            },
+        )
+        svg_output_dir, svg_final_dir = self._storage_service.ensure_render_directories(project_id, artifact.id)
+        design_spec = self._design_spec_builder.build(project=project, slide_plan=slide_plan, template=template)
+        design_spec_path = self._storage_service.save_render_context(project_id, artifact.id, "design-spec.json", design_spec)
+        render_result = self._render_svg_pages(slide_plan=slide_plan, template=template, svg_output_dir=svg_output_dir, svg_final_dir=svg_final_dir)
+        artifact.svg_output_dir = svg_output_dir
+        artifact.svg_final_dir = svg_final_dir
+        artifact.preview_image_paths = render_result.generated_files
+        artifact.render_status = render_result.render_status
+        artifact.failed_slide_ids = render_result.failed_slide_ids
+        artifact.log_path = render_result.log_path
+        artifact.metadata["design_spec_path"] = design_spec_path
+        artifact.metadata["render_mode"] = "builtin_svg_v1"
+        artifact.metadata["generated_svg_files"] = render_result.generated_files
+        self._repository.create_slide_artifact(artifact)
+        self._persist_project_artifact(project_id, "slide-artifact.json", artifact)
+        updated_project = self._repository.update_project_links(
+            project_id,
+            latest_slide_plan_id=slide_plan.id,
+            latest_artifact_id=artifact.id,
+            status=ProjectStatus.FINALIZED if render_result.render_status == RenderStatus.SUCCEEDED else ProjectStatus.RENDERING,
+        )
+
+        task_run = TaskRun(
+            project_id=project_id,
+            task_type=TaskType.RENDER,
+            task_status=TaskStatus.SUCCEEDED,
+            result={
+                "artifact_id": artifact.id,
+                "slide_plan_id": slide_plan.id,
+                "project_status": (updated_project.status if updated_project else ProjectStatus.RENDERING),
+                "svg_output_dir": svg_output_dir,
+                "svg_final_dir": svg_final_dir,
+                "design_spec_path": design_spec_path,
+                "template_id": template.template_id,
+                "generated_svg_files": render_result.generated_files,
+                "failed_slide_ids": render_result.failed_slide_ids,
+            },
+        )
+        self._repository.create_task_run(task_run)
+        return artifact, task_run
+
+    def _render_svg_pages(self, slide_plan: SlidePlan, template: TemplateMeta, svg_output_dir: str, svg_final_dir: str) -> SvgRenderResult:
+        render_result = self._svg_renderer.render(slide_plan=slide_plan, template=template)
+        generated_output_files: list[str] = []
+        generated_final_files: list[str] = []
+        for page in render_result.pages:
+            file_name = f"slide-{page.slide_number:02d}.svg"
+            generated_output_files.append(self._storage_service.save_svg_page(svg_output_dir, file_name, page.svg_content))
+            generated_final_files.append(self._storage_service.save_svg_page(svg_final_dir, file_name, page.svg_content))
+        log_payload = {
+            "render_status": render_result.render_status,
+            "generated_files": generated_final_files,
+            "failed_slide_ids": render_result.failed_slide_ids,
+        }
+        log_path = self._storage_service.save_render_context(
+            slide_plan.project_id,
+            render_result.artifact_id,
+            "render-log.json",
+            log_payload,
+        )
+        return render_result.model_copy(update={"generated_files": generated_final_files, "log_path": log_path})
+
+    def update_brief(self, project_id: str, payload: UpdateBriefRequest) -> PresentationBrief:
+        self.get_project(project_id)
+        brief = self._repository.get_brief(payload.brief_id) if payload.brief_id else self._repository.get_latest_brief(project_id)
+        if brief is None:
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Project has no brief to edit")
+        updated_brief = brief.model_copy(
+            update={
+                "presentation_goal": payload.presentation_goal if payload.presentation_goal is not None else brief.presentation_goal,
+                "target_audience": payload.target_audience if payload.target_audience is not None else brief.target_audience,
+                "core_message": payload.core_message if payload.core_message is not None else brief.core_message,
+                "storyline": payload.storyline if payload.storyline is not None else brief.storyline,
+                "recommended_page_count": payload.recommended_page_count if payload.recommended_page_count is not None else brief.recommended_page_count,
+                "tone": payload.tone if payload.tone is not None else brief.tone,
+                "style_preferences": payload.style_preferences if payload.style_preferences is not None else brief.style_preferences,
+                "risks": payload.risks if payload.risks is not None else brief.risks,
+                "assumptions": payload.assumptions if payload.assumptions is not None else brief.assumptions,
+                "metadata": {**brief.metadata, **(payload.metadata or {}), "last_edited_by": "manual_review"},
+            }
+        )
+        persisted_brief = self._repository.update_brief(updated_brief)
+        self._persist_project_artifact(project_id, "brief.json", persisted_brief)
+        return persisted_brief
+
+    def update_outline(self, project_id: str, payload: UpdateOutlineRequest) -> Outline:
+        self.get_project(project_id)
+        outline = self._repository.get_outline(payload.outline_id) if payload.outline_id else self._repository.get_latest_outline(project_id)
+        if outline is None:
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Project has no outline to edit")
+        chapters = [OutlineSection.model_validate(chapter) for chapter in payload.chapters] if payload.chapters is not None else outline.chapters
+        updated_outline = outline.model_copy(
+            update={
+                "title": payload.title if payload.title is not None else outline.title,
+                "chapters": chapters,
+                "summary": payload.summary if payload.summary is not None else outline.summary,
+                "metadata": {**outline.metadata, **(payload.metadata or {}), "last_edited_by": "manual_review"},
+            }
+        )
+        persisted_outline = self._repository.update_outline(updated_outline)
+        self._persist_project_artifact(project_id, "outline.json", persisted_outline)
+        return persisted_outline
+
+    def update_slide_plan(self, project_id: str, payload: UpdateSlidePlanRequest) -> SlidePlan:
+        self.get_project(project_id)
+        slide_plan = self._repository.get_slide_plan(payload.slide_plan_id) if payload.slide_plan_id else self._repository.get_latest_slide_plan(project_id)
+        if slide_plan is None:
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Project has no slide plan to edit")
+        slides = [SlidePlanItem.model_validate(slide) for slide in payload.slides] if payload.slides is not None else slide_plan.slides
+        updated_slide_plan = slide_plan.model_copy(
+            update={
+                "page_count": payload.page_count if payload.page_count is not None else len(slides),
+                "slides": slides,
+                "design_direction": payload.design_direction if payload.design_direction is not None else slide_plan.design_direction,
+                "metadata": {**slide_plan.metadata, **(payload.metadata or {}), "last_edited_by": "manual_review"},
+            }
+        )
+        persisted_slide_plan = self._repository.update_slide_plan(updated_slide_plan)
+        self._persist_project_artifact(project_id, "slide-plan.json", persisted_slide_plan)
+        return persisted_slide_plan
+
+    def _persist_project_artifact(self, project_id: str, artifact_name: str, model: Any) -> str:
+        if hasattr(model, "model_dump"):
+            payload = model.model_dump(mode="json")
+        else:
+            payload = model
+        return self._storage_service.save_project_artifact(project_id, artifact_name, payload)
 
     def _build_raw_markdown(self, project_files: list[ProjectFile]) -> str:
         return "\n\n".join(f"# {project_file.file_name}\n\n{project_file.extracted_summary or 'Pending source parsing.'}" for project_file in project_files)
@@ -440,9 +583,9 @@ class ProjectService:
         if has_files and has_intent:
             return "mixed"
         if has_files:
-            return "file_upload"
+            return "file"
         if has_intent:
-            return "chat_input"
+            return "chat"
         return fallback_mode
 
     def _build_intent_markdown(self, user_intent: UserIntent) -> str:
@@ -463,52 +606,3 @@ class ProjectService:
             lines.append(f"# Desired Page Count\n\n{user_intent.desired_page_count}")
         return "\n\n".join(lines)
 
-    def _build_presentation_goal(self, project: Project, user_intent: UserIntent | None) -> str:
-        if user_intent and user_intent.purpose:
-            return user_intent.purpose
-        return project.description or f"Generate a presentation for project {project.name}"
-
-    def _build_core_message(self, project: Project, project_files: list[ProjectFile]) -> str:
-        return f"{project.name} is synthesized from {len(project_files)} registered source files."
-
-    def _build_storyline(self, project_files: list[ProjectFile]) -> str:
-        return " -> ".join(project_file.file_name for project_file in project_files)
-
-    def _derive_outline_titles(self, brief: PresentationBrief) -> list[str]:
-        return [
-            "Problem Context",
-            "Research Scope",
-            "Methodology",
-            "Key Findings",
-            "Conclusion and Next Steps",
-        ]
-
-    def _build_slide_plan_items(self, outline: Outline, brief: PresentationBrief) -> list[SlidePlanItem]:
-        slides: list[SlidePlanItem] = []
-        for index, chapter in enumerate(outline.chapters, start=1):
-            bullets = chapter.supporting_points[:3] if chapter.supporting_points else [brief.core_message]
-            slides.append(
-                SlidePlanItem(
-                    slide_id=f"slide-{index}",
-                    slide_number=index,
-                    title=chapter.title,
-                    conclusion=chapter.key_message,
-                    layout_mode="two_column",
-                    content_blocks=[
-                        ContentBlock(
-                            block_id=f"slide-{index}-summary",
-                            block_type="summary",
-                            heading=chapter.objective,
-                            body=chapter.key_message,
-                            bullets=bullets,
-                            asset_refs=[],
-                            chart_hint=None,
-                            emphasis="primary",
-                        )
-                    ],
-                    speaker_notes=f"Focus on {chapter.objective.lower()} for {brief.target_audience}.",
-                    data_refs=[],
-                    visual_priority="medium",
-                )
-            )
-        return slides

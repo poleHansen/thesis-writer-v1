@@ -6,6 +6,7 @@ from app.models.project import CreateProjectRequest
 from app.models.project import BriefResponse
 from app.models.project import GenerateBriefRequest
 from app.models.project import GenerateOutlineRequest
+from app.models.project import GenerateSlideArtifactRequest
 from app.models.project import GenerateSlidePlanRequest
 from app.models.project import OutlineResponse
 from app.models.project import ParseProjectFilesRequest
@@ -17,7 +18,15 @@ from app.models.project import ProjectResponse
 from app.models.project import ProjectStatusResponse
 from app.models.project import RegisterProjectFileRequest
 from app.models.project import SlidePlanResponse
+from app.models.project import SlideArtifactResponse
 from app.models.project import SourceBundleResponse
+from app.models.project import TemplatesResponse
+from app.models.project import UpdateBriefRequest
+from app.models.project import UpdateBriefResponse
+from app.models.project import UpdateOutlineRequest
+from app.models.project import UpdateOutlineResponse
+from app.models.project import UpdateSlidePlanRequest
+from app.models.project import UpdateSlidePlanResponse
 from app.models.project import UploadProjectFileRequest
 from app.services.project_service import ProjectService
 from app.state import get_project_service
@@ -107,6 +116,16 @@ def generate_brief(
     return BriefResponse(brief=brief, task_run=task_run)
 
 
+@router.patch("/{project_id}/brief", response_model=UpdateBriefResponse)
+def update_brief(
+    project_id: str,
+    payload: UpdateBriefRequest,
+    service: ProjectService = Depends(get_project_service),
+) -> UpdateBriefResponse:
+    brief = service.update_brief(project_id, payload)
+    return UpdateBriefResponse(brief=brief)
+
+
 @router.post("/{project_id}/outline:generate", response_model=OutlineResponse)
 def generate_outline(
     project_id: str,
@@ -117,6 +136,16 @@ def generate_outline(
     return OutlineResponse(outline=outline, task_run=task_run)
 
 
+@router.patch("/{project_id}/outline", response_model=UpdateOutlineResponse)
+def update_outline(
+    project_id: str,
+    payload: UpdateOutlineRequest,
+    service: ProjectService = Depends(get_project_service),
+) -> UpdateOutlineResponse:
+    outline = service.update_outline(project_id, payload)
+    return UpdateOutlineResponse(outline=outline)
+
+
 @router.post("/{project_id}/slide-plan:generate", response_model=SlidePlanResponse)
 def generate_slide_plan(
     project_id: str,
@@ -125,3 +154,30 @@ def generate_slide_plan(
 ) -> SlidePlanResponse:
     slide_plan, task_run = service.generate_slide_plan(project_id, payload)
     return SlidePlanResponse(slide_plan=slide_plan, task_run=task_run)
+
+
+@router.post("/{project_id}/artifact:generate", response_model=SlideArtifactResponse)
+def generate_slide_artifact(
+    project_id: str,
+    payload: GenerateSlideArtifactRequest,
+    service: ProjectService = Depends(get_project_service),
+) -> SlideArtifactResponse:
+    artifact, task_run = service.generate_slide_artifact(project_id, payload)
+    return SlideArtifactResponse(artifact=artifact, task_run=task_run)
+
+
+@router.get("/templates", response_model=TemplatesResponse)
+def list_templates(
+    service: ProjectService = Depends(get_project_service),
+) -> TemplatesResponse:
+    return TemplatesResponse(templates=service.list_templates())
+
+
+@router.patch("/{project_id}/slide-plan", response_model=UpdateSlidePlanResponse)
+def update_slide_plan(
+    project_id: str,
+    payload: UpdateSlidePlanRequest,
+    service: ProjectService = Depends(get_project_service),
+) -> UpdateSlidePlanResponse:
+    slide_plan = service.update_slide_plan(project_id, payload)
+    return UpdateSlidePlanResponse(slide_plan=slide_plan)

@@ -3,7 +3,8 @@
   "python.analysis.extraPaths": [
     "${workspaceFolder}/apps/api/src",
     "${workspaceFolder}/packages/core-types/src",
-    "${workspaceFolder}/packages/ingestion/src"
+    "${workspaceFolder}/packages/ingestion/src",
+    "${workspaceFolder}/packages/methodology-engine/src"
   ],
   "python-envs.pythonProjects": [
     {

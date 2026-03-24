@@ -68,7 +68,25 @@ class GenerateBriefRequest(BaseModel):
 
 class BriefResponse(BaseModel):
     brief: PresentationBrief
-    task_run: TaskRun
+    task_run: TaskRun | None = None
+
+
+class UpdateBriefRequest(BaseModel):
+    brief_id: str | None = None
+    presentation_goal: str | None = None
+    target_audience: str | None = None
+    core_message: str | None = None
+    storyline: str | None = None
+    recommended_page_count: int | None = Field(default=None, ge=1)
+    tone: str | None = None
+    style_preferences: list[str] | None = None
+    risks: list[str] | None = None
+    assumptions: list[str] | None = None
+    metadata: dict | None = None
+
+
+class UpdateBriefResponse(BaseModel):
+    brief: PresentationBrief
 
 
 class SourceBundleResponse(BaseModel):
@@ -94,7 +112,19 @@ class GenerateOutlineRequest(BaseModel):
 
 class OutlineResponse(BaseModel):
     outline: Outline
-    task_run: TaskRun
+    task_run: TaskRun | None = None
+
+
+class UpdateOutlineRequest(BaseModel):
+    outline_id: str | None = None
+    title: str | None = None
+    chapters: list[dict] | None = None
+    summary: str | None = None
+    metadata: dict | None = None
+
+
+class UpdateOutlineResponse(BaseModel):
+    outline: Outline
 
 
 class GenerateSlidePlanRequest(BaseModel):
@@ -105,7 +135,29 @@ class GenerateSlidePlanRequest(BaseModel):
 
 class SlidePlanResponse(BaseModel):
     slide_plan: SlidePlan
-    task_run: TaskRun
+    task_run: TaskRun | None = None
+
+
+class GenerateSlideArtifactRequest(BaseModel):
+    slide_plan_id: str | None = None
+    template_id: str | None = None
+
+
+class SlideArtifactResponse(BaseModel):
+    artifact: SlideArtifact
+    task_run: TaskRun | None = None
+
+
+class UpdateSlidePlanRequest(BaseModel):
+    slide_plan_id: str | None = None
+    page_count: int | None = Field(default=None, ge=0)
+    slides: list[dict] | None = None
+    design_direction: str | None = None
+    metadata: dict | None = None
+
+
+class UpdateSlidePlanResponse(BaseModel):
+    slide_plan: SlidePlan
 
 
 class TemplatesResponse(BaseModel):

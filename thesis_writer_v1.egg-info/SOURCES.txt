@@ -15,6 +15,7 @@ apps/api/src/app/models/project.py
 apps/api/src/app/repositories/__init__.py
 apps/api/src/app/repositories/project_repository.py
 apps/api/src/app/services/__init__.py
+apps/api/src/app/services/file_storage.py
 apps/api/src/app/services/project_service.py
 packages/core-types/src/core_types/__init__.py
 packages/core-types/src/core_types/common.py

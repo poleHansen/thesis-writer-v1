@@ -10,6 +10,9 @@ Requires-Dist: pydantic<3.0,>=2.11
 Requires-Dist: pydantic-settings<3.0,>=2.10
 Requires-Dist: sqlalchemy<3.0,>=2.0
 Requires-Dist: psycopg[binary]<4.0,>=3.2
+Requires-Dist: httpx<0.29,>=0.28
+Requires-Dist: pypdf<6.0,>=5.4
+Requires-Dist: python-docx<2.0,>=1.1
 
 # thesis-writer-v1
 毕业论文初稿自动生成平台
