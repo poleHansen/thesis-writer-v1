@@ -1,0 +1,46 @@
+{
+  "created_at": "2026-03-24T11:46:44.519342Z",
+  "updated_at": "2026-03-24T11:46:44.519342Z",
+  "id": "1df637b3-dda2-42d8-88a6-e27cbdfb321f",
+  "project_id": "7308113c-6e33-4626-9164-f2b7d823caf7",
+  "source_bundle_id": "c14724fc-3a13-4c00-a080-941e1d2f1a8d",
+  "presentation_goal": "Verify repeated exports produce distinct run ids and output paths.",
+  "target_audience": "general audience",
+  "core_message": "demo.md: A compact source summary for run id tests.",
+  "storyline": "Sources: demo.md",
+  "recommended_page_count": 8,
+  "tone": "professional",
+  "style_preferences": [],
+  "risks": [
+    "user intent is incomplete and may affect narrative accuracy"
+  ],
+  "assumptions": [
+    "research enrichment is not connected yet",
+    "uploaded files are the primary evidence base",
+    "missing clarification fields will be filled in later review"
+  ],
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "clarification": {
+      "is_sufficient": false,
+      "missing_fields": [
+        "audience",
+        "scenario",
+        "purpose",
+        "desired_page_count",
+        "style_preferences",
+        "emphasize_points"
+      ],
+      "suggested_questions": [
+        "这份 PPT 的目标受众是谁？",
+        "这份 PPT 会在什么场景下使用？",
+        "这次演示最核心的目标是什么？",
+        "希望控制在多少页以内？",
+        "有没有明确的风格偏好？",
+        "是否需要重点强调某些数据、图表、案例或观点？"
+      ]
+    },
+    "source_mode": "file"
+  }
+}

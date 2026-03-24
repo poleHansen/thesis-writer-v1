@@ -70,6 +70,20 @@ class ProjectService:
         tasks = self._repository.list_project_tasks(project_id)
         return project, tasks
 
+    def list_projects_dashboard(self) -> list[dict[str, object]]:
+        return self._repository.list_project_dashboard()
+
+    def list_project_exports(self, project_id: str, limit: int = 5) -> list[ExportJob]:
+        self.get_project(project_id)
+        return self._repository.list_project_exports(project_id, limit)
+
+    def get_project_export(self, project_id: str, export_id: str) -> ExportJob:
+        self.get_project(project_id)
+        export_job = self._repository.get_project_export(project_id, export_id)
+        if export_job is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Export job not found")
+        return export_job
+
     def list_templates(self) -> list[TemplateMeta]:
         return self._template_registry.list_templates()
 

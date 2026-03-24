@@ -17,6 +17,23 @@ class ProjectResponse(BaseModel):
     project: Project
 
 
+class ProjectDashboardItem(BaseModel):
+    project: Project
+    file_count: int = 0
+    parsed_file_count: int = 0
+    failed_file_count: int = 0
+    latest_brief: PresentationBrief | None = None
+    latest_outline: Outline | None = None
+    latest_slide_plan: SlidePlan | None = None
+    latest_artifact: SlideArtifact | None = None
+    latest_export: ExportJob | None = None
+    current_task: TaskRun | None = None
+
+
+class ProjectDashboardResponse(BaseModel):
+    projects: list[ProjectDashboardItem] = Field(default_factory=list)
+
+
 class ProjectDetailResponse(BaseModel):
     project: Project
     latest_source_bundle: SourceBundle | None = None
@@ -156,6 +173,14 @@ class GenerateExportRequest(BaseModel):
 class ExportJobResponse(BaseModel):
     export_job: ExportJob
     task_run: TaskRun | None = None
+
+
+class ExportHistoryResponse(BaseModel):
+    exports: list[ExportJob] = Field(default_factory=list)
+
+
+class ExportDetailResponse(BaseModel):
+    export_job: ExportJob
 
 
 class UpdateSlidePlanRequest(BaseModel):

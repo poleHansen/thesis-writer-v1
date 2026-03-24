@@ -6,7 +6,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from core_types import ExportJob, Outline, OutlineSection, PresentationBrief, Project, ProjectFile, SlideArtifact, SlidePlan, SlidePlanItem, ContentBlock, SourceBundle, TaskRun, TemplateMeta
-from core_types.enums import ProjectStatus, TaskStatus, TaskType
+from core_types.enums import ParseStatus, ProjectStatus, TaskStatus, TaskType
 
 from app.db.models import ExportRecord, OutlineRecord, PresentationBriefRecord, ProjectFileRecord, ProjectRecord, SlideArtifactRecord, SlidePlanRecord, SourceBundleRecord, TaskRunRecord, TemplateRecord
 
@@ -33,6 +33,26 @@ class InMemoryProjectRepository:
 
     def list_project_tasks(self, project_id: str) -> list[TaskRun]:
         return list(self._tasks_by_project.get(project_id, []))
+
+    def list_projects(self) -> list[Project]:
+        return sorted(self._projects.values(), key=lambda project: project.created_at, reverse=True)
+
+    def list_project_dashboard(self) -> list[dict[str, object]]:
+        return [
+            {
+                "project": project,
+                "file_count": 0,
+                "parsed_file_count": 0,
+                "failed_file_count": 0,
+                "latest_brief": None,
+                "latest_outline": None,
+                "latest_slide_plan": None,
+                "latest_artifact": None,
+                "latest_export": None,
+                "current_task": (self._tasks_by_project.get(project.id) or [None])[-1],
+            }
+            for project in self.list_projects()
+        ]
 
     def create_project_file(self, project_file: ProjectFile) -> ProjectFile:
         self._tasks_by_project[project_file.project_id]
@@ -109,6 +129,9 @@ class InMemoryProjectRepository:
             "latest_artifact": None,
             "latest_export": None,
         }
+
+    def list_project_exports(self, project_id: str, limit: int = 5) -> list[ExportJob]:
+        return []
 
     def update_project_links(
         self,
@@ -209,6 +232,11 @@ class SqlAlchemyProjectRepository:
             updated_at=record.updated_at,
         )
 
+    def list_projects(self) -> list[Project]:
+        stmt = select(ProjectRecord).order_by(ProjectRecord.created_at.desc())
+        records = self._session.execute(stmt).scalars().all()
+        return [self.get_project(record.id) for record in records if self.get_project(record.id) is not None]
+
     def list_project_tasks(self, project_id: str) -> list[TaskRun]:
         stmt = (
             select(TaskRunRecord)
@@ -306,6 +334,30 @@ class SqlAlchemyProjectRepository:
             )
             for record in records
         ]
+
+    def list_project_dashboard(self) -> list[dict[str, object]]:
+        dashboard: list[dict[str, object]] = []
+        for project in self.list_projects():
+            files = self.list_project_files(project.id)
+            tasks = self.list_project_tasks(project.id)
+            detail = self.get_project_detail(project.id)
+            if detail is None:
+                continue
+            dashboard.append(
+                {
+                    "project": project,
+                    "file_count": len(files),
+                    "parsed_file_count": len([project_file for project_file in files if project_file.parse_status == ParseStatus.SUCCEEDED]),
+                    "failed_file_count": len([project_file for project_file in files if project_file.parse_status == ParseStatus.FAILED]),
+                    "latest_brief": detail.get("latest_brief"),
+                    "latest_outline": detail.get("latest_outline"),
+                    "latest_slide_plan": detail.get("latest_slide_plan"),
+                    "latest_artifact": detail.get("latest_artifact"),
+                    "latest_export": detail.get("latest_export"),
+                    "current_task": tasks[-1] if tasks else None,
+                }
+            )
+        return dashboard
 
     def create_source_bundle(self, source_bundle: SourceBundle) -> SourceBundle:
         record = SourceBundleRecord(
@@ -655,6 +707,29 @@ class SqlAlchemyProjectRepository:
             created_at=record.created_at,
             updated_at=record.updated_at,
         )
+
+    def list_project_exports(self, project_id: str, limit: int = 5) -> list[ExportJob]:
+        stmt = (
+            select(ExportRecord)
+            .where(ExportRecord.project_id == project_id)
+            .order_by(ExportRecord.created_at.desc())
+            .limit(limit)
+        )
+        records = self._session.execute(stmt).scalars().all()
+        exports: list[ExportJob] = []
+        for record in records:
+            export_job = self.get_export_job(record.id)
+            if export_job is not None:
+                exports.append(export_job)
+        return exports
+
+    def get_project_export(self, project_id: str, export_id: str) -> ExportJob | None:
+        export_job = self.get_export_job(export_id)
+        if export_job is None:
+            return None
+        if export_job.project_id != project_id:
+            return None
+        return export_job
 
     def get_project_detail(self, project_id: str) -> dict[str, object] | None:
         project = self.get_project(project_id)

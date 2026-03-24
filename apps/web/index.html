@@ -3,33 +3,309 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>thesis-writer-v1</title>
+    <title>Thesis Writer Dashboard</title>
     <link rel="stylesheet" href="./src/styles.css" />
   </head>
   <body>
     <main class="shell">
       <section class="hero">
-        <p class="eyebrow">Phase 0 Baseline</p>
-        <h1>Thesis Writer Workspace</h1>
-        <p class="summary">
-          A monorepo baseline for research ingestion, methodology planning, SVG rendering,
-          and export orchestration.
-        </p>
-        <div class="card-grid">
-          <article>
-            <h2>API</h2>
-            <p>FastAPI service skeleton with health endpoint and environment settings.</p>
+        <div class="hero-copy">
+          <p class="eyebrow">Phase 6.1 Dashboard</p>
+          <h1>Project Delivery Board</h1>
+          <p class="summary">
+            汇总项目阶段、输入材料、最新 Brief / Outline / Slide Plan，以及渲染与导出结果，作为后续审阅闭环的入口。
+          </p>
+        </div>
+        <div class="hero-metrics" id="hero-metrics">
+          <article class="metric-card">
+            <span class="metric-label">Projects</span>
+            <strong class="metric-value" id="metric-projects">-</strong>
           </article>
-          <article>
-            <h2>Packages</h2>
-            <p>Reserved package boundaries for core types, ingestion, planning, rendering, and export.</p>
+          <article class="metric-card">
+            <span class="metric-label">Exports Ready</span>
+            <strong class="metric-value" id="metric-exports">-</strong>
           </article>
-          <article>
-            <h2>Infra</h2>
-            <p>Docker Compose baseline for local PostgreSQL, Redis, API, and static web preview.</p>
+          <article class="metric-card">
+            <span class="metric-label">Render Risks</span>
+            <strong class="metric-value" id="metric-risks">-</strong>
           </article>
         </div>
       </section>
+
+      <section class="toolbar">
+        <label class="api-config">
+          <span>API Base</span>
+          <input id="api-base" type="text" value="http://127.0.0.1:8000" />
+        </label>
+        <label class="filter-control">
+          <span>Status</span>
+          <select id="status-filter">
+            <option value="all">全部状态</option>
+            <option value="draft">draft</option>
+            <option value="briefed">briefed</option>
+            <option value="outlined">outlined</option>
+            <option value="planned">planned</option>
+            <option value="rendered">rendered</option>
+            <option value="exported">exported</option>
+            <option value="finalized">finalized</option>
+            <option value="failed">failed</option>
+          </select>
+        </label>
+        <label class="filter-control filter-search">
+          <span>Search</span>
+          <input id="search-input" type="search" placeholder="项目名 / 标签 / 描述" />
+        </label>
+        <button id="refresh-button" type="button">Refresh Dashboard</button>
+      </section>
+
+      <section class="status-banner" id="status-banner">正在加载项目看板...</section>
+
+      <section class="workspace-grid">
+        <section class="dashboard-column">
+          <section class="dashboard-grid" id="dashboard-grid"></section>
+        </section>
+        <aside class="review-panel" id="review-panel">
+          <div class="review-panel-empty" id="review-empty-state">
+            <p class="eyebrow">Phase 6.2 Review</p>
+            <h2>Stage Review Workspace</h2>
+            <p>
+              选中左侧项目卡片后，这里会加载 latest brief、outline、slide plan 与渲染摘要，支持阶段性审阅与手工修订。
+            </p>
+          </div>
+          <div class="review-panel-content" id="review-content" hidden>
+            <header class="review-header">
+              <div>
+                <p class="review-kicker" id="review-kicker"></p>
+                <h2 class="review-title" id="review-title"></h2>
+              </div>
+              <span class="status-pill" id="review-status"></span>
+            </header>
+
+            <p class="review-description" id="review-description"></p>
+
+            <div class="review-meta" id="review-meta"></div>
+
+            <section class="review-section">
+              <div class="review-section-header">
+                <div>
+                  <p class="review-section-kicker">Brief</p>
+                  <h3>Presentation Brief Review</h3>
+                </div>
+                <button type="button" class="secondary-button" id="save-brief-button">保存 Brief</button>
+              </div>
+              <div class="review-form-grid">
+                <label>
+                  <span>Presentation Goal</span>
+                  <textarea id="brief-goal" rows="3"></textarea>
+                </label>
+                <label>
+                  <span>Target Audience</span>
+                  <textarea id="brief-audience" rows="2"></textarea>
+                </label>
+                <label>
+                  <span>Core Message</span>
+                  <textarea id="brief-core-message" rows="3"></textarea>
+                </label>
+                <label>
+                  <span>Storyline</span>
+                  <textarea id="brief-storyline" rows="4"></textarea>
+                </label>
+                <label>
+                  <span>Tone</span>
+                  <input id="brief-tone" type="text" />
+                </label>
+                <label>
+                  <span>Recommended Page Count</span>
+                  <input id="brief-page-count" type="number" min="1" />
+                </label>
+                <label>
+                  <span>Style Preferences</span>
+                  <textarea id="brief-style-preferences" rows="2" placeholder="使用逗号分隔"></textarea>
+                </label>
+                <label>
+                  <span>Risks</span>
+                  <textarea id="brief-risks" rows="2" placeholder="使用换行分隔"></textarea>
+                </label>
+                <label>
+                  <span>Assumptions</span>
+                  <textarea id="brief-assumptions" rows="2" placeholder="使用换行分隔"></textarea>
+                </label>
+              </div>
+            </section>
+
+            <section class="review-section">
+              <div class="review-section-header">
+                <div>
+                  <p class="review-section-kicker">Outline</p>
+                  <h3>Story Outline Review</h3>
+                </div>
+                <button type="button" class="secondary-button" id="save-outline-button">保存 Outline</button>
+              </div>
+              <div class="review-form-grid">
+                <label>
+                  <span>Title</span>
+                  <input id="outline-title" type="text" />
+                </label>
+                <label class="full-span">
+                  <span>Summary</span>
+                  <textarea id="outline-summary" rows="4"></textarea>
+                </label>
+                <label class="full-span">
+                  <span>Chapters</span>
+                  <textarea id="outline-chapters" rows="8" placeholder="每行一个章节；支持 Title | Objective | Key points"></textarea>
+                </label>
+              </div>
+            </section>
+
+            <section class="review-section">
+              <div class="review-section-header">
+                <div>
+                  <p class="review-section-kicker">Slide Plan</p>
+                  <h3>Slide Structure Review</h3>
+                </div>
+                <button type="button" class="secondary-button" id="save-slide-plan-button">保存 Slide Plan</button>
+              </div>
+              <div class="review-form-grid">
+                <label>
+                  <span>Design Direction</span>
+                  <input id="slide-plan-direction" type="text" />
+                </label>
+                <label>
+                  <span>Page Count</span>
+                  <input id="slide-plan-page-count" type="number" min="0" />
+                </label>
+                <label class="full-span">
+                  <span>Slides</span>
+                  <textarea id="slide-plan-slides" rows="10" placeholder="每行一页；支持 Title | Intent | Layout"></textarea>
+                </label>
+              </div>
+            </section>
+
+            <section class="review-section review-output-section">
+              <div class="review-section-header">
+                <div>
+                  <p class="review-section-kicker">Render</p>
+                  <h3>Artifact Snapshot</h3>
+                </div>
+              </div>
+              <div class="review-form-grid review-regenerate-grid">
+                <label>
+                  <span>场景筛选</span>
+                  <select id="template-scenario-filter">
+                    <option value="">全部场景</option>
+                  </select>
+                </label>
+                <label>
+                  <span>风格筛选</span>
+                  <select id="template-style-filter">
+                    <option value="">全部风格</option>
+                  </select>
+                </label>
+                <label>
+                  <span>信息密度</span>
+                  <select id="template-density-filter">
+                    <option value="">全部密度</option>
+                  </select>
+                </label>
+                <label>
+                  <span>行业标签</span>
+                  <input id="template-industry-filter" type="text" placeholder="如 thesis / finance / tech" />
+                </label>
+                <label class="full-span">
+                  <span>Template Override</span>
+                  <select id="template-select">
+                    <option value="">自动选择模板</option>
+                  </select>
+                </label>
+                <p class="template-filter-hint full-span" id="template-filter-hint">当前显示全部模板。</p>
+                <div class="template-preview-grid full-span" id="template-preview-grid"></div>
+                <div class="regenerate-actions full-span">
+                  <button type="button" class="secondary-button" id="rerun-slide-plan-button">按模板重生成 Slide Plan</button>
+                  <button type="button" class="secondary-button" id="rerender-artifact-button">按模板整体重渲染</button>
+                </div>
+              </div>
+              <div class="artifact-summary" id="artifact-summary"></div>
+              <div class="review-subsection">
+                <div class="section-heading section-heading-inline">
+                  <h4>SVG Preview</h4>
+                  <p>基于现有 artifact 路径直接查看最终页级 SVG 结果。</p>
+                </div>
+                <div class="artifact-preview-grid" id="artifact-preview-grid"></div>
+              </div>
+              <div class="review-subsection">
+                <div class="section-heading section-heading-inline">
+                  <h4>Run Delta</h4>
+                  <p>查看当前选中导出与最新导出之间的最小差异摘要。</p>
+                </div>
+                <div class="export-delta" id="export-delta"></div>
+              </div>
+              <div class="review-subsection">
+                <div class="section-heading section-heading-inline">
+                  <h4>Recent Export Runs</h4>
+                  <p>保留最近几次版本化导出，先满足最小历史可见性。</p>
+                </div>
+                <div class="export-history" id="export-history"></div>
+              </div>
+            </section>
+
+            <section class="review-section review-export-section">
+              <div class="review-section-header">
+                <div>
+                  <p class="review-section-kicker">Export</p>
+                  <h3>Delivery Output</h3>
+                </div>
+              </div>
+              <div class="review-form-grid review-export-grid">
+                <label>
+                  <span>Export Format</span>
+                  <select id="export-format-select">
+                    <option value="pptx">PPTX</option>
+                    <option value="pdf">PDF Preview</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Artifact Source</span>
+                  <input id="export-artifact-id" type="text" placeholder="留空时使用 latest artifact" />
+                </label>
+                <div class="export-actions full-span">
+                  <button type="button" class="secondary-button" id="run-export-button">生成导出文件</button>
+                </div>
+              </div>
+              <p class="export-hint">
+                导出会直接调用现有 `POST /projects/{id}/export`，PPTX 产物与 PDF 预览都会写入项目导出记录，并在完成后回刷审阅摘要。
+              </p>
+            </section>
+          </div>
+        </aside>
+      </section>
     </main>
+    <template id="project-card-template">
+      <article class="project-card">
+        <header class="project-card-header">
+          <div>
+            <p class="project-kicker"></p>
+            <h2 class="project-title"></h2>
+          </div>
+          <span class="status-pill"></span>
+        </header>
+        <p class="project-description"></p>
+        <div class="project-stats"></div>
+        <div class="project-panels">
+          <section>
+            <h3>Inputs</h3>
+            <div class="panel-body panel-inputs"></div>
+          </section>
+          <section>
+            <h3>Planning</h3>
+            <div class="panel-body panel-planning"></div>
+          </section>
+          <section>
+            <h3>Output</h3>
+            <div class="panel-body panel-output"></div>
+          </section>
+        </div>
+      </article>
+    </template>
+    <script type="module" src="./src/pages/dashboard/main.js"></script>
   </body>
 </html>

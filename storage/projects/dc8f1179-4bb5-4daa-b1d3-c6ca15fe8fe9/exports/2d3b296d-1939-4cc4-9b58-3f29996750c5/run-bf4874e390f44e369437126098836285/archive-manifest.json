@@ -1,0 +1,34 @@
+{
+  "project_id": "dc8f1179-4bb5-4daa-b1d3-c6ca15fe8fe9",
+  "artifact_id": "2d3b296d-1939-4cc4-9b58-3f29996750c5",
+  "export_id": "6f2cb0c4-4c43-4792-87b7-23805f50720a",
+  "run_id": "run-bf4874e390f44e369437126098836285",
+  "export_format": "pdf",
+  "export_path": "storage\\projects\\dc8f1179-4bb5-4daa-b1d3-c6ca15fe8fe9\\exports\\2d3b296d-1939-4cc4-9b58-3f29996750c5\\run-bf4874e390f44e369437126098836285\\2d3b296d-1939-4cc4-9b58-3f29996750c5-run-bf4874e390f44e369437126098836285.pdf",
+  "preview_pdf_path": "storage\\projects\\dc8f1179-4bb5-4daa-b1d3-c6ca15fe8fe9\\exports\\2d3b296d-1939-4cc4-9b58-3f29996750c5\\run-bf4874e390f44e369437126098836285\\2d3b296d-1939-4cc4-9b58-3f29996750c5-run-bf4874e390f44e369437126098836285.pdf",
+  "source_svg_final_dir": "storage\\projects\\dc8f1179-4bb5-4daa-b1d3-c6ca15fe8fe9\\render\\2d3b296d-1939-4cc4-9b58-3f29996750c5\\svg_final",
+  "source_files": [
+    "storage\\projects\\dc8f1179-4bb5-4daa-b1d3-c6ca15fe8fe9\\render\\2d3b296d-1939-4cc4-9b58-3f29996750c5\\svg_final\\slide-01.svg",
+    "storage\\projects\\dc8f1179-4bb5-4daa-b1d3-c6ca15fe8fe9\\render\\2d3b296d-1939-4cc4-9b58-3f29996750c5\\svg_final\\slide-02.svg",
+    "storage\\projects\\dc8f1179-4bb5-4daa-b1d3-c6ca15fe8fe9\\render\\2d3b296d-1939-4cc4-9b58-3f29996750c5\\svg_final\\slide-03.svg",
+    "storage\\projects\\dc8f1179-4bb5-4daa-b1d3-c6ca15fe8fe9\\render\\2d3b296d-1939-4cc4-9b58-3f29996750c5\\svg_final\\slide-04.svg",
+    "storage\\projects\\dc8f1179-4bb5-4daa-b1d3-c6ca15fe8fe9\\render\\2d3b296d-1939-4cc4-9b58-3f29996750c5\\svg_final\\slide-05.svg"
+  ],
+  "artifacts": {
+    "slide_artifact": "storage\\projects\\dc8f1179-4bb5-4daa-b1d3-c6ca15fe8fe9\\artifacts\\slide-artifact.json",
+    "export_output": "storage\\projects\\dc8f1179-4bb5-4daa-b1d3-c6ca15fe8fe9\\exports\\2d3b296d-1939-4cc4-9b58-3f29996750c5\\run-bf4874e390f44e369437126098836285\\2d3b296d-1939-4cc4-9b58-3f29996750c5-run-bf4874e390f44e369437126098836285.pdf"
+  },
+  "metadata": {
+    "source_svg_final_dir": "storage\\projects\\dc8f1179-4bb5-4daa-b1d3-c6ca15fe8fe9\\render\\2d3b296d-1939-4cc4-9b58-3f29996750c5\\svg_final",
+    "export_kind": "pdf_preview_from_svg_pages",
+    "file_count": 5,
+    "rendered_files": [
+      "slide-01.svg",
+      "slide-02.svg",
+      "slide-03.svg",
+      "slide-04.svg",
+      "slide-05.svg"
+    ],
+    "renderer": "cairosvg+pypdf"
+  }
+}

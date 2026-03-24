@@ -1,0 +1,181 @@
+{
+  "created_at": "2026-03-24T10:34:56.650409Z",
+  "updated_at": "2026-03-24T10:34:56.650409Z",
+  "id": "46405f85-bf46-45cf-805f-9bddf36a545b",
+  "project_id": "9324e924-92e5-4cd8-aaf2-97991f636465",
+  "brief_id": "d1685e1a-b222-42ad-a2ed-00eb271c62e7",
+  "outline_id": "efa7bada-ef1d-44ec-9688-84f671ba3b74",
+  "page_count": 5,
+  "slides": [
+    {
+      "slide_id": "slide-1",
+      "slide_number": 1,
+      "title": "Context and Problem",
+      "conclusion": "The presentation should anchor on: demo.md: A compact source summary for artifact tests.",
+      "layout_mode": "cover",
+      "content_blocks": [
+        {
+          "block_id": "slide-1-hero",
+          "block_type": "hero",
+          "heading": "Context and Problem",
+          "body": "The presentation should anchor on: demo.md: A compact source summary for artifact tests.",
+          "bullets": [
+            "Verify generated artifacts are written to disk.",
+            "Sources: demo.md"
+          ],
+          "asset_refs": [],
+          "chart_hint": null,
+          "emphasis": "primary"
+        }
+      ],
+      "speaker_notes": "Keep the slide anchored on one conclusion: The presentation should anchor on: demo.md: A compact source summary for artifact tests.",
+      "data_refs": [],
+      "visual_priority": "high"
+    },
+    {
+      "slide_id": "slide-2",
+      "slide_number": 2,
+      "title": "What Matters Most",
+      "conclusion": "What Matters Most defines what the audience must understand before details.",
+      "layout_mode": "toc",
+      "content_blocks": [
+        {
+          "block_id": "slide-2-toc",
+          "block_type": "agenda",
+          "heading": "Presentation Flow",
+          "body": "Clarify the decision focus and evaluation lens",
+          "bullets": [
+            "Verify generated artifacts are written to disk.",
+            "Sources: demo.md",
+            "Audience focus: general audience"
+          ],
+          "asset_refs": [],
+          "chart_hint": null,
+          "emphasis": "primary"
+        }
+      ],
+      "speaker_notes": "Keep the slide anchored on one conclusion: What Matters Most defines what the audience must understand before details.",
+      "data_refs": [],
+      "visual_priority": "balanced"
+    },
+    {
+      "slide_id": "slide-3",
+      "slide_number": 3,
+      "title": "Evidence and Analysis",
+      "conclusion": "Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+      "layout_mode": "chart_focus",
+      "content_blocks": [
+        {
+          "block_id": "slide-3-insight",
+          "block_type": "insight",
+          "heading": "Evidence and Analysis",
+          "body": "Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+          "bullets": [],
+          "asset_refs": [],
+          "chart_hint": "compare key evidence",
+          "emphasis": "primary"
+        },
+        {
+          "block_id": "slide-3-evidence",
+          "block_type": "evidence",
+          "heading": "Key Evidence",
+          "body": null,
+          "bullets": [
+            "Verify generated artifacts are written to disk.",
+            "Sources: demo.md",
+            "Audience focus: general audience"
+          ],
+          "asset_refs": [],
+          "chart_hint": "bar_or_line",
+          "emphasis": "secondary"
+        }
+      ],
+      "speaker_notes": "Keep the slide anchored on one conclusion: Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+      "data_refs": [],
+      "visual_priority": "medium"
+    },
+    {
+      "slide_id": "slide-4",
+      "slide_number": 4,
+      "title": "Implications and Choices",
+      "conclusion": "Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+      "layout_mode": "hero",
+      "content_blocks": [
+        {
+          "block_id": "slide-4-recommendation",
+          "block_type": "recommendation",
+          "heading": "Implications and Choices",
+          "body": "Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+          "bullets": [
+            "Verify generated artifacts are written to disk.",
+            "Sources: demo.md",
+            "Audience focus: general audience"
+          ],
+          "asset_refs": [],
+          "chart_hint": null,
+          "emphasis": "primary"
+        }
+      ],
+      "speaker_notes": "Keep the slide anchored on one conclusion: Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+      "data_refs": [],
+      "visual_priority": "high"
+    },
+    {
+      "slide_id": "slide-5",
+      "slide_number": 5,
+      "title": "Recommendation and Next Steps",
+      "conclusion": "Recommendation and Next Steps converts the storyline into a final recommendation.",
+      "layout_mode": "ending",
+      "content_blocks": [
+        {
+          "block_id": "slide-5-ending",
+          "block_type": "ending",
+          "heading": "Next Step",
+          "body": "Recommendation and Next Steps converts the storyline into a final recommendation.",
+          "bullets": [
+            "Verify generated artifacts are written to disk.",
+            "Sources: demo.md"
+          ],
+          "asset_refs": [],
+          "chart_hint": null,
+          "emphasis": "primary"
+        }
+      ],
+      "speaker_notes": "Keep the slide anchored on one conclusion: Recommendation and Next Steps converts the storyline into a final recommendation.",
+      "data_refs": [],
+      "visual_priority": "high"
+    }
+  ],
+  "design_direction": "professional general",
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "source": "outline",
+    "preferred_template_id": null,
+    "audience_tag": "general audience",
+    "tone": "professional",
+    "style_tags": [
+      "professional"
+    ],
+    "scenario_tags": [
+      "general"
+    ],
+    "planning_principles": [
+      "single_conclusion_per_slide",
+      "controlled_information_density",
+      "limited_content_blocks",
+      "layout_matches_content_type"
+    ],
+    "supported_layout_modes": [
+      "cover",
+      "toc",
+      "section",
+      "hero",
+      "two_column",
+      "bento",
+      "chart_focus",
+      "timeline",
+      "ending"
+    ]
+  }
+}

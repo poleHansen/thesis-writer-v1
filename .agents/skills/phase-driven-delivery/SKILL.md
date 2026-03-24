@@ -1,12 +1,12 @@
 ---
 name: phase-driven-delivery
-description: 'Use when asked to implement thesis-writer-v1 by following 分阶段实施计划.md, updating task_plan.md/progress.md/findings.md after each phase, performing code review at phase boundaries, and consulting LandPPT, ppt-master, or approved external references when needed.'
+description: 'Use when asked to implement thesis-writer-v1 by following 实施方案.md and 分阶段实施计划.md, updating task_plan.md/progress.md/findings.md after each phase, performing code review at phase boundaries, and consulting LandPPT, ppt-master, or approved external references when needed.'
 user-invocable: true
 ---
 
 # Phase Driven Delivery
 
-Use this skill when the task is not a single isolated code change, but ongoing project delivery against the plan in [分阶段实施计划.md](d:/code/thesis-writer-v1/分阶段实施计划.md).
+Use this skill when the task is not a single isolated code change, but ongoing project delivery against the implementation references in [实施方案.md](d:/code/thesis-writer-v1/实施方案.md) and [分阶段实施计划.md](d:/code/thesis-writer-v1/分阶段实施计划.md).
 
 This skill packages a strict workflow for:
 
@@ -31,10 +31,11 @@ It applies when the user asks for any of the following:
 
 Before changing code, read these files if they exist:
 
-1. `分阶段实施计划.md`
-2. `task_plan.md`
-3. `progress.md`
-4. `findings.md`
+1. `实施方案.md`
+2. `分阶段实施计划.md`
+3. `task_plan.md`
+4. `progress.md`
+5. `findings.md`
 
 If the task touches PPT generation workflows inside `ppt-master`, also read `d:/code/ppt-master/skills/ppt-master/SKILL.md` before acting on those tasks.
 
@@ -57,6 +58,7 @@ Follow these steps in order.
 
 Determine:
 
+- Which architecture, layering, and project structure constraints in `实施方案.md` still govern the active work.
 - Which phase in `分阶段实施计划.md` is currently active.
 - Which checklist items are already complete, in progress, or blocked.
 - Whether `task_plan.md` reflects the same status.

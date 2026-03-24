@@ -7,8 +7,8 @@ class Settings(BaseSettings):
     app_host: str = "0.0.0.0"
     app_port: int = 8000
     auto_create_tables: bool = True
-    database_url: str = "postgresql://postgres:postgres@postgres:5432/thesis_writer"
-    redis_url: str = "redis://redis:6379/0"
+    database_url: str = "postgresql://postgres:postgres@127.0.0.1:5432/thesis_writer"
+    redis_url: str = "redis://127.0.0.1:6379/0"
 
     model_config = SettingsConfigDict(
         env_file=".env",

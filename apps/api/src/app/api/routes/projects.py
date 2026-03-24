@@ -5,6 +5,8 @@ from fastapi import APIRouter, Depends, status
 from app.models.project import CreateProjectRequest
 from app.models.project import BriefResponse
 from app.models.project import ExportJobResponse
+from app.models.project import ExportHistoryResponse
+from app.models.project import ExportDetailResponse
 from app.models.project import GenerateBriefRequest
 from app.models.project import GenerateExportRequest
 from app.models.project import GenerateOutlineRequest
@@ -15,6 +17,7 @@ from app.models.project import ParseProjectFilesRequest
 from app.models.project import ParseProjectFilesResponse
 from app.models.project import ProjectFileResponse
 from app.models.project import ProjectDetailResponse
+from app.models.project import ProjectDashboardResponse
 from app.models.project import ProjectFilesResponse
 from app.models.project import ProjectResponse
 from app.models.project import ProjectStatusResponse
@@ -52,6 +55,13 @@ def create_project(
     return ProjectResponse(project=project)
 
 
+@router.get("", response_model=ProjectDashboardResponse)
+def list_projects(
+    service: ProjectService = Depends(get_project_service),
+) -> ProjectDashboardResponse:
+    return ProjectDashboardResponse(projects=service.list_projects_dashboard())
+
+
 @router.get("/{project_id}", response_model=ProjectDetailResponse)
 def get_project(
     project_id: str,
@@ -59,6 +69,26 @@ def get_project(
 ) -> ProjectDetailResponse:
     detail = service.get_project_detail(project_id)
     return ProjectDetailResponse(**detail)
+
+
+@router.get("/{project_id}/exports", response_model=ExportHistoryResponse)
+def list_project_exports(
+    project_id: str,
+    limit: int = 5,
+    service: ProjectService = Depends(get_project_service),
+) -> ExportHistoryResponse:
+    exports = service.list_project_exports(project_id, limit)
+    return ExportHistoryResponse(exports=exports)
+
+
+@router.get("/{project_id}/exports/{export_id}", response_model=ExportDetailResponse)
+def get_project_export(
+    project_id: str,
+    export_id: str,
+    service: ProjectService = Depends(get_project_service),
+) -> ExportDetailResponse:
+    export_job = service.get_project_export(project_id, export_id)
+    return ExportDetailResponse(export_job=export_job)
 
 
 @router.get("/{project_id}/status", response_model=ProjectStatusResponse)

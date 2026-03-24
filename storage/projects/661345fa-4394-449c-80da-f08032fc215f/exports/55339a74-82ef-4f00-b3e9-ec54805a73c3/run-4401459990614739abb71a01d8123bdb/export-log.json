@@ -1,0 +1,11 @@
+{
+  "project_id": "661345fa-4394-449c-80da-f08032fc215f",
+  "artifact_id": "55339a74-82ef-4f00-b3e9-ec54805a73c3",
+  "export_id": "743db197-5de2-4ced-8952-ee395b84cdaa",
+  "run_id": "run-4401459990614739abb71a01d8123bdb",
+  "status": "succeeded",
+  "export_format": "pdf",
+  "archive_manifest_path": "storage\\projects\\661345fa-4394-449c-80da-f08032fc215f\\exports\\55339a74-82ef-4f00-b3e9-ec54805a73c3\\run-4401459990614739abb71a01d8123bdb\\archive-manifest.json",
+  "export_path": "storage\\projects\\661345fa-4394-449c-80da-f08032fc215f\\exports\\55339a74-82ef-4f00-b3e9-ec54805a73c3\\run-4401459990614739abb71a01d8123bdb\\55339a74-82ef-4f00-b3e9-ec54805a73c3-run-4401459990614739abb71a01d8123bdb.pdf",
+  "preview_pdf_path": "storage\\projects\\661345fa-4394-449c-80da-f08032fc215f\\exports\\55339a74-82ef-4f00-b3e9-ec54805a73c3\\run-4401459990614739abb71a01d8123bdb\\55339a74-82ef-4f00-b3e9-ec54805a73c3-run-4401459990614739abb71a01d8123bdb.pdf"
+}
