@@ -1,0 +1,26 @@
+{
+  "template_id": "government-blue",
+  "name": "政务蓝风",
+  "style_tags": ["government", "formal", "blue", "clean"],
+  "scenario_tags": ["policy", "report", "public-sector", "regional-analysis"],
+  "supported_layout_modes": [
+    "cover",
+    "toc",
+    "section",
+    "hero",
+    "two_column",
+    "chart_focus",
+    "timeline",
+    "ending"
+  ],
+  "density_range": "medium-high",
+  "color_scheme": ["#0F3D75", "#F8FAFC", "#D4A017"],
+  "design_spec_path": "builtin://templates/government-blue/design-spec.json",
+  "preview_image_path": "builtin://templates/government-blue/preview.png",
+  "metadata": {
+    "default_for": ["policy", "report", "regional-analysis"],
+    "font_family": "Source Han Sans",
+    "inspiration_sources": ["LandPPT:商务", "ppt-master:顶级咨询风_甘孜州经济财政分析"],
+    "visual_direction": "formal_light_cards"
+  }
+}

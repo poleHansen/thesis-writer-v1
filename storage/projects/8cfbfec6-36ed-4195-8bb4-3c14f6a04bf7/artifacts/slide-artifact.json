@@ -1,0 +1,42 @@
+{
+  "created_at": "2026-03-24T02:42:44.206904Z",
+  "updated_at": "2026-03-24T02:42:44.206904Z",
+  "id": "7c78d604-f3f1-4e36-b425-5f070d8cc9ff",
+  "project_id": "8cfbfec6-36ed-4195-8bb4-3c14f6a04bf7",
+  "slide_plan_id": "fe478061-52d5-47f6-8219-6b2cf20782a8",
+  "template_id": "07f263eb-f207-4246-9b79-2507698301d0",
+  "svg_output_dir": "storage\\projects\\8cfbfec6-36ed-4195-8bb4-3c14f6a04bf7\\render\\7c78d604-f3f1-4e36-b425-5f070d8cc9ff\\svg_output",
+  "svg_final_dir": "storage\\projects\\8cfbfec6-36ed-4195-8bb4-3c14f6a04bf7\\render\\7c78d604-f3f1-4e36-b425-5f070d8cc9ff\\svg_final",
+  "preview_image_paths": [],
+  "render_status": "failed",
+  "failed_slide_ids": [
+    "slide-1",
+    "slide-2",
+    "slide-3",
+    "slide-4",
+    "slide-5"
+  ],
+  "log_path": "storage\\projects\\8cfbfec6-36ed-4195-8bb4-3c14f6a04bf7\\render\\7c78d604-f3f1-4e36-b425-5f070d8cc9ff\\render-log.json",
+  "metadata": {
+    "generated_from": "slide_plan",
+    "page_count": 5,
+    "design_direction": "methodology-engine planned",
+    "slide_titles": [
+      "Context and Problem",
+      "What Matters Most",
+      "Evidence and Analysis",
+      "Implications and Choices",
+      "Recommendation and Next Steps"
+    ],
+    "render_mode": "builtin_svg_v1",
+    "template_id": "consulting-clean",
+    "template_name": "咨询清晰风",
+    "design_spec_path": "storage\\projects\\8cfbfec6-36ed-4195-8bb4-3c14f6a04bf7\\render\\7c78d604-f3f1-4e36-b425-5f070d8cc9ff\\design-spec.json",
+    "generated_svg_files": [],
+    "validation_summary": {
+      "checked_file_count": 0,
+      "valid_file_count": 0,
+      "invalid_file_count": 0
+    }
+  }
+}

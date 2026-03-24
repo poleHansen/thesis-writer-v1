@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#E2E8F0" />
+  <rect x="0" y="0" width="1280" height="18" fill="#0EA5E9" />
+        <text x="80" y="110" font-size="20" font-family="Arial" fill="#0EA5E9" data-max-width="1120">chart_focus</text>
+    <text x="80" y="170" font-size="38" font-family="Arial" font-weight="700" fill="#0F172A" data-max-width="1120">Evidence and Analysis</text>
+    <text x="80" y="215" font-size="20" font-family="Arial" fill="#0F172A" fill-opacity="0.72" data-max-width="1120">Evidence and Analysis substantiates the storyline with the most relevant evidence.</text>
+  <rect x="80" y="280" width="720" height="280" rx="24" fill="#0EA5E9" fill-opacity="0.08" />
+  <polyline points="130,500 240,430 360,450 500,360 650,390 760,320" fill="none" stroke="#0EA5E9" stroke-width="8" />
+    <text x="110" y="330" font-size="24" font-family="Arial" fill="#0F172A" data-max-width="660">Evidence and Analysis</text><circle cx="868" cy="314" r="5" fill="#0EA5E9" /><text x="884" y="320" font-size="18" font-family="Arial" fill="#0F172A" data-max-width="280">Verify generated artifacts are written to disk.</text><circle cx="868" cy="348" r="5" fill="#0EA5E9" /><text x="884" y="354" font-size="18" font-family="Arial" fill="#0F172A" data-max-width="280">Sources: demo.md</text><circle cx="868" cy="382" r="5" fill="#0EA5E9" /><text x="884" y="388" font-size="18" font-family="Arial" fill="#0F172A" data-max-width="280">Audience focus: general audience</text>
+  <line x1="80" y1="650" x2="1200" y2="650" stroke="#0F172A" stroke-opacity="0.18" />
+    <text x="80" y="685" font-size="18" font-family="Arial" fill="#0F172A" fill-opacity="0.65" data-max-width="1120">3/5  咨询清晰风</text>
+</svg>

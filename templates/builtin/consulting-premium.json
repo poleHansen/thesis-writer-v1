@@ -1,0 +1,27 @@
+{
+  "template_id": "consulting-premium",
+  "name": "高端咨询风",
+  "style_tags": ["consulting", "executive", "premium", "clean"],
+  "scenario_tags": ["strategy", "management", "business", "analysis"],
+  "supported_layout_modes": [
+    "cover",
+    "toc",
+    "section",
+    "hero",
+    "two_column",
+    "bento",
+    "chart_focus",
+    "timeline",
+    "ending"
+  ],
+  "density_range": "medium-high",
+  "color_scheme": ["#0F172A", "#E2E8F0", "#C48A3A"],
+  "design_spec_path": "builtin://templates/consulting-premium/design-spec.json",
+  "preview_image_path": "builtin://templates/consulting-premium/preview.png",
+  "metadata": {
+    "default_for": ["strategy", "management", "analysis"],
+    "font_family": "Source Han Sans",
+    "inspiration_sources": ["LandPPT:商务", "ppt-master:顶级咨询风_甘孜州经济财政分析"],
+    "visual_direction": "executive_light_panels"
+  }
+}

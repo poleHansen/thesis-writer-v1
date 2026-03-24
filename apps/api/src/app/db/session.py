@@ -6,7 +6,7 @@ from contextlib import contextmanager
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
 
-from app.config import settings
+from app.config import get_settings
 from app.db.base import Base
 
 
@@ -16,18 +16,26 @@ def _normalize_database_url(database_url: str) -> str:
     return database_url
 
 
-engine = create_engine(_normalize_database_url(settings.database_url), future=True)
-SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False, future=True)
+def get_engine():
+    settings = get_settings()
+    return create_engine(_normalize_database_url(settings.database_url), future=True)
+
+
+engine = get_engine()
+
+
+def _build_session_local():
+    return sessionmaker(bind=get_engine(), autoflush=False, autocommit=False, future=True)
 
 
 def initialize_database() -> None:
     import app.db.models  # noqa: F401
 
-    Base.metadata.create_all(bind=engine)
+    Base.metadata.create_all(bind=get_engine())
 
 
 def get_session() -> Generator[Session, None, None]:
-    session = SessionLocal()
+    session = _build_session_local()()
     try:
         yield session
     finally:
@@ -36,7 +44,7 @@ def get_session() -> Generator[Session, None, None]:
 
 @contextmanager
 def session_scope() -> Generator[Session, None, None]:
-    session = SessionLocal()
+    session = _build_session_local()()
     try:
         yield session
         session.commit()

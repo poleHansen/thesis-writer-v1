@@ -95,6 +95,9 @@ def test_generation_writes_artifact_snapshots(tmp_path: Path) -> None:
     slide_plan_payload = json.loads(slide_plan_path.read_text(encoding="utf-8"))
     slide_artifact_payload = json.loads(slide_artifact_path.read_text(encoding="utf-8"))
     design_spec_payload = json.loads(design_spec_path.read_text(encoding="utf-8"))
+    render_log_payload = json.loads((render_root / "render-log.json").read_text(encoding="utf-8"))
+    first_svg = next((render_root / "svg_final").glob("slide-*.svg"))
+    first_svg_content = first_svg.read_text(encoding="utf-8")
 
     assert brief_payload["project_id"] == project_id
     assert outline_payload["project_id"] == project_id
@@ -104,7 +107,23 @@ def test_generation_writes_artifact_snapshots(tmp_path: Path) -> None:
     assert slide_artifact_payload["metadata"]["design_spec_path"].endswith("design-spec.json")
     assert slide_artifact_payload["render_status"] in {"succeeded", "partial"}
     assert slide_artifact_payload["metadata"]["generated_svg_files"]
+    assert slide_artifact_payload["metadata"]["validation_summary"]["checked_file_count"] >= 1
+    assert slide_artifact_payload["metadata"]["validation_summary"]["invalid_file_count"] == 0
+    assert slide_artifact_payload["metadata"]["finalization_summary"]["page_count"] >= 1
+    assert slide_artifact_payload["metadata"]["finalization_summary"]["width_height_alignment_count"] >= 0
     assert design_spec_payload["project_id"] == project_id
     assert design_spec_payload["page_count"] >= 1
     assert design_spec_payload["template"]["template_id"]
     assert slide_plan_payload["page_count"] >= 1
+    assert render_log_payload["validation_results"]
+    assert all(item["is_valid"] for item in render_log_payload["validation_results"])
+    assert render_log_payload["finalization_summary"]["page_count"] >= 1
+    assert render_log_payload["finalization_summary"]["width_height_alignment_count"] >= 0
+    assert all(item["finalizer_steps"] for item in render_log_payload["validation_results"])
+    assert all(
+        "ensure_canvas_dimensions" in item["finalizer_steps"] or 'width="1280"' in first_svg_content
+        for item in render_log_payload["validation_results"]
+    )
+    assert first_svg_content.startswith("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
+    assert 'width="1280"' in first_svg_content
+    assert 'height="720"' in first_svg_content

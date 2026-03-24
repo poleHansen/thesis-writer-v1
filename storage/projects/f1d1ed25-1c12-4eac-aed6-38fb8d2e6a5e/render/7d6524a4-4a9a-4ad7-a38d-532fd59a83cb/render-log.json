@@ -1,0 +1,39 @@
+{
+  "render_status": "succeeded",
+  "generated_files": [
+    "storage\\projects\\f1d1ed25-1c12-4eac-aed6-38fb8d2e6a5e\\render\\7d6524a4-4a9a-4ad7-a38d-532fd59a83cb\\svg_final\\slide-01.svg",
+    "storage\\projects\\f1d1ed25-1c12-4eac-aed6-38fb8d2e6a5e\\render\\7d6524a4-4a9a-4ad7-a38d-532fd59a83cb\\svg_final\\slide-02.svg",
+    "storage\\projects\\f1d1ed25-1c12-4eac-aed6-38fb8d2e6a5e\\render\\7d6524a4-4a9a-4ad7-a38d-532fd59a83cb\\svg_final\\slide-03.svg",
+    "storage\\projects\\f1d1ed25-1c12-4eac-aed6-38fb8d2e6a5e\\render\\7d6524a4-4a9a-4ad7-a38d-532fd59a83cb\\svg_final\\slide-04.svg",
+    "storage\\projects\\f1d1ed25-1c12-4eac-aed6-38fb8d2e6a5e\\render\\7d6524a4-4a9a-4ad7-a38d-532fd59a83cb\\svg_final\\slide-05.svg"
+  ],
+  "failed_slide_ids": [],
+  "render_errors": [],
+  "validation_results": [
+    {
+      "file_path": "storage\\projects\\f1d1ed25-1c12-4eac-aed6-38fb8d2e6a5e\\render\\7d6524a4-4a9a-4ad7-a38d-532fd59a83cb\\svg_final\\slide-01.svg",
+      "is_valid": true,
+      "issues": []
+    },
+    {
+      "file_path": "storage\\projects\\f1d1ed25-1c12-4eac-aed6-38fb8d2e6a5e\\render\\7d6524a4-4a9a-4ad7-a38d-532fd59a83cb\\svg_final\\slide-02.svg",
+      "is_valid": true,
+      "issues": []
+    },
+    {
+      "file_path": "storage\\projects\\f1d1ed25-1c12-4eac-aed6-38fb8d2e6a5e\\render\\7d6524a4-4a9a-4ad7-a38d-532fd59a83cb\\svg_final\\slide-03.svg",
+      "is_valid": true,
+      "issues": []
+    },
+    {
+      "file_path": "storage\\projects\\f1d1ed25-1c12-4eac-aed6-38fb8d2e6a5e\\render\\7d6524a4-4a9a-4ad7-a38d-532fd59a83cb\\svg_final\\slide-04.svg",
+      "is_valid": true,
+      "issues": []
+    },
+    {
+      "file_path": "storage\\projects\\f1d1ed25-1c12-4eac-aed6-38fb8d2e6a5e\\render\\7d6524a4-4a9a-4ad7-a38d-532fd59a83cb\\svg_final\\slide-05.svg",
+      "is_valid": true,
+      "issues": []
+    }
+  ]
+}

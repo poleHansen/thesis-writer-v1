@@ -34,6 +34,13 @@ from app.state import get_project_service
 router = APIRouter(prefix="/projects", tags=["projects"])
 
 
+@router.get("/templates", response_model=TemplatesResponse)
+def list_templates(
+    service: ProjectService = Depends(get_project_service),
+) -> TemplatesResponse:
+    return TemplatesResponse(templates=service.list_templates())
+
+
 @router.post("", response_model=ProjectResponse, status_code=status.HTTP_201_CREATED)
 def create_project(
     payload: CreateProjectRequest,
@@ -164,13 +171,6 @@ def generate_slide_artifact(
 ) -> SlideArtifactResponse:
     artifact, task_run = service.generate_slide_artifact(project_id, payload)
     return SlideArtifactResponse(artifact=artifact, task_run=task_run)
-
-
-@router.get("/templates", response_model=TemplatesResponse)
-def list_templates(
-    service: ProjectService = Depends(get_project_service),
-) -> TemplatesResponse:
-    return TemplatesResponse(templates=service.list_templates())
 
 
 @router.patch("/{project_id}/slide-plan", response_model=UpdateSlidePlanResponse)

@@ -1,0 +1,25 @@
+{
+  "template_id": "consulting-clean",
+  "name": "咨询清晰风",
+  "style_tags": ["consulting", "clean", "structured"],
+  "scenario_tags": ["analysis", "strategy", "report"],
+  "supported_layout_modes": [
+    "cover",
+    "toc",
+    "section",
+    "hero",
+    "two_column",
+    "bento",
+    "chart_focus",
+    "timeline",
+    "ending"
+  ],
+  "density_range": "medium",
+  "color_scheme": ["#0F172A", "#E2E8F0", "#0EA5E9"],
+  "design_spec_path": "builtin://templates/consulting-clean/design-spec.json",
+  "preview_image_path": "builtin://templates/consulting-clean/preview.png",
+  "metadata": {
+    "default_for": ["analysis", "mixed"],
+    "font_family": "Source Han Sans"
+  }
+}

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#E2E8F0" />
+  <rect x="0" y="0" width="1280" height="18" fill="#0EA5E9" />
+        <text x="80" y="110" font-size="20" font-family="Arial" fill="#0EA5E9" data-max-width="1120">cover</text>
+    <text x="80" y="170" font-size="38" font-family="Arial" font-weight="700" fill="#0F172A" data-max-width="1120">Context and Problem</text>
+    <text x="80" y="215" font-size="20" font-family="Arial" fill="#0F172A" fill-opacity="0.72" data-max-width="1120">The presentation should anchor on: demo.md: A compact source summary for artifact tests.</text>
+  <circle cx="1030" cy="180" r="120" fill="#0EA5E9" fill-opacity="0.12" />
+  <circle cx="1120" cy="260" r="70" fill="#0EA5E9" fill-opacity="0.22" />
+    <text x="80" y="330" font-size="22" font-family="Arial" fill="#0F172A" fill-opacity="0.78" data-max-width="720">The presentation should anchor on: demo.md: A compact source summary for artifact tests.</text>
+  <line x1="80" y1="650" x2="1200" y2="650" stroke="#0F172A" stroke-opacity="0.18" />
+    <text x="80" y="685" font-size="18" font-family="Arial" fill="#0F172A" fill-opacity="0.65" data-max-width="1120">1/5  咨询清晰风</text>
+</svg>

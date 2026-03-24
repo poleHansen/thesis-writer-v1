@@ -1,0 +1,23 @@
+{
+  "template_id": "academic-defense",
+  "name": "学术答辩风",
+  "style_tags": ["academic", "defense", "precise"],
+  "scenario_tags": ["thesis", "research", "defense"],
+  "supported_layout_modes": [
+    "cover",
+    "toc",
+    "section",
+    "two_column",
+    "chart_focus",
+    "timeline",
+    "ending"
+  ],
+  "density_range": "medium-high",
+  "color_scheme": ["#1E3A8A", "#F8FAFC", "#DC2626"],
+  "design_spec_path": "builtin://templates/academic-defense/design-spec.json",
+  "preview_image_path": "builtin://templates/academic-defense/preview.png",
+  "metadata": {
+    "default_for": ["thesis", "research"],
+    "font_family": "Noto Serif SC"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "template_id": "research-paper",
+  "name": "研究论文风",
+  "style_tags": ["research", "paper", "academic", "minimal"],
+  "scenario_tags": ["thesis", "research", "journal", "methodology"],
+  "supported_layout_modes": [
+    "cover",
+    "toc",
+    "section",
+    "hero",
+    "two_column",
+    "chart_focus",
+    "timeline",
+    "ending"
+  ],
+  "density_range": "high",
+  "color_scheme": ["#F8FAFC", "#1E293B", "#2563EB"],
+  "design_spec_path": "builtin://templates/research-paper/design-spec.json",
+  "preview_image_path": "builtin://templates/research-paper/preview.png",
+  "metadata": {
+    "default_for": ["thesis", "research", "journal"],
+    "font_family": "Noto Serif SC",
+    "inspiration_sources": ["LandPPT:简约答辩风", "ppt-master:ppt169_通用灵活+学术_重庆大学论文格式标准"],
+    "visual_direction": "paper_clean_focus"
+  }
+}

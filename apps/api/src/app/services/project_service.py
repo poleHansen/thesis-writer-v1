@@ -16,7 +16,9 @@ from app.models.project import UploadProjectFileRequest
 from app.repositories.project_repository import SqlAlchemyProjectRepository
 from app.services.design_spec_builder import DesignSpecBuilder
 from app.services.file_storage import FileStorageService
+from app.services.svg_finalizer import SvgFinalizer
 from app.services.svg_renderer import SvgRenderResult, SvgRenderer
+from app.services.svg_validator import SvgValidator
 from app.services.template_registry import TemplateRegistryService
 
 
@@ -31,6 +33,8 @@ class ProjectService:
         self._template_registry = TemplateRegistryService()
         self._design_spec_builder = DesignSpecBuilder()
         self._svg_renderer = SvgRenderer()
+        self._svg_finalizer = SvgFinalizer()
+        self._svg_validator = SvgValidator()
         self._storage_service = storage_service or FileStorageService("storage")
 
     def create_project(self, payload: CreateProjectRequest) -> Project:
@@ -381,7 +385,7 @@ class ProjectService:
         svg_output_dir, svg_final_dir = self._storage_service.ensure_render_directories(project_id, artifact.id)
         design_spec = self._design_spec_builder.build(project=project, slide_plan=slide_plan, template=template)
         design_spec_path = self._storage_service.save_render_context(project_id, artifact.id, "design-spec.json", design_spec)
-        render_result = self._render_svg_pages(slide_plan=slide_plan, template=template, svg_output_dir=svg_output_dir, svg_final_dir=svg_final_dir)
+        render_result = self._render_svg_pages(project_id=project_id, artifact_id=artifact.id, slide_plan=slide_plan, template=template, svg_output_dir=svg_output_dir, svg_final_dir=svg_final_dir)
         artifact.svg_output_dir = svg_output_dir
         artifact.svg_final_dir = svg_final_dir
         artifact.preview_image_paths = render_result.generated_files
@@ -391,6 +395,8 @@ class ProjectService:
         artifact.metadata["design_spec_path"] = design_spec_path
         artifact.metadata["render_mode"] = "builtin_svg_v1"
         artifact.metadata["generated_svg_files"] = render_result.generated_files
+        artifact.metadata["validation_summary"] = render_result.validation_summary
+        artifact.metadata["finalization_summary"] = render_result.validation_summary.get("finalization_summary", {})
         self._repository.create_slide_artifact(artifact)
         self._persist_project_artifact(project_id, "slide-artifact.json", artifact)
         updated_project = self._repository.update_project_links(
@@ -414,31 +420,58 @@ class ProjectService:
                 "template_id": template.template_id,
                 "generated_svg_files": render_result.generated_files,
                 "failed_slide_ids": render_result.failed_slide_ids,
+                "validation_summary": render_result.validation_summary,
             },
         )
         self._repository.create_task_run(task_run)
         return artifact, task_run
 
-    def _render_svg_pages(self, slide_plan: SlidePlan, template: TemplateMeta, svg_output_dir: str, svg_final_dir: str) -> SvgRenderResult:
+    def _render_svg_pages(self, project_id: str, artifact_id: str, slide_plan: SlidePlan, template: TemplateMeta, svg_output_dir: str, svg_final_dir: str) -> SvgRenderResult:
         render_result = self._svg_renderer.render(slide_plan=slide_plan, template=template)
         generated_output_files: list[str] = []
         generated_final_files: list[str] = []
+        validation_results: list[dict[str, object]] = []
+        rendered_pages: list[tuple[str, str]] = []
         for page in render_result.pages:
             file_name = f"slide-{page.slide_number:02d}.svg"
             generated_output_files.append(self._storage_service.save_svg_page(svg_output_dir, file_name, page.svg_content))
-            generated_final_files.append(self._storage_service.save_svg_page(svg_final_dir, file_name, page.svg_content))
+            rendered_pages.append((file_name, page.svg_content))
+
+        finalize_result = self._svg_finalizer.finalize_pages(rendered_pages)
+        for finalized_page in finalize_result.pages:
+            final_path = self._storage_service.save_svg_page(svg_final_dir, finalized_page.final_file_name, finalized_page.final_svg_content)
+            generated_final_files.append(final_path)
+            validation = self._svg_validator.validate_file(final_path, finalized_page.final_svg_content)
+            validation_results.append(
+                {
+                    "file_path": validation.file_path,
+                    "is_valid": validation.is_valid,
+                    "issues": validation.issues,
+                    "finalizer_steps": finalized_page.applied_steps,
+                }
+            )
         log_payload = {
             "render_status": render_result.render_status,
+            "generated_output_files": generated_output_files,
             "generated_files": generated_final_files,
             "failed_slide_ids": render_result.failed_slide_ids,
+            "render_errors": render_result.render_errors,
+            "finalization_summary": finalize_result.summary,
+            "validation_results": validation_results,
         }
         log_path = self._storage_service.save_render_context(
-            slide_plan.project_id,
-            render_result.artifact_id,
+            project_id,
+            artifact_id,
             "render-log.json",
             log_payload,
         )
-        return render_result.model_copy(update={"generated_files": generated_final_files, "log_path": log_path})
+        validation_summary = {
+            "checked_file_count": len(validation_results),
+            "valid_file_count": sum(1 for item in validation_results if item["is_valid"]),
+            "invalid_file_count": sum(1 for item in validation_results if not item["is_valid"]),
+            "finalization_summary": finalize_result.summary,
+        }
+        return render_result.model_copy(update={"generated_files": generated_final_files, "log_path": log_path, "validation_summary": validation_summary})
 
     def update_brief(self, project_id: str, payload: UpdateBriefRequest) -> PresentationBrief:
         self.get_project(project_id)

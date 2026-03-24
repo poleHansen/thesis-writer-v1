@@ -1,0 +1,27 @@
+{
+  "template_id": "technology-grid",
+  "name": "科技网格风",
+  "style_tags": ["technology", "grid", "dark", "data"],
+  "scenario_tags": ["technology", "product", "ai", "architecture"],
+  "supported_layout_modes": [
+    "cover",
+    "toc",
+    "section",
+    "hero",
+    "two_column",
+    "bento",
+    "chart_focus",
+    "timeline",
+    "ending"
+  ],
+  "density_range": "medium",
+  "color_scheme": ["#0A0F1F", "#22D3EE", "#A78BFA"],
+  "design_spec_path": "builtin://templates/technology-grid/design-spec.json",
+  "preview_image_path": "builtin://templates/technology-grid/preview.png",
+  "metadata": {
+    "default_for": ["technology", "product", "architecture"],
+    "font_family": "Source Han Sans",
+    "inspiration_sources": ["LandPPT:科技风", "ppt-master:顶级咨询风_构建有效AI代理_Anthropic"],
+    "visual_direction": "dark_grid_hud"
+  }
+}

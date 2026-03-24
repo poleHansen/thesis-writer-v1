@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#E2E8F0" />
+  <rect x="0" y="0" width="1280" height="18" fill="#0EA5E9" />
+        <text x="80" y="110" font-size="20" font-family="Arial" fill="#0EA5E9" data-max-width="1120">ending</text>
+    <text x="80" y="170" font-size="38" font-family="Arial" font-weight="700" fill="#0F172A" data-max-width="1120">Recommendation and Next Steps</text>
+    <text x="80" y="215" font-size="20" font-family="Arial" fill="#0F172A" fill-opacity="0.72" data-max-width="1120">Recommendation and Next Steps converts the storyline into a final recommendation.</text>
+  <rect x="80" y="280" width="1120" height="220" rx="36" fill="#0EA5E9" fill-opacity="0.1" />
+    <text x="640" y="400" text-anchor="middle" font-size="44" font-family="Arial" font-weight="700" fill="#0F172A" data-max-width="920">Recommendation and Next Steps conver…</text>
+  <line x1="80" y1="650" x2="1200" y2="650" stroke="#0F172A" stroke-opacity="0.18" />
+    <text x="80" y="685" font-size="18" font-family="Arial" fill="#0F172A" fill-opacity="0.65" data-max-width="1120">5/5  咨询清晰风</text>
+</svg>

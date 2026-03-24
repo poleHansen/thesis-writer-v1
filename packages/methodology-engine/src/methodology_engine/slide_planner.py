@@ -14,17 +14,24 @@ class SlidePlanner:
         preferred_template_id: str | None,
     ) -> SlidePlan:
         slides = self._build_slide_plan_items(outline, brief)
+        style_tags = self._style_tags(brief)
+        scenario_tags = self._scenario_tags(brief, outline)
         return SlidePlan(
             project_id=project_id,
             brief_id=brief.id,
             outline_id=outline.id,
             page_count=len(slides),
             slides=slides,
-            design_direction=preferred_template_id or "methodology-engine planned",
+            design_direction=preferred_template_id or self._build_design_direction(brief, style_tags, scenario_tags),
             status=ReviewStatus.DRAFT,
             metadata={
                 "generation_mode": "methodology_engine_v1",
                 "source": "outline",
+                "preferred_template_id": preferred_template_id,
+                "audience_tag": brief.target_audience,
+                "tone": brief.tone,
+                "style_tags": style_tags,
+                "scenario_tags": scenario_tags,
                 "planning_principles": [
                     "single_conclusion_per_slide",
                     "controlled_information_density",
@@ -34,6 +41,55 @@ class SlidePlanner:
                 "supported_layout_modes": [mode.value for mode in LayoutMode],
             },
         )
+
+    def _build_design_direction(
+        self,
+        brief: PresentationBrief,
+        style_tags: list[str],
+        scenario_tags: list[str],
+    ) -> str:
+        direction_tokens: list[str] = []
+        for token in [*style_tags[:2], *scenario_tags[:2], brief.tone]:
+            if token and token not in direction_tokens:
+                direction_tokens.append(token)
+        return " ".join(direction_tokens) if direction_tokens else "methodology-engine planned"
+
+    def _style_tags(self, brief: PresentationBrief) -> list[str]:
+        tags: list[str] = []
+        for token in [*brief.style_preferences, brief.tone]:
+            normalized = self._normalize_token(token)
+            if normalized and normalized not in tags:
+                tags.append(normalized)
+        return tags
+
+    def _scenario_tags(self, brief: PresentationBrief, outline: Outline) -> list[str]:
+        tags: list[str] = []
+        audience = brief.target_audience.lower()
+        outline_title = outline.title.lower()
+        storyline = brief.storyline.lower()
+        joined_text = " ".join([brief.presentation_goal.lower(), brief.core_message.lower(), outline_title, storyline, audience])
+
+        keyword_groups = {
+            "technology": ["ai", "technology", "tech", "digital", "platform", "system", "architecture"],
+            "product": ["product", "user", "growth", "delivery", "roadmap"],
+            "architecture": ["architecture", "system", "capability", "platform", "integration"],
+            "policy": ["policy", "government", "public", "regional", "regulation"],
+            "research": ["research", "thesis", "academic", "study", "defense"],
+            "report": ["report", "analysis", "briefing", "assessment"],
+        }
+        for tag, keywords in keyword_groups.items():
+            if any(keyword in joined_text for keyword in keywords) and tag not in tags:
+                tags.append(tag)
+
+        if not tags:
+            tags.append("general")
+        return tags
+
+    def _normalize_token(self, token: str | None) -> str | None:
+        if not token:
+            return None
+        normalized = token.strip().lower().replace("_", " ").replace("-", " ")
+        return normalized if normalized else None
 
     def _build_slide_plan_items(self, outline: Outline, brief: PresentationBrief) -> list[SlidePlanItem]:
         chapters = outline.chapters
