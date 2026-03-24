@@ -2,7 +2,9 @@
 
 from app.models.project import CreateProjectRequest
 from app.models.project import BriefResponse
+from app.models.project import ExportJobResponse
 from app.models.project import GenerateBriefRequest
+from app.models.project import GenerateExportRequest
 from app.models.project import GenerateOutlineRequest
 from app.models.project import GenerateSlideArtifactRequest
 from app.models.project import GenerateSlidePlanRequest
@@ -26,7 +28,9 @@ from app.models.project import UploadProjectFileRequest
 __all__ = [
 	"BriefResponse",
 	"CreateProjectRequest",
+	"ExportJobResponse",
 	"GenerateBriefRequest",
+	"GenerateExportRequest",
 	"GenerateOutlineRequest",
 	"GenerateSlideArtifactRequest",
 	"GenerateSlidePlanRequest",

@@ -3,7 +3,7 @@ from __future__ import annotations
 from pydantic import BaseModel, Field
 
 from core_types import ExportJob, Outline, PresentationBrief, Project, ProjectFile, SlideArtifact, SlidePlan, SourceBundle, TaskRun, TemplateMeta, UserIntent
-from core_types.enums import ProjectFileType, SourceMode
+from core_types.enums import ExportFormat, ProjectFileType, SourceMode
 
 
 class CreateProjectRequest(BaseModel):
@@ -145,6 +145,16 @@ class GenerateSlideArtifactRequest(BaseModel):
 
 class SlideArtifactResponse(BaseModel):
     artifact: SlideArtifact
+    task_run: TaskRun | None = None
+
+
+class GenerateExportRequest(BaseModel):
+    artifact_id: str | None = None
+    export_format: ExportFormat = ExportFormat.PPTX
+
+
+class ExportJobResponse(BaseModel):
+    export_job: ExportJob
     task_run: TaskRun | None = None
 
 

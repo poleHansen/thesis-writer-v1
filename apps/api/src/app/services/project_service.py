@@ -1,20 +1,24 @@
 from __future__ import annotations
 
 import base64
+import json
+from pathlib import Path
 from typing import Any
+from uuid import uuid4
 
 from fastapi import HTTPException, status
 
-from core_types import ExtractedAsset, Outline, OutlineSection, PresentationBrief, Project, ProjectFile, SlideArtifact, SlidePlan, SlidePlanItem, SourceBundle, SourceChunk, TaskRun, TemplateMeta, UserIntent
+from core_types import ExportJob, ExtractedAsset, Outline, OutlineSection, PresentationBrief, Project, ProjectFile, SlideArtifact, SlidePlan, SlidePlanItem, SourceBundle, SourceChunk, TaskRun, TemplateMeta, UserIntent
 from core_types.task.models import TaskRun
-from core_types.enums import BundleStatus, FileUploadStatus, ParseStatus, ProjectStatus, RenderStatus, ReviewStatus, TaskStatus, TaskType
+from core_types.enums import BundleStatus, ExportStatus, FileUploadStatus, ParseStatus, ProjectStatus, RenderStatus, ReviewStatus, TaskStatus, TaskType
 from ingestion import DocumentNormalizer, IngestionParser
 from methodology_engine import BriefGenerator, OutlineGenerator, SlidePlanner
 
-from app.models.project import CreateProjectRequest, GenerateBriefRequest, GenerateOutlineRequest, GenerateSlideArtifactRequest, GenerateSlidePlanRequest, ParseProjectFilesRequest, RegisterProjectFileRequest, UpdateBriefRequest, UpdateOutlineRequest, UpdateSlidePlanRequest
+from app.models.project import CreateProjectRequest, GenerateBriefRequest, GenerateExportRequest, GenerateOutlineRequest, GenerateSlideArtifactRequest, GenerateSlidePlanRequest, ParseProjectFilesRequest, RegisterProjectFileRequest, UpdateBriefRequest, UpdateOutlineRequest, UpdateSlidePlanRequest
 from app.models.project import UploadProjectFileRequest
 from app.repositories.project_repository import SqlAlchemyProjectRepository
 from app.services.design_spec_builder import DesignSpecBuilder
+from app.services.export_service import PdfExportService, PptxExportService
 from app.services.file_storage import FileStorageService
 from app.services.svg_finalizer import SvgFinalizer
 from app.services.svg_renderer import SvgRenderResult, SvgRenderer
@@ -36,6 +40,8 @@ class ProjectService:
         self._svg_finalizer = SvgFinalizer()
         self._svg_validator = SvgValidator()
         self._storage_service = storage_service or FileStorageService("storage")
+        self._export_service = PptxExportService()
+        self._pdf_export_service = PdfExportService()
 
     def create_project(self, payload: CreateProjectRequest) -> Project:
         project = Project(
@@ -425,6 +431,162 @@ class ProjectService:
         )
         self._repository.create_task_run(task_run)
         return artifact, task_run
+
+    def generate_export(self, project_id: str, payload: GenerateExportRequest) -> tuple[ExportJob, TaskRun]:
+        self.get_project(project_id)
+        export_format = payload.export_format.value if hasattr(payload.export_format, "value") else str(payload.export_format)
+        artifact = self._repository.get_slide_artifact(payload.artifact_id) if payload.artifact_id else None
+        if artifact is None:
+            detail = self._repository.get_project_detail(project_id)
+            artifact = None if detail is None else detail.get("latest_artifact")
+        export_job = ExportJob(
+            project_id=project_id,
+            artifact_id=artifact.id if artifact is not None else (payload.artifact_id or "unknown-artifact"),
+            run_id=f"run-{uuid4().hex}",
+            export_format=export_format,
+            status=ExportStatus.PENDING,
+            metadata={},
+        )
+        if artifact is None:
+            return self._fail_export(export_job, "Project has no rendered artifact to export")
+        export_job.artifact_id = artifact.id
+        export_job.metadata = {"source_svg_final_dir": artifact.svg_final_dir}
+        if not artifact.svg_final_dir:
+            return self._fail_export(export_job, "Artifact is missing svg_final output")
+        if artifact.render_status not in {RenderStatus.SUCCEEDED, RenderStatus.PARTIAL}:
+            return self._fail_export(export_job, "Artifact finalize is incomplete; export is unavailable")
+
+        final_svg_files = sorted(Path(artifact.svg_final_dir).glob("slide-*.svg"))
+        if not final_svg_files:
+            return self._fail_export(export_job, "Artifact has no finalized SVG pages to export")
+
+        export_file_name = f"{artifact.id}-{export_job.run_id}.{export_format}"
+        export_path = self._storage_service.build_export_path(project_id, artifact.id, export_job.run_id, export_file_name)
+        if export_format == "pdf":
+            export_metadata = self._pdf_export_service.export_svg_pages_to_pdf(
+                svg_paths=final_svg_files,
+                target_path=export_path,
+            )
+            export_job.preview_pdf_path = export_path
+            export_job.metadata = {
+                "source_svg_final_dir": artifact.svg_final_dir,
+                "export_kind": "pdf_preview_from_svg_pages",
+                **export_metadata,
+            }
+        else:
+            export_metadata = self._export_service.export_svg_pages_to_pptx(
+                svg_paths=final_svg_files,
+                target_path=export_path,
+            )
+            export_job.export_path = export_path
+            export_job.metadata = {
+                "source_svg_final_dir": artifact.svg_final_dir,
+                "export_kind": "pptx_from_svg_pages",
+                **export_metadata,
+            }
+
+        if export_format != "pdf":
+            export_job.export_path = export_path
+        else:
+            export_job.export_path = export_path
+        archive_manifest_path = self._storage_service.save_export_context(
+            project_id,
+            artifact.id,
+            export_job.run_id,
+            "archive-manifest.json",
+            {
+                "project_id": project_id,
+                "artifact_id": artifact.id,
+                "export_id": export_job.id,
+                "run_id": export_job.run_id,
+                "export_format": export_format,
+                "export_path": export_path,
+                "preview_pdf_path": export_job.preview_pdf_path,
+                "source_svg_final_dir": artifact.svg_final_dir,
+                "source_files": [str(path) for path in final_svg_files],
+                "artifacts": {
+                    "slide_artifact": self._storage_service.save_project_artifact(
+                        project_id,
+                        "slide-artifact.json",
+                        artifact.model_dump(mode="json"),
+                    ),
+                    "export_output": export_path,
+                },
+                "metadata": export_job.metadata,
+            },
+        )
+        export_log_path = self._storage_service.save_export_context(
+            project_id,
+            artifact.id,
+            export_job.run_id,
+            "export-log.json",
+            {
+                "project_id": project_id,
+                "artifact_id": artifact.id,
+                "export_id": export_job.id,
+                "run_id": export_job.run_id,
+                "status": "succeeded",
+                "export_format": export_format,
+                "archive_manifest_path": archive_manifest_path,
+                "export_path": export_path,
+                "preview_pdf_path": export_job.preview_pdf_path,
+            },
+        )
+        export_job.metadata = {
+            **export_job.metadata,
+            "run_id": export_job.run_id,
+            "archive_manifest_path": archive_manifest_path,
+            "export_log_path": export_log_path,
+        }
+        export_job.status = ExportStatus.SUCCEEDED
+        self._repository.create_export_job(export_job)
+        updated_project = self._repository.update_project_links(
+            project_id,
+            latest_artifact_id=artifact.id,
+            status=ProjectStatus.EXPORTED,
+        )
+        task_run = TaskRun(
+            project_id=project_id,
+            task_type=TaskType.EXPORT,
+            task_status=TaskStatus.SUCCEEDED,
+            result={
+                "artifact_id": artifact.id,
+                "export_id": export_job.id,
+                "run_id": export_job.run_id,
+                "export_format": export_format,
+                "export_path": export_path,
+                "preview_pdf_path": export_job.preview_pdf_path,
+                "archive_manifest_path": archive_manifest_path,
+                "export_log_path": export_log_path,
+                "project_status": (updated_project.status if updated_project else ProjectStatus.EXPORTED),
+            },
+        )
+        self._repository.create_task_run(task_run)
+        return export_job, task_run
+
+    def _fail_export(self, export_job: ExportJob, error_message: str) -> tuple[ExportJob, TaskRun]:
+        export_job.status = ExportStatus.FAILED
+        export_job.error_message = error_message
+        self._repository.create_export_job(export_job)
+        updated_project = self._repository.update_project_links(
+            export_job.project_id,
+            status=ProjectStatus.EXPORT_FAILED,
+        )
+        task_run = TaskRun(
+            project_id=export_job.project_id,
+            task_type=TaskType.EXPORT,
+            task_status=TaskStatus.FAILED,
+            result={
+                "artifact_id": export_job.artifact_id,
+                "export_id": export_job.id,
+                "run_id": export_job.run_id,
+                "export_format": export_job.export_format,
+                "project_status": (updated_project.status if updated_project else ProjectStatus.EXPORT_FAILED),
+            },
+            error_message=error_message,
+        )
+        self._repository.create_task_run(task_run)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=error_message)
 
     def _render_svg_pages(self, project_id: str, artifact_id: str, slide_plan: SlidePlan, template: TemplateMeta, svg_output_dir: str, svg_final_dir: str) -> SvgRenderResult:
         render_result = self._svg_renderer.render(slide_plan=slide_plan, template=template)

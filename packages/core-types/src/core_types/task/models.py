@@ -11,6 +11,7 @@ from core_types.enums import ExportFormat, ExportStatus, TaskStatus, TaskType
 class ExportJob(IdentifiedModel):
     project_id: str
     artifact_id: str
+    run_id: str
     export_format: ExportFormat = ExportFormat.PPTX
     export_path: str | None = None
     preview_pdf_path: str | None = None

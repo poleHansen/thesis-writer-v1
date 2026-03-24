@@ -8,3 +8,5 @@ httpx<0.29,>=0.28
 pytest<9.0,>=8.3
 pypdf<6.0,>=5.4
 python-docx<2.0,>=1.1
+python-pptx<2.0,>=1.0
+cairosvg<3.0,>=2.7

@@ -190,6 +190,7 @@ class ExportRecord(Base):
     id: Mapped[str] = mapped_column(String(64), primary_key=True)
     project_id: Mapped[str] = mapped_column(String(64), ForeignKey("projects.id"), nullable=False, index=True)
     artifact_id: Mapped[str] = mapped_column(String(64), ForeignKey("slide_artifacts.id"), nullable=False, index=True)
+    run_id: Mapped[str] = mapped_column(String(64), nullable=False, index=True)
     export_format: Mapped[str] = mapped_column(String(32), nullable=False, index=True)
     export_path: Mapped[str | None] = mapped_column(String(512), nullable=True)
     preview_pdf_path: Mapped[str | None] = mapped_column(String(512), nullable=True)

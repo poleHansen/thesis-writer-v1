@@ -1,0 +1,33 @@
+{
+  "project_id": "2dc71a23-007b-4382-97ae-7fba1374619f",
+  "artifact_id": "ccef9182-049f-40fa-9ac3-7f436a283104",
+  "export_id": "03df5c98-cbc5-4cc3-a31d-cae03c7e43c0",
+  "export_format": "pdf",
+  "export_path": "storage\\projects\\2dc71a23-007b-4382-97ae-7fba1374619f\\exports\\ccef9182-049f-40fa-9ac3-7f436a283104\\ccef9182-049f-40fa-9ac3-7f436a283104.pdf",
+  "preview_pdf_path": "storage\\projects\\2dc71a23-007b-4382-97ae-7fba1374619f\\exports\\ccef9182-049f-40fa-9ac3-7f436a283104\\ccef9182-049f-40fa-9ac3-7f436a283104.pdf",
+  "source_svg_final_dir": "storage\\projects\\2dc71a23-007b-4382-97ae-7fba1374619f\\render\\ccef9182-049f-40fa-9ac3-7f436a283104\\svg_final",
+  "source_files": [
+    "storage\\projects\\2dc71a23-007b-4382-97ae-7fba1374619f\\render\\ccef9182-049f-40fa-9ac3-7f436a283104\\svg_final\\slide-01.svg",
+    "storage\\projects\\2dc71a23-007b-4382-97ae-7fba1374619f\\render\\ccef9182-049f-40fa-9ac3-7f436a283104\\svg_final\\slide-02.svg",
+    "storage\\projects\\2dc71a23-007b-4382-97ae-7fba1374619f\\render\\ccef9182-049f-40fa-9ac3-7f436a283104\\svg_final\\slide-03.svg",
+    "storage\\projects\\2dc71a23-007b-4382-97ae-7fba1374619f\\render\\ccef9182-049f-40fa-9ac3-7f436a283104\\svg_final\\slide-04.svg",
+    "storage\\projects\\2dc71a23-007b-4382-97ae-7fba1374619f\\render\\ccef9182-049f-40fa-9ac3-7f436a283104\\svg_final\\slide-05.svg"
+  ],
+  "artifacts": {
+    "slide_artifact": "storage\\projects\\2dc71a23-007b-4382-97ae-7fba1374619f\\artifacts\\slide-artifact.json",
+    "export_output": "storage\\projects\\2dc71a23-007b-4382-97ae-7fba1374619f\\exports\\ccef9182-049f-40fa-9ac3-7f436a283104\\ccef9182-049f-40fa-9ac3-7f436a283104.pdf"
+  },
+  "metadata": {
+    "source_svg_final_dir": "storage\\projects\\2dc71a23-007b-4382-97ae-7fba1374619f\\render\\ccef9182-049f-40fa-9ac3-7f436a283104\\svg_final",
+    "export_kind": "pdf_preview_from_svg_pages",
+    "file_count": 5,
+    "rendered_files": [
+      "slide-01.svg",
+      "slide-02.svg",
+      "slide-03.svg",
+      "slide-04.svg",
+      "slide-05.svg"
+    ],
+    "renderer": "cairosvg+pypdf"
+  }
+}

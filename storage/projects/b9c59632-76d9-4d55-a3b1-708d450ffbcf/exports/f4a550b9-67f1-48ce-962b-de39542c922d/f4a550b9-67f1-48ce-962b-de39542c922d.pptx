@@ -1,0 +1,14 @@
+{
+  "project_id": "b9c59632-76d9-4d55-a3b1-708d450ffbcf",
+  "artifact_id": "f4a550b9-67f1-48ce-962b-de39542c922d",
+  "export_format": "pptx",
+  "source_dir": "storage\\projects\\b9c59632-76d9-4d55-a3b1-708d450ffbcf\\render\\f4a550b9-67f1-48ce-962b-de39542c922d\\svg_final",
+  "file_count": 5,
+  "files": [
+    "slide-01.svg",
+    "slide-02.svg",
+    "slide-03.svg",
+    "slide-04.svg",
+    "slide-05.svg"
+  ]
+}

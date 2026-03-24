@@ -80,6 +80,9 @@ class InMemoryProjectRepository:
     def create_slide_artifact(self, artifact: SlideArtifact) -> SlideArtifact:
         return artifact
 
+    def create_export_job(self, export_job: ExportJob) -> ExportJob:
+        return export_job
+
     def get_slide_plan(self, slide_plan_id: str) -> SlidePlan | None:
         return None
 
@@ -595,6 +598,25 @@ class SqlAlchemyProjectRepository:
         self._session.commit()
         return artifact
 
+    def create_export_job(self, export_job: ExportJob) -> ExportJob:
+        record = ExportRecord(
+            id=export_job.id,
+            project_id=export_job.project_id,
+            artifact_id=export_job.artifact_id,
+            run_id=export_job.run_id,
+            export_format=export_job.export_format,
+            export_path=export_job.export_path,
+            preview_pdf_path=export_job.preview_pdf_path,
+            status=export_job.status,
+            error_message=export_job.error_message,
+            metadata_json=export_job.metadata,
+            created_at=export_job.created_at,
+            updated_at=export_job.updated_at,
+        )
+        self._session.add(record)
+        self._session.commit()
+        return export_job
+
     def get_slide_artifact(self, artifact_id: str) -> SlideArtifact | None:
         record = self._session.get(SlideArtifactRecord, artifact_id)
         if record is None:
@@ -623,6 +645,7 @@ class SqlAlchemyProjectRepository:
             id=record.id,
             project_id=record.project_id,
             artifact_id=record.artifact_id,
+            run_id=record.run_id,
             export_format=record.export_format,
             export_path=record.export_path,
             preview_pdf_path=record.preview_pdf_path,

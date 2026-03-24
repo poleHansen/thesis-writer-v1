@@ -16,6 +16,7 @@ apps/api/src/app/repositories/__init__.py
 apps/api/src/app/repositories/project_repository.py
 apps/api/src/app/services/__init__.py
 apps/api/src/app/services/design_spec_builder.py
+apps/api/src/app/services/export_service.py
 apps/api/src/app/services/file_storage.py
 apps/api/src/app/services/project_service.py
 apps/api/src/app/services/svg_finalizer.py

@@ -50,3 +50,22 @@ class FileStorageService:
         target_path = target_dir / file_name
         target_path.write_text(svg_content, encoding="utf-8")
         return str(target_path)
+
+    def save_export_file(self, project_id: str, artifact_id: str, run_id: str, file_name: str, content: bytes) -> str:
+        export_dir = self._storage_root / "projects" / project_id / "exports" / artifact_id / run_id
+        export_dir.mkdir(parents=True, exist_ok=True)
+        target_path = export_dir / file_name
+        target_path.write_bytes(content)
+        return str(target_path)
+
+    def build_export_path(self, project_id: str, artifact_id: str, run_id: str, file_name: str) -> str:
+        export_dir = self._storage_root / "projects" / project_id / "exports" / artifact_id / run_id
+        export_dir.mkdir(parents=True, exist_ok=True)
+        return str(export_dir / file_name)
+
+    def save_export_context(self, project_id: str, artifact_id: str, run_id: str, file_name: str, payload: dict[str, object]) -> str:
+        export_dir = self._storage_root / "projects" / project_id / "exports" / artifact_id / run_id
+        export_dir.mkdir(parents=True, exist_ok=True)
+        target_path = export_dir / file_name
+        target_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+        return str(target_path)

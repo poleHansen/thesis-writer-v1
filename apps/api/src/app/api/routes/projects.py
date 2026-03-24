@@ -4,7 +4,9 @@ from fastapi import APIRouter, Depends, status
 
 from app.models.project import CreateProjectRequest
 from app.models.project import BriefResponse
+from app.models.project import ExportJobResponse
 from app.models.project import GenerateBriefRequest
+from app.models.project import GenerateExportRequest
 from app.models.project import GenerateOutlineRequest
 from app.models.project import GenerateSlideArtifactRequest
 from app.models.project import GenerateSlidePlanRequest
@@ -171,6 +173,16 @@ def generate_slide_artifact(
 ) -> SlideArtifactResponse:
     artifact, task_run = service.generate_slide_artifact(project_id, payload)
     return SlideArtifactResponse(artifact=artifact, task_run=task_run)
+
+
+@router.post("/{project_id}/export", response_model=ExportJobResponse)
+def generate_export(
+    project_id: str,
+    payload: GenerateExportRequest,
+    service: ProjectService = Depends(get_project_service),
+) -> ExportJobResponse:
+    export_job, task_run = service.generate_export(project_id, payload)
+    return ExportJobResponse(export_job=export_job, task_run=task_run)
 
 
 @router.patch("/{project_id}/slide-plan", response_model=UpdateSlidePlanResponse)
