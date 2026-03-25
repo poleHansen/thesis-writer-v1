@@ -1,0 +1,46 @@
+{
+  "created_at": "2026-03-25T04:45:32.290230Z",
+  "updated_at": "2026-03-25T04:45:32.290230Z",
+  "id": "6aa941ff-b7e7-4be3-be66-4262a3fe7325",
+  "project_id": "9e275fab-ed25-4d9a-a8ae-9a77cc097989",
+  "source_bundle_id": "0ec9ef21-f452-4d75-be27-9d566cb69c3a",
+  "presentation_goal": "Verify dashboard keeps rendered projects without export data.",
+  "target_audience": "general audience",
+  "core_message": "demo.md: A compact source summary for dashboard tri-state tests.",
+  "storyline": "Sources: demo.md",
+  "recommended_page_count": 8,
+  "tone": "professional",
+  "style_preferences": [],
+  "risks": [
+    "user intent is incomplete and may affect narrative accuracy"
+  ],
+  "assumptions": [
+    "research enrichment is not connected yet",
+    "uploaded files are the primary evidence base",
+    "missing clarification fields will be filled in later review"
+  ],
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "clarification": {
+      "is_sufficient": false,
+      "missing_fields": [
+        "audience",
+        "scenario",
+        "purpose",
+        "desired_page_count",
+        "style_preferences",
+        "emphasize_points"
+      ],
+      "suggested_questions": [
+        "这份 PPT 的目标受众是谁？",
+        "这份 PPT 会在什么场景下使用？",
+        "这次演示最核心的目标是什么？",
+        "希望控制在多少页以内？",
+        "有没有明确的风格偏好？",
+        "是否需要重点强调某些数据、图表、案例或观点？"
+      ]
+    },
+    "source_mode": "file"
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "created_at": "2026-03-25T10:39:28.495193Z",
+  "updated_at": "2026-03-25T10:39:28.495193Z",
+  "id": "5c5c311b-751d-4395-9bc7-e58d75b6dcba",
+  "project_id": "77cfe703-a002-4340-b579-b78ce602a1d0",
+  "brief_id": "f584a368-c387-45d2-9aa4-62d1e7708428",
+  "outline_id": "100f64d9-c736-41b8-9e5e-4d13533a38e5",
+  "page_count": 5,
+  "slides": [
+    {
+      "slide_id": "slide-1",
+      "slide_number": 1,
+      "title": "Scenario and Core Challenge",
+      "conclusion": "The presentation should anchor on: 培训课件场景，强调结构清晰、知识分层和可讲授性。",
+      "layout_mode": "cover",
+      "content_blocks": [
+        {
+          "block_id": "slide-1-hero",
+          "block_type": "hero",
+          "heading": "Scenario and Core Challenge",
+          "body": "The presentation should anchor on: 培训课件场景，强调结构清晰、知识分层和可讲授性。",
+          "bullets": [
+            "便于分章节讲解和课堂互动",
+            "Context: 培训课件 | Sources: training-courseware.md | Highlights: 培训课件场景，强调结构清晰、知识分层和可讲授性。 -> 企业 AI 提效实战培训"
+          ],
+          "asset_refs": [],
+          "chart_hint": null,
+          "emphasis": "primary"
+        }
+      ],
+      "speaker_notes": "Keep the slide anchored on one conclusion: The presentation should anchor on: 培训课件场景，强调结构清晰、知识分层和可讲授性。",
+      "data_refs": [],
+      "visual_priority": "high"
+    },
+    {
+      "slide_id": "slide-2",
+      "slide_number": 2,
+      "title": "Audience Priorities",
+      "conclusion": "Audience Priorities defines what the audience must understand before details.",
+      "layout_mode": "toc",
+      "content_blocks": [
+        {
+          "block_id": "slide-2-toc",
+          "block_type": "agenda",
+          "heading": "Presentation Flow",
+          "body": "Clarify the decision focus and evaluation lens",
+          "bullets": [
+            "便于分章节讲解和课堂互动",
+            "Context: 培训课件 | Sources: training-courseware.md | Highlights: 培训课件场景，强调结构清晰、知识分层和可讲授性。 -> 企业 AI 提效实战培训",
+            "Audience focus: 内部培训学员"
+          ],
+          "asset_refs": [],
+          "chart_hint": null,
+          "emphasis": "primary"
+        }
+      ],
+      "speaker_notes": "Keep the slide anchored on one conclusion: Audience Priorities defines what the audience must understand before details.",
+      "data_refs": [],
+      "visual_priority": "balanced"
+    },
+    {
+      "slide_id": "slide-3",
+      "slide_number": 3,
+      "title": "Evidence and Analysis",
+      "conclusion": "Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+      "layout_mode": "chart_focus",
+      "content_blocks": [
+        {
+          "block_id": "slide-3-insight",
+          "block_type": "insight",
+          "heading": "Evidence and Analysis",
+          "body": "Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+          "bullets": [],
+          "asset_refs": [],
+          "chart_hint": "compare key evidence",
+          "emphasis": "primary"
+        },
+        {
+          "block_id": "slide-3-evidence",
+          "block_type": "evidence",
+          "heading": "Key Evidence",
+          "body": null,
+          "bullets": [
+            "便于分章节讲解和课堂互动",
+            "Context: 培训课件 | Sources: training-courseware.md | Highlights: 培训课件场景，强调结构清晰、知识分层和可讲授性。 -> 企业 AI 提效实战培训",
+            "Audience focus: 内部培训学员"
+          ],
+          "asset_refs": [],
+          "chart_hint": "bar_or_line",
+          "emphasis": "secondary"
+        }
+      ],
+      "speaker_notes": "Keep the slide anchored on one conclusion: Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+      "data_refs": [],
+      "visual_priority": "medium"
+    },
+    {
+      "slide_id": "slide-4",
+      "slide_number": 4,
+      "title": "Implications and Choices",
+      "conclusion": "Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+      "layout_mode": "hero",
+      "content_blocks": [
+        {
+          "block_id": "slide-4-recommendation",
+          "block_type": "recommendation",
+          "heading": "Implications and Choices",
+          "body": "Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+          "bullets": [
+            "便于分章节讲解和课堂互动",
+            "Context: 培训课件 | Sources: training-courseware.md | Highlights: 培训课件场景，强调结构清晰、知识分层和可讲授性。 -> 企业 AI 提效实战培训",
+            "Audience focus: 内部培训学员"
+          ],
+          "asset_refs": [],
+          "chart_hint": null,
+          "emphasis": "primary"
+        }
+      ],
+      "speaker_notes": "Keep the slide anchored on one conclusion: Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+      "data_refs": [],
+      "visual_priority": "high"
+    },
+    {
+      "slide_id": "slide-5",
+      "slide_number": 5,
+      "title": "Recommendation and Next Steps",
+      "conclusion": "Recommendation and Next Steps converts the storyline into a final recommendation.",
+      "layout_mode": "ending",
+      "content_blocks": [
+        {
+          "block_id": "slide-5-ending",
+          "block_type": "ending",
+          "heading": "Next Step",
+          "body": "Recommendation and Next Steps converts the storyline into a final recommendation.",
+          "bullets": [
+            "便于分章节讲解和课堂互动",
+            "Context: 培训课件 | Sources: training-courseware.md | Highlights: 培训课件场景，强调结构清晰、知识分层和可讲授性。 -> 企业 AI 提效实战培训"
+          ],
+          "asset_refs": [],
+          "chart_hint": null,
+          "emphasis": "primary"
+        }
+      ],
+      "speaker_notes": "Keep the slide anchored on one conclusion: Recommendation and Next Steps converts the storyline into a final recommendation.",
+      "data_refs": [],
+      "visual_priority": "high"
+    }
+  ],
+  "design_direction": "consulting-clean",
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "source": "outline",
+    "preferred_template_id": "consulting-clean",
+    "audience_tag": "内部培训学员",
+    "tone": "training",
+    "style_tags": [
+      "training"
+    ],
+    "scenario_tags": [
+      "technology"
+    ],
+    "planning_principles": [
+      "single_conclusion_per_slide",
+      "controlled_information_density",
+      "limited_content_blocks",
+      "layout_matches_content_type"
+    ],
+    "supported_layout_modes": [
+      "cover",
+      "toc",
+      "section",
+      "hero",
+      "two_column",
+      "bento",
+      "chart_focus",
+      "timeline",
+      "ending"
+    ]
+  }
+}

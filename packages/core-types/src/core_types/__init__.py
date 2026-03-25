@@ -1,4 +1,4 @@
-"""Core domain contracts for thesis-writer-v1."""
+"""Core domain contracts for the AI PPT Studio platform."""
 
 from core_types.artifact.models import SlideArtifact
 from core_types.brief.models import PresentationBrief

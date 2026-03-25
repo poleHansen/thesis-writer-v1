@@ -1,0 +1,93 @@
+{
+  "created_at": "2026-03-24T14:07:27.876132Z",
+  "updated_at": "2026-03-24T14:07:27.876132Z",
+  "id": "5a11dd1b-1f31-497b-89aa-cdc3bec5ad8a",
+  "project_id": "cf5b9485-1701-4ee1-8bb6-2e93ff3690ae",
+  "brief_id": "03c0af55-6f63-45af-af2d-625442e3582e",
+  "title": "Dashboard Latest Export outline",
+  "chapters": [
+    {
+      "section_id": "section-1",
+      "title": "Context and Problem",
+      "objective": "Establish the presentation mainline and stakes",
+      "key_message": "The presentation should anchor on: demo.md: A compact source summary for dashboard latest export tests.",
+      "supporting_points": [
+        "Verify dashboard latest_export stays pinned to the newest run.",
+        "Sources: demo.md",
+        "Audience focus: general audience",
+        "Evidence source: demo.md"
+      ],
+      "estimated_slides": 1,
+      "children": []
+    },
+    {
+      "section_id": "section-2",
+      "title": "What Matters Most",
+      "objective": "Clarify the decision focus and evaluation lens",
+      "key_message": "What Matters Most defines what the audience must understand before details.",
+      "supporting_points": [
+        "Verify dashboard latest_export stays pinned to the newest run.",
+        "Sources: demo.md",
+        "Audience focus: general audience",
+        "Evidence source: demo.md"
+      ],
+      "estimated_slides": 1,
+      "children": []
+    },
+    {
+      "section_id": "section-3",
+      "title": "Evidence and Analysis",
+      "objective": "Present the strongest supporting evidence",
+      "key_message": "Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+      "supporting_points": [
+        "Verify dashboard latest_export stays pinned to the newest run.",
+        "Sources: demo.md",
+        "Audience focus: general audience",
+        "Evidence source: demo.md"
+      ],
+      "estimated_slides": 1,
+      "children": []
+    },
+    {
+      "section_id": "section-4",
+      "title": "Implications and Choices",
+      "objective": "Explain tradeoffs, impacts, and implications",
+      "key_message": "Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+      "supporting_points": [
+        "Verify dashboard latest_export stays pinned to the newest run.",
+        "Sources: demo.md",
+        "Audience focus: general audience",
+        "Evidence source: demo.md"
+      ],
+      "estimated_slides": 1,
+      "children": []
+    },
+    {
+      "section_id": "section-5",
+      "title": "Recommendation and Next Steps",
+      "objective": "Drive toward a concrete takeaway and action",
+      "key_message": "Recommendation and Next Steps converts the storyline into a final recommendation.",
+      "supporting_points": [
+        "Verify dashboard latest_export stays pinned to the newest run.",
+        "Sources: demo.md",
+        "Audience focus: general audience",
+        "Evidence source: demo.md"
+      ],
+      "estimated_slides": 1,
+      "children": []
+    }
+  ],
+  "summary": "Outline generated from brief 03c0af55-6f63-45af-af2d-625442e3582e with 5 chapters.",
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "source": "brief",
+    "source_mode": "file",
+    "generation_principles": [
+      "mainline_before_chapters",
+      "explicit_chapter_role",
+      "explicit_key_message",
+      "avoid_raw_toc_copy"
+    ]
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "created_at": "2026-03-25T03:50:31.205313Z",
+  "updated_at": "2026-03-25T03:50:31.205313Z",
+  "id": "e9ebed4d-aa24-4e0a-acd3-e794d5ea5979",
+  "project_id": "d8baa9d5-754d-4900-80c2-27820a1216cd",
+  "brief_id": "1c071750-8691-4b3d-b4aa-042ce627749f",
+  "title": "Outlined Detail Demo outline",
+  "chapters": [
+    {
+      "section_id": "section-1",
+      "title": "Context and Problem",
+      "objective": "Establish the presentation mainline and stakes",
+      "key_message": "The presentation should anchor on: outlined-detail.md: A source summary that is sufficient to generate a brief and outline but not a slide plan.",
+      "supporting_points": [
+        "Verify outlined detail stays aligned before any slide plan exists.",
+        "Sources: outlined-detail.md",
+        "Audience focus: general audience",
+        "Evidence source: outlined-detail.md"
+      ],
+      "estimated_slides": 1,
+      "children": []
+    },
+    {
+      "section_id": "section-2",
+      "title": "What Matters Most",
+      "objective": "Clarify the decision focus and evaluation lens",
+      "key_message": "What Matters Most defines what the audience must understand before details.",
+      "supporting_points": [
+        "Verify outlined detail stays aligned before any slide plan exists.",
+        "Sources: outlined-detail.md",
+        "Audience focus: general audience",
+        "Evidence source: outlined-detail.md"
+      ],
+      "estimated_slides": 1,
+      "children": []
+    },
+    {
+      "section_id": "section-3",
+      "title": "Evidence and Analysis",
+      "objective": "Present the strongest supporting evidence",
+      "key_message": "Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+      "supporting_points": [
+        "Verify outlined detail stays aligned before any slide plan exists.",
+        "Sources: outlined-detail.md",
+        "Audience focus: general audience",
+        "Evidence source: outlined-detail.md"
+      ],
+      "estimated_slides": 1,
+      "children": []
+    },
+    {
+      "section_id": "section-4",
+      "title": "Implications and Choices",
+      "objective": "Explain tradeoffs, impacts, and implications",
+      "key_message": "Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+      "supporting_points": [
+        "Verify outlined detail stays aligned before any slide plan exists.",
+        "Sources: outlined-detail.md",
+        "Audience focus: general audience",
+        "Evidence source: outlined-detail.md"
+      ],
+      "estimated_slides": 1,
+      "children": []
+    },
+    {
+      "section_id": "section-5",
+      "title": "Recommendation and Next Steps",
+      "objective": "Drive toward a concrete takeaway and action",
+      "key_message": "Recommendation and Next Steps converts the storyline into a final recommendation.",
+      "supporting_points": [
+        "Verify outlined detail stays aligned before any slide plan exists.",
+        "Sources: outlined-detail.md",
+        "Audience focus: general audience",
+        "Evidence source: outlined-detail.md"
+      ],
+      "estimated_slides": 1,
+      "children": []
+    }
+  ],
+  "summary": "Outline generated from brief 1c071750-8691-4b3d-b4aa-042ce627749f with 5 chapters.",
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "source": "brief",
+    "source_mode": "file",
+    "generation_principles": [
+      "mainline_before_chapters",
+      "explicit_chapter_role",
+      "explicit_key_message",
+      "avoid_raw_toc_copy"
+    ]
+  }
+}

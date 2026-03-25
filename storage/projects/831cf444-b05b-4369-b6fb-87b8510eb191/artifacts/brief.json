@@ -1,0 +1,46 @@
+{
+  "created_at": "2026-03-25T10:39:05.712016Z",
+  "updated_at": "2026-03-25T10:39:05.712016Z",
+  "id": "aa1d5a2c-154b-4a83-a5fb-7bf11fabcdfd",
+  "project_id": "831cf444-b05b-4369-b6fb-87b8510eb191",
+  "source_bundle_id": "1d1c5dc1-7085-41ad-92fe-f5976615b053",
+  "presentation_goal": "Verify briefing detail stays aligned before any outline exists.",
+  "target_audience": "general audience",
+  "core_message": "briefing-detail.md: A source summary that is sufficient to generate a brief but not yet any later planning objects.",
+  "storyline": "Sources: briefing-detail.md",
+  "recommended_page_count": 8,
+  "tone": "professional",
+  "style_preferences": [],
+  "risks": [
+    "user intent is incomplete and may affect narrative accuracy"
+  ],
+  "assumptions": [
+    "research enrichment is not connected yet",
+    "uploaded files are the primary evidence base",
+    "missing clarification fields will be filled in later review"
+  ],
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "clarification": {
+      "is_sufficient": false,
+      "missing_fields": [
+        "audience",
+        "scenario",
+        "purpose",
+        "desired_page_count",
+        "style_preferences",
+        "emphasize_points"
+      ],
+      "suggested_questions": [
+        "这份 PPT 的目标受众是谁？",
+        "这份 PPT 会在什么场景下使用？",
+        "这次演示最核心的目标是什么？",
+        "希望控制在多少页以内？",
+        "有没有明确的风格偏好？",
+        "是否需要重点强调某些数据、图表、案例或观点？"
+      ]
+    },
+    "source_mode": "file"
+  }
+}

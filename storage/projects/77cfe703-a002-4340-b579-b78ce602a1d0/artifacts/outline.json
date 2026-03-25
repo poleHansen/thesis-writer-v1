@@ -1,0 +1,93 @@
+{
+  "created_at": "2026-03-25T10:39:28.441190Z",
+  "updated_at": "2026-03-25T10:39:28.441190Z",
+  "id": "100f64d9-c736-41b8-9e5e-4d13533a38e5",
+  "project_id": "77cfe703-a002-4340-b579-b78ce602a1d0",
+  "brief_id": "f584a368-c387-45d2-9aa4-62d1e7708428",
+  "title": "企业 AI 提效实战培训 outline",
+  "chapters": [
+    {
+      "section_id": "section-1",
+      "title": "Scenario and Core Challenge",
+      "objective": "Establish the presentation mainline and stakes",
+      "key_message": "The presentation should anchor on: 培训课件场景，强调结构清晰、知识分层和可讲授性。",
+      "supporting_points": [
+        "便于分章节讲解和课堂互动",
+        "Context: 培训课件 | Sources: training-courseware.md | Highlights: 培训课件场景，强调结构清晰、知识分层和可讲授性。 -> 企业 AI 提效实战培训",
+        "Audience focus: 内部培训学员",
+        "Evidence source: training-courseware.md"
+      ],
+      "estimated_slides": 2,
+      "children": []
+    },
+    {
+      "section_id": "section-2",
+      "title": "Audience Priorities",
+      "objective": "Clarify the decision focus and evaluation lens",
+      "key_message": "Audience Priorities defines what the audience must understand before details.",
+      "supporting_points": [
+        "便于分章节讲解和课堂互动",
+        "Context: 培训课件 | Sources: training-courseware.md | Highlights: 培训课件场景，强调结构清晰、知识分层和可讲授性。 -> 企业 AI 提效实战培训",
+        "Audience focus: 内部培训学员",
+        "Evidence source: training-courseware.md"
+      ],
+      "estimated_slides": 2,
+      "children": []
+    },
+    {
+      "section_id": "section-3",
+      "title": "Evidence and Analysis",
+      "objective": "Present the strongest supporting evidence",
+      "key_message": "Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+      "supporting_points": [
+        "便于分章节讲解和课堂互动",
+        "Context: 培训课件 | Sources: training-courseware.md | Highlights: 培训课件场景，强调结构清晰、知识分层和可讲授性。 -> 企业 AI 提效实战培训",
+        "Audience focus: 内部培训学员",
+        "Evidence source: training-courseware.md"
+      ],
+      "estimated_slides": 2,
+      "children": []
+    },
+    {
+      "section_id": "section-4",
+      "title": "Implications and Choices",
+      "objective": "Explain tradeoffs, impacts, and implications",
+      "key_message": "Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+      "supporting_points": [
+        "便于分章节讲解和课堂互动",
+        "Context: 培训课件 | Sources: training-courseware.md | Highlights: 培训课件场景，强调结构清晰、知识分层和可讲授性。 -> 企业 AI 提效实战培训",
+        "Audience focus: 内部培训学员",
+        "Evidence source: training-courseware.md"
+      ],
+      "estimated_slides": 2,
+      "children": []
+    },
+    {
+      "section_id": "section-5",
+      "title": "Recommendation and Next Steps",
+      "objective": "Drive toward a concrete takeaway and action",
+      "key_message": "Recommendation and Next Steps converts the storyline into a final recommendation.",
+      "supporting_points": [
+        "便于分章节讲解和课堂互动",
+        "Context: 培训课件 | Sources: training-courseware.md | Highlights: 培训课件场景，强调结构清晰、知识分层和可讲授性。 -> 企业 AI 提效实战培训",
+        "Audience focus: 内部培训学员",
+        "Evidence source: training-courseware.md"
+      ],
+      "estimated_slides": 2,
+      "children": []
+    }
+  ],
+  "summary": "Outline generated from brief f584a368-c387-45d2-9aa4-62d1e7708428 with 5 chapters.",
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "source": "brief",
+    "source_mode": "mixed",
+    "generation_principles": [
+      "mainline_before_chapters",
+      "explicit_chapter_role",
+      "explicit_key_message",
+      "avoid_raw_toc_copy"
+    ]
+  }
+}

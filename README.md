@@ -1,6 +1,29 @@
-# thesis-writer-v1
+# AI PPT Studio
 
-毕业论文初稿自动生成平台
+融合 Linux.do 方法论、LandPPT 平台能力与 ppt-master 渲染链路的 AI PPT 生成网站
+
+## 项目定位
+
+这个仓库的目标不是做“论文初稿生成器”，而是做一个面向多场景的 AI PPT 生成平台。
+
+核心能力包括：
+
+- 对话生成 PPT：用户通过对话描述主题、目标、受众、场景与风格，系统先澄清，再规划，再生成。
+- 材料生成 PPT：用户上传 Word、PDF、Markdown、网页链接、文本等资料，系统先解析，再研究，再规划，再生成。
+- 统一内容中台：无论输入来自对话还是文件，都统一进入 `SourceBundle -> PresentationBrief -> Outline -> SlidePlan -> SlideArtifact -> ExportJob` 链路。
+- SVG-first 交付：最终页面以 SVG-first 方式渲染，并支持导出 PPTX / PDF 与保留版本化结果归档。
+
+当前优先支持的典型场景包括：
+
+- 论文答辩
+- 企业汇报
+- 战略咨询
+- 产品发布
+- 培训课件
+- 政府或园区汇报
+- 技术分享
+
+其中“论文答辩”只是支持场景之一，不再代表整个产品定位。
 
 ## 环境要求
 
@@ -16,6 +39,18 @@ uv sync
 ```
 
 ## 本地启动
+
+默认 `.env` 已按宿主机本地开发配置为 `127.0.0.1`。如果你用 Docker Compose 启动，容器内的 `DATABASE_URL` 和 `REDIS_URL` 会由 `docker-compose.yml` 自动覆盖为服务名。
+
+### 初始化数据库
+
+在首次启动 API 前，先执行正式数据库迁移：
+
+```bash
+uv run alembic upgrade head
+```
+
+`AUTO_CREATE_TABLES` 仅保留给本地开发和部分测试夹具兜底，标准 schema 变更入口是 Alembic。
 
 ### 启动 API
 
@@ -39,6 +74,13 @@ uv run uvicorn app.main:app --host 0.0.0.0 --port 8000 --app-dir apps/api/src --
 uv run python apps/web/server.py
 ```
 
+如果 3000 端口已被占用，可先设置其他端口再启动：
+
+```bash
+$env:WEB_PORT=3001
+uv run python apps/web/server.py
+```
+
 访问地址：
 
 - Web: http://127.0.0.1:3000
@@ -55,3 +97,5 @@ uv run python apps/web/server.py
 ```bash
 docker compose up --build
 ```
+
+容器内 API 会先执行一次 `alembic upgrade head`，再启动 FastAPI 服务。

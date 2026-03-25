@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#F8FAFC" />
+  <rect x="0" y="0" width="1280" height="18" fill="#DC2626" />
+        <text x="80" y="110" font-size="20" font-family="Arial" fill="#DC2626" data-max-width="1120" data-line-height="1.0" data-max-height="24">chart_focus</text>
+    <text x="80" y="170" font-size="38" font-family="Arial" fill="#1E3A8A" data-max-width="1120" data-line-height="1.18" data-max-height="92" font-weight="700">Evidence and Analysis</text>
+    <text x="80" y="230" font-size="20" font-family="Arial" fill="#1E3A8A" data-max-width="1120" data-line-height="1.2" data-max-height="48" fill-opacity="0.72">Evidence and Analysis substantiates the storyline with the most relevant evidence.</text>
+  <rect x="80" y="280" width="720" height="280" rx="24" fill="#DC2626" fill-opacity="0.08" />
+    <polyline points="130,500 240,430 360,450 500,360 650,390 760,320" fill="none" stroke="#DC2626" stroke-width="8" />
+        <text x="110" y="330" font-size="24" font-family="Arial" fill="#1E3A8A" data-max-width="660" data-line-height="1.35" data-max-height="88">Evidence and Analysis</text><circle cx="868" cy="314" r="5" fill="#DC2626" /><text x="884" y="320" font-size="18" font-family="Arial" fill="#1E3A8A" data-max-width="280" data-line-height="1.2" data-max-height="44">用 12 页以内说明研究价值、方法与结论</text><circle cx="868" cy="351" r="5" fill="#DC2626" /><text x="884" y="357" font-size="18" font-family="Arial" fill="#1E3A8A" data-max-width="280" data-line-height="1.2" data-max-height="44">Context: 学术论文答辩 | Sources:<tspan x="884" dy="21.6">academic-thesis-defense.md…</tspan></text><circle cx="868" cy="410" r="5" fill="#DC2626" /><text x="884" y="416" font-size="18" font-family="Arial" fill="#1E3A8A" data-max-width="280" data-line-height="1.2" data-max-height="44">Audience focus: 导师与答辩委员会</text>
+  <line x1="80" y1="650" x2="1200" y2="650" stroke="#1E3A8A" stroke-opacity="0.18" />
+    <text x="80" y="685" font-size="18" font-family="Arial" fill="#1E3A8A" data-max-width="1120" data-line-height="1.0" data-max-height="22" fill-opacity="0.65">3/5 学术答辩风</text>
+</svg>

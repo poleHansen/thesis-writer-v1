@@ -10,7 +10,7 @@ function summarizePlanning(item) {
     lines.push(`Outline: ${item.latest_outline.title}`);
   }
   if (item.latest_slide_plan) {
-    lines.push(`Slides: ${item.latest_slide_plan.page_count} pages`);
+    lines.push(`Slides: ${item.latest_slide_plan.page_count} pages planned`);
   }
   return lines;
 }
@@ -136,13 +136,13 @@ function renderProjectCard(item, dom) {
   const detailLink = document.createElement("a");
   detailLink.href = getProjectHash(item.project.id);
   detailLink.className = "detail-link";
-  detailLink.textContent = "查看项目详情锚点";
+  detailLink.textContent = "进入项目工作区";
   outputPanel.appendChild(detailLink);
 
   card.addEventListener("click", (event) => {
     const clickedLink = event.target.closest("a");
     if (!clickedLink) {
-      window.location.hash = getProjectHash(item.project.id);
+      window.location.href = getProjectHash(item.project.id);
     }
   });
 
@@ -189,7 +189,7 @@ export function renderDashboard(items, dom) {
   updateMetrics(filteredItems, dom);
 
   if (!items.length) {
-    dom.statusBanner.textContent = "当前没有项目。先通过 API 创建项目后，这里会显示阶段摘要。";
+    dom.statusBanner.textContent = "当前没有 PPT 项目。先创建项目后，这里会显示各阶段摘要。";
     return;
   }
 
@@ -201,6 +201,6 @@ export function renderDashboard(items, dom) {
   filteredItems.forEach((item) => {
     dom.dashboardGrid.appendChild(renderProjectCard(item, dom));
   });
-  dom.statusBanner.textContent = `已显示 ${filteredItems.length} / ${items.length} 个项目，最后刷新时间 ${formatDate(new Date().toISOString())}`;
+  dom.statusBanner.textContent = `已显示 ${filteredItems.length} / ${items.length} 个 PPT 项目，最后刷新时间 ${formatDate(new Date().toISOString())}`;
   focusActiveProject();
 }

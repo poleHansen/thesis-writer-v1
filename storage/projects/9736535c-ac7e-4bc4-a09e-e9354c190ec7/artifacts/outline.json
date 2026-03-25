@@ -1,0 +1,93 @@
+{
+  "created_at": "2026-03-24T15:08:48.604007Z",
+  "updated_at": "2026-03-24T15:08:48.604007Z",
+  "id": "2b3935c6-27f3-4eaf-9e0e-e6bc8052b61d",
+  "project_id": "9736535c-ac7e-4bc4-a09e-e9354c190ec7",
+  "brief_id": "653b9f3b-06b0-4a99-9ad3-0b0322825057",
+  "title": "Dashboard Rendered Project outline",
+  "chapters": [
+    {
+      "section_id": "section-1",
+      "title": "Context and Problem",
+      "objective": "Establish the presentation mainline and stakes",
+      "key_message": "The presentation should anchor on: demo.md: A compact source summary for dashboard mixed status tests.",
+      "supporting_points": [
+        "Verify dashboard keeps rendered project state without export data.",
+        "Sources: demo.md",
+        "Audience focus: general audience",
+        "Evidence source: demo.md"
+      ],
+      "estimated_slides": 1,
+      "children": []
+    },
+    {
+      "section_id": "section-2",
+      "title": "What Matters Most",
+      "objective": "Clarify the decision focus and evaluation lens",
+      "key_message": "What Matters Most defines what the audience must understand before details.",
+      "supporting_points": [
+        "Verify dashboard keeps rendered project state without export data.",
+        "Sources: demo.md",
+        "Audience focus: general audience",
+        "Evidence source: demo.md"
+      ],
+      "estimated_slides": 1,
+      "children": []
+    },
+    {
+      "section_id": "section-3",
+      "title": "Evidence and Analysis",
+      "objective": "Present the strongest supporting evidence",
+      "key_message": "Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+      "supporting_points": [
+        "Verify dashboard keeps rendered project state without export data.",
+        "Sources: demo.md",
+        "Audience focus: general audience",
+        "Evidence source: demo.md"
+      ],
+      "estimated_slides": 1,
+      "children": []
+    },
+    {
+      "section_id": "section-4",
+      "title": "Implications and Choices",
+      "objective": "Explain tradeoffs, impacts, and implications",
+      "key_message": "Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+      "supporting_points": [
+        "Verify dashboard keeps rendered project state without export data.",
+        "Sources: demo.md",
+        "Audience focus: general audience",
+        "Evidence source: demo.md"
+      ],
+      "estimated_slides": 1,
+      "children": []
+    },
+    {
+      "section_id": "section-5",
+      "title": "Recommendation and Next Steps",
+      "objective": "Drive toward a concrete takeaway and action",
+      "key_message": "Recommendation and Next Steps converts the storyline into a final recommendation.",
+      "supporting_points": [
+        "Verify dashboard keeps rendered project state without export data.",
+        "Sources: demo.md",
+        "Audience focus: general audience",
+        "Evidence source: demo.md"
+      ],
+      "estimated_slides": 1,
+      "children": []
+    }
+  ],
+  "summary": "Outline generated from brief 653b9f3b-06b0-4a99-9ad3-0b0322825057 with 5 chapters.",
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "source": "brief",
+    "source_mode": "file",
+    "generation_principles": [
+      "mainline_before_chapters",
+      "explicit_chapter_role",
+      "explicit_key_message",
+      "avoid_raw_toc_copy"
+    ]
+  }
+}

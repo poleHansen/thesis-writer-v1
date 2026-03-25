@@ -1,0 +1,91 @@
+{
+  "project_id": "84b4ba5d-e7cf-4dfa-b8ea-dbd8a68ed242",
+  "project_name": "Status Latest Export Tail",
+  "template": {
+    "template_id": "technology-grid",
+    "name": "科技网格风",
+    "style_tags": [
+      "technology",
+      "grid",
+      "dark",
+      "data"
+    ],
+    "scenario_tags": [
+      "technology",
+      "product",
+      "ai",
+      "architecture"
+    ],
+    "color_scheme": [
+      "#0A0F1F",
+      "#22D3EE",
+      "#A78BFA"
+    ],
+    "density_range": "medium",
+    "design_spec_path": "builtin://templates/technology-grid/design-spec.json",
+    "preview_image_path": "builtin://templates/technology-grid/preview.png",
+    "metadata": {
+      "default_for": [
+        "technology",
+        "product",
+        "architecture"
+      ],
+      "font_family": "Source Han Sans",
+      "inspiration_sources": [
+        "LandPPT:科技风",
+        "ppt-master:顶级咨询风_构建有效AI代理_Anthropic"
+      ],
+      "visual_direction": "dark_grid_hud"
+    }
+  },
+  "design_direction": "professional technology",
+  "page_count": 5,
+  "render_mode": "placeholder",
+  "slides": [
+    {
+      "slide_id": "slide-1",
+      "slide_number": 1,
+      "title": "Context and Problem",
+      "conclusion": "The presentation should anchor on: demo.md: A compact source summary for project status latest export tests.",
+      "layout_mode": "cover",
+      "content_block_count": 1,
+      "visual_priority": "high"
+    },
+    {
+      "slide_id": "slide-2",
+      "slide_number": 2,
+      "title": "What Matters Most",
+      "conclusion": "What Matters Most defines what the audience must understand before details.",
+      "layout_mode": "toc",
+      "content_block_count": 1,
+      "visual_priority": "balanced"
+    },
+    {
+      "slide_id": "slide-3",
+      "slide_number": 3,
+      "title": "Evidence and Analysis",
+      "conclusion": "Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+      "layout_mode": "chart_focus",
+      "content_block_count": 2,
+      "visual_priority": "medium"
+    },
+    {
+      "slide_id": "slide-4",
+      "slide_number": 4,
+      "title": "Implications and Choices",
+      "conclusion": "Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+      "layout_mode": "hero",
+      "content_block_count": 1,
+      "visual_priority": "high"
+    },
+    {
+      "slide_id": "slide-5",
+      "slide_number": 5,
+      "title": "Recommendation and Next Steps",
+      "conclusion": "Recommendation and Next Steps converts the storyline into a final recommendation.",
+      "layout_mode": "ending",
+      "content_block_count": 1,
+      "visual_priority": "high"
+    }
+  ]
+}

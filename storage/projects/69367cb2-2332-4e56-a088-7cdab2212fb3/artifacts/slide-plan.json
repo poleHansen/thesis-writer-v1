@@ -1,0 +1,182 @@
+{
+  "created_at": "2026-03-25T06:34:53.689487Z",
+  "updated_at": "2026-03-25T06:34:53.689487Z",
+  "id": "c44f8f8e-1d2a-4ce8-b72d-7a1221284bb8",
+  "project_id": "69367cb2-2332-4e56-a088-7cdab2212fb3",
+  "brief_id": "7999a3c5-46a0-45ac-bb23-2e32b4c2550a",
+  "outline_id": "4747f96e-063b-481e-9dcc-0052077805a8",
+  "page_count": 5,
+  "slides": [
+    {
+      "slide_id": "slide-1",
+      "slide_number": 1,
+      "title": "Scenario and Core Challenge",
+      "conclusion": "The presentation should anchor on: 政府汇报场景，强调政策语境、指标进展、重点项目与风险事项。",
+      "layout_mode": "cover",
+      "content_blocks": [
+        {
+          "block_id": "slide-1-hero",
+          "block_type": "hero",
+          "heading": "Scenario and Core Challenge",
+          "body": "The presentation should anchor on: 政府汇报场景，强调政策语境、指标进展、重点项目与风险事项。",
+          "bullets": [
+            "形成稳健、规范、层次清晰的正式汇报",
+            "Context: 政府汇报 | Sources: government-reporting-pack.md | Highlights: 政府汇报场景，强调政策语境、指标进展、重点项目与风险事项。 -> 区域数字治理年度汇报"
+          ],
+          "asset_refs": [],
+          "chart_hint": null,
+          "emphasis": "primary"
+        }
+      ],
+      "speaker_notes": "Keep the slide anchored on one conclusion: The presentation should anchor on: 政府汇报场景，强调政策语境、指标进展、重点项目与风险事项。",
+      "data_refs": [],
+      "visual_priority": "high"
+    },
+    {
+      "slide_id": "slide-2",
+      "slide_number": 2,
+      "title": "Audience Priorities",
+      "conclusion": "Audience Priorities defines what the audience must understand before details.",
+      "layout_mode": "toc",
+      "content_blocks": [
+        {
+          "block_id": "slide-2-toc",
+          "block_type": "agenda",
+          "heading": "Presentation Flow",
+          "body": "Clarify the decision focus and evaluation lens",
+          "bullets": [
+            "形成稳健、规范、层次清晰的正式汇报",
+            "Context: 政府汇报 | Sources: government-reporting-pack.md | Highlights: 政府汇报场景，强调政策语境、指标进展、重点项目与风险事项。 -> 区域数字治理年度汇报",
+            "Audience focus: 主管部门与领导班子"
+          ],
+          "asset_refs": [],
+          "chart_hint": null,
+          "emphasis": "primary"
+        }
+      ],
+      "speaker_notes": "Keep the slide anchored on one conclusion: Audience Priorities defines what the audience must understand before details.",
+      "data_refs": [],
+      "visual_priority": "balanced"
+    },
+    {
+      "slide_id": "slide-3",
+      "slide_number": 3,
+      "title": "Evidence and Analysis",
+      "conclusion": "Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+      "layout_mode": "chart_focus",
+      "content_blocks": [
+        {
+          "block_id": "slide-3-insight",
+          "block_type": "insight",
+          "heading": "Evidence and Analysis",
+          "body": "Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+          "bullets": [],
+          "asset_refs": [],
+          "chart_hint": "compare key evidence",
+          "emphasis": "primary"
+        },
+        {
+          "block_id": "slide-3-evidence",
+          "block_type": "evidence",
+          "heading": "Key Evidence",
+          "body": null,
+          "bullets": [
+            "形成稳健、规范、层次清晰的正式汇报",
+            "Context: 政府汇报 | Sources: government-reporting-pack.md | Highlights: 政府汇报场景，强调政策语境、指标进展、重点项目与风险事项。 -> 区域数字治理年度汇报",
+            "Audience focus: 主管部门与领导班子"
+          ],
+          "asset_refs": [],
+          "chart_hint": "bar_or_line",
+          "emphasis": "secondary"
+        }
+      ],
+      "speaker_notes": "Keep the slide anchored on one conclusion: Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+      "data_refs": [],
+      "visual_priority": "medium"
+    },
+    {
+      "slide_id": "slide-4",
+      "slide_number": 4,
+      "title": "Implications and Choices",
+      "conclusion": "Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+      "layout_mode": "hero",
+      "content_blocks": [
+        {
+          "block_id": "slide-4-recommendation",
+          "block_type": "recommendation",
+          "heading": "Implications and Choices",
+          "body": "Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+          "bullets": [
+            "形成稳健、规范、层次清晰的正式汇报",
+            "Context: 政府汇报 | Sources: government-reporting-pack.md | Highlights: 政府汇报场景，强调政策语境、指标进展、重点项目与风险事项。 -> 区域数字治理年度汇报",
+            "Audience focus: 主管部门与领导班子"
+          ],
+          "asset_refs": [],
+          "chart_hint": null,
+          "emphasis": "primary"
+        }
+      ],
+      "speaker_notes": "Keep the slide anchored on one conclusion: Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+      "data_refs": [],
+      "visual_priority": "high"
+    },
+    {
+      "slide_id": "slide-5",
+      "slide_number": 5,
+      "title": "Recommendation and Next Steps",
+      "conclusion": "Recommendation and Next Steps converts the storyline into a final recommendation.",
+      "layout_mode": "ending",
+      "content_blocks": [
+        {
+          "block_id": "slide-5-ending",
+          "block_type": "ending",
+          "heading": "Next Step",
+          "body": "Recommendation and Next Steps converts the storyline into a final recommendation.",
+          "bullets": [
+            "形成稳健、规范、层次清晰的正式汇报",
+            "Context: 政府汇报 | Sources: government-reporting-pack.md | Highlights: 政府汇报场景，强调政策语境、指标进展、重点项目与风险事项。 -> 区域数字治理年度汇报"
+          ],
+          "asset_refs": [],
+          "chart_hint": null,
+          "emphasis": "primary"
+        }
+      ],
+      "speaker_notes": "Keep the slide anchored on one conclusion: Recommendation and Next Steps converts the storyline into a final recommendation.",
+      "data_refs": [],
+      "visual_priority": "high"
+    }
+  ],
+  "design_direction": "government-blue",
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "source": "outline",
+    "preferred_template_id": "government-blue",
+    "audience_tag": "主管部门与领导班子",
+    "tone": "government",
+    "style_tags": [
+      "government"
+    ],
+    "scenario_tags": [
+      "policy",
+      "report"
+    ],
+    "planning_principles": [
+      "single_conclusion_per_slide",
+      "controlled_information_density",
+      "limited_content_blocks",
+      "layout_matches_content_type"
+    ],
+    "supported_layout_modes": [
+      "cover",
+      "toc",
+      "section",
+      "hero",
+      "two_column",
+      "bento",
+      "chart_focus",
+      "timeline",
+      "ending"
+    ]
+  }
+}

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import sys
 from pathlib import Path
 
 from fastapi.testclient import TestClient
@@ -8,11 +9,16 @@ from fastapi.testclient import TestClient
 from core_types import ContentBlock, LayoutMode, SlidePlan, SlidePlanItem
 from app.services.template_registry import TemplateRegistryService
 
+TESTS_DIR = Path(__file__).resolve().parent
+if str(TESTS_DIR) not in sys.path:
+    sys.path.append(str(TESTS_DIR))
+
+from helpers import bootstrap_sqlite_database
+
 
 def test_list_templates_returns_externalized_builtin_assets(tmp_path: Path) -> None:
     database_path = tmp_path / "template-test.db"
-    os.environ["DATABASE_URL"] = f"sqlite:///{database_path.as_posix()}"
-    os.environ["AUTO_CREATE_TABLES"] = "true"
+    bootstrap_sqlite_database(database_path)
 
     from app.main import create_app
 

@@ -1,0 +1,46 @@
+{
+  "created_at": "2026-03-24T15:26:16.185970Z",
+  "updated_at": "2026-03-24T15:26:16.185970Z",
+  "id": "ac9990fe-722e-4294-98bc-0545381133c7",
+  "project_id": "805fa819-9715-48e4-9f38-460933e710ed",
+  "source_bundle_id": "57a8dea6-baf1-46fe-a341-c7a49f4e77c0",
+  "presentation_goal": "Verify project status keeps current_task aligned with the newest export run.",
+  "target_audience": "general audience",
+  "core_message": "demo.md: A compact source summary for project status latest export tests.",
+  "storyline": "Sources: demo.md",
+  "recommended_page_count": 8,
+  "tone": "professional",
+  "style_preferences": [],
+  "risks": [
+    "user intent is incomplete and may affect narrative accuracy"
+  ],
+  "assumptions": [
+    "research enrichment is not connected yet",
+    "uploaded files are the primary evidence base",
+    "missing clarification fields will be filled in later review"
+  ],
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "clarification": {
+      "is_sufficient": false,
+      "missing_fields": [
+        "audience",
+        "scenario",
+        "purpose",
+        "desired_page_count",
+        "style_preferences",
+        "emphasize_points"
+      ],
+      "suggested_questions": [
+        "这份 PPT 的目标受众是谁？",
+        "这份 PPT 会在什么场景下使用？",
+        "这次演示最核心的目标是什么？",
+        "希望控制在多少页以内？",
+        "有没有明确的风格偏好？",
+        "是否需要重点强调某些数据、图表、案例或观点？"
+      ]
+    },
+    "source_mode": "file"
+  }
+}

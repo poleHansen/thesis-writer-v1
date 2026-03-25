@@ -1,0 +1,31 @@
+{
+  "created_at": "2026-03-25T10:39:34.319438Z",
+  "updated_at": "2026-03-25T10:39:34.319438Z",
+  "id": "70b67fa6-6b90-40cd-9673-bc53062758a1",
+  "project_id": "b133bb5c-7a7f-405e-8807-c24affe49f19",
+  "source_bundle_id": "c6cf2562-c984-4438-96a7-32090d3881b8",
+  "presentation_goal": "便于分章节讲解和课堂互动",
+  "target_audience": "内部培训学员",
+  "core_message": "培训课件场景，强调结构清晰、知识分层和可讲授性。",
+  "storyline": "Context: 培训课件 | Sources: training-courseware.md | Highlights: 培训课件场景，强调结构清晰、知识分层和可讲授性。 -> 企业 AI 提效实战培训",
+  "recommended_page_count": 10,
+  "tone": "training",
+  "style_preferences": [
+    "training"
+  ],
+  "risks": [],
+  "assumptions": [
+    "research enrichment is not connected yet",
+    "uploaded files are the primary evidence base"
+  ],
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "clarification": {
+      "is_sufficient": true,
+      "missing_fields": [],
+      "suggested_questions": []
+    },
+    "source_mode": "mixed"
+  }
+}

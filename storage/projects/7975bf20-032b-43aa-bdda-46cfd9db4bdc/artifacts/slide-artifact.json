@@ -1,0 +1,60 @@
+{
+  "created_at": "2026-03-25T10:39:26.381176",
+  "updated_at": "2026-03-25T10:39:26.381176",
+  "id": "7f99d17f-a817-44e0-9026-2278392e5613",
+  "project_id": "7975bf20-032b-43aa-bdda-46cfd9db4bdc",
+  "slide_plan_id": "9849467f-1d46-4e60-9169-45c163c68ea8",
+  "template_id": "18246dbb-f074-4f0e-a442-d6507b2ce955",
+  "svg_output_dir": "storage\\projects\\7975bf20-032b-43aa-bdda-46cfd9db4bdc\\render\\7f99d17f-a817-44e0-9026-2278392e5613\\svg_output",
+  "svg_final_dir": "storage\\projects\\7975bf20-032b-43aa-bdda-46cfd9db4bdc\\render\\7f99d17f-a817-44e0-9026-2278392e5613\\svg_final",
+  "preview_image_paths": [
+    "storage\\projects\\7975bf20-032b-43aa-bdda-46cfd9db4bdc\\render\\7f99d17f-a817-44e0-9026-2278392e5613\\svg_final\\slide-01.svg",
+    "storage\\projects\\7975bf20-032b-43aa-bdda-46cfd9db4bdc\\render\\7f99d17f-a817-44e0-9026-2278392e5613\\svg_final\\slide-02.svg",
+    "storage\\projects\\7975bf20-032b-43aa-bdda-46cfd9db4bdc\\render\\7f99d17f-a817-44e0-9026-2278392e5613\\svg_final\\slide-03.svg",
+    "storage\\projects\\7975bf20-032b-43aa-bdda-46cfd9db4bdc\\render\\7f99d17f-a817-44e0-9026-2278392e5613\\svg_final\\slide-04.svg",
+    "storage\\projects\\7975bf20-032b-43aa-bdda-46cfd9db4bdc\\render\\7f99d17f-a817-44e0-9026-2278392e5613\\svg_final\\slide-05.svg"
+  ],
+  "render_status": "succeeded",
+  "failed_slide_ids": [],
+  "log_path": "storage\\projects\\7975bf20-032b-43aa-bdda-46cfd9db4bdc\\render\\7f99d17f-a817-44e0-9026-2278392e5613\\render-log.json",
+  "metadata": {
+    "generated_from": "slide_plan",
+    "page_count": 5,
+    "design_direction": "consulting-premium",
+    "slide_titles": [
+      "Scenario and Core Challenge",
+      "Audience Priorities",
+      "Evidence and Analysis",
+      "Implications and Choices",
+      "Recommendation and Next Steps"
+    ],
+    "render_mode": "builtin_svg_v1",
+    "template_id": "consulting-premium",
+    "template_name": "高端咨询风",
+    "design_spec_path": "storage\\projects\\7975bf20-032b-43aa-bdda-46cfd9db4bdc\\render\\7f99d17f-a817-44e0-9026-2278392e5613\\design-spec.json",
+    "generated_svg_files": [
+      "storage\\projects\\7975bf20-032b-43aa-bdda-46cfd9db4bdc\\render\\7f99d17f-a817-44e0-9026-2278392e5613\\svg_final\\slide-01.svg",
+      "storage\\projects\\7975bf20-032b-43aa-bdda-46cfd9db4bdc\\render\\7f99d17f-a817-44e0-9026-2278392e5613\\svg_final\\slide-02.svg",
+      "storage\\projects\\7975bf20-032b-43aa-bdda-46cfd9db4bdc\\render\\7f99d17f-a817-44e0-9026-2278392e5613\\svg_final\\slide-03.svg",
+      "storage\\projects\\7975bf20-032b-43aa-bdda-46cfd9db4bdc\\render\\7f99d17f-a817-44e0-9026-2278392e5613\\svg_final\\slide-04.svg",
+      "storage\\projects\\7975bf20-032b-43aa-bdda-46cfd9db4bdc\\render\\7f99d17f-a817-44e0-9026-2278392e5613\\svg_final\\slide-05.svg"
+    ],
+    "validation_summary": {
+      "checked_file_count": 5,
+      "valid_file_count": 5,
+      "invalid_file_count": 0,
+      "finalization_summary": {
+        "page_count": 5,
+        "normalized_xml_declaration_count": 5,
+        "resource_path_rewrite_count": 0,
+        "width_height_alignment_count": 0
+      }
+    },
+    "finalization_summary": {
+      "page_count": 5,
+      "normalized_xml_declaration_count": 5,
+      "resource_path_rewrite_count": 0,
+      "width_height_alignment_count": 0
+    }
+  }
+}

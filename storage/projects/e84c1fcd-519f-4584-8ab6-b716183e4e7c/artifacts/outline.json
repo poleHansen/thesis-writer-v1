@@ -1,0 +1,93 @@
+{
+  "created_at": "2026-03-25T10:39:23.629155Z",
+  "updated_at": "2026-03-25T10:39:23.629155Z",
+  "id": "c458ac58-c734-4048-87cc-d6f2da58199e",
+  "project_id": "e84c1fcd-519f-4584-8ab6-b716183e4e7c",
+  "brief_id": "9b858dff-4c75-4743-be94-1158b566177b",
+  "title": "区域数字治理年度汇报 outline",
+  "chapters": [
+    {
+      "section_id": "section-1",
+      "title": "Scenario and Core Challenge",
+      "objective": "Establish the presentation mainline and stakes",
+      "key_message": "The presentation should anchor on: 政府汇报场景，强调政策语境、指标进展、重点项目与风险事项。",
+      "supporting_points": [
+        "形成稳健、规范、层次清晰的正式汇报",
+        "Context: 政府汇报 | Sources: government-reporting-pack.md | Highlights: 政府汇报场景，强调政策语境、指标进展、重点项目与风险事项。 -> 区域数字治理年度汇报",
+        "Audience focus: 主管部门与领导班子",
+        "Evidence source: government-reporting-pack.md"
+      ],
+      "estimated_slides": 2,
+      "children": []
+    },
+    {
+      "section_id": "section-2",
+      "title": "Audience Priorities",
+      "objective": "Clarify the decision focus and evaluation lens",
+      "key_message": "Audience Priorities defines what the audience must understand before details.",
+      "supporting_points": [
+        "形成稳健、规范、层次清晰的正式汇报",
+        "Context: 政府汇报 | Sources: government-reporting-pack.md | Highlights: 政府汇报场景，强调政策语境、指标进展、重点项目与风险事项。 -> 区域数字治理年度汇报",
+        "Audience focus: 主管部门与领导班子",
+        "Evidence source: government-reporting-pack.md"
+      ],
+      "estimated_slides": 2,
+      "children": []
+    },
+    {
+      "section_id": "section-3",
+      "title": "Evidence and Analysis",
+      "objective": "Present the strongest supporting evidence",
+      "key_message": "Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+      "supporting_points": [
+        "形成稳健、规范、层次清晰的正式汇报",
+        "Context: 政府汇报 | Sources: government-reporting-pack.md | Highlights: 政府汇报场景，强调政策语境、指标进展、重点项目与风险事项。 -> 区域数字治理年度汇报",
+        "Audience focus: 主管部门与领导班子",
+        "Evidence source: government-reporting-pack.md"
+      ],
+      "estimated_slides": 2,
+      "children": []
+    },
+    {
+      "section_id": "section-4",
+      "title": "Implications and Choices",
+      "objective": "Explain tradeoffs, impacts, and implications",
+      "key_message": "Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+      "supporting_points": [
+        "形成稳健、规范、层次清晰的正式汇报",
+        "Context: 政府汇报 | Sources: government-reporting-pack.md | Highlights: 政府汇报场景，强调政策语境、指标进展、重点项目与风险事项。 -> 区域数字治理年度汇报",
+        "Audience focus: 主管部门与领导班子",
+        "Evidence source: government-reporting-pack.md"
+      ],
+      "estimated_slides": 2,
+      "children": []
+    },
+    {
+      "section_id": "section-5",
+      "title": "Recommendation and Next Steps",
+      "objective": "Drive toward a concrete takeaway and action",
+      "key_message": "Recommendation and Next Steps converts the storyline into a final recommendation.",
+      "supporting_points": [
+        "形成稳健、规范、层次清晰的正式汇报",
+        "Context: 政府汇报 | Sources: government-reporting-pack.md | Highlights: 政府汇报场景，强调政策语境、指标进展、重点项目与风险事项。 -> 区域数字治理年度汇报",
+        "Audience focus: 主管部门与领导班子",
+        "Evidence source: government-reporting-pack.md"
+      ],
+      "estimated_slides": 2,
+      "children": []
+    }
+  ],
+  "summary": "Outline generated from brief 9b858dff-4c75-4743-be94-1158b566177b with 5 chapters.",
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "source": "brief",
+    "source_mode": "mixed",
+    "generation_principles": [
+      "mainline_before_chapters",
+      "explicit_chapter_role",
+      "explicit_key_message",
+      "avoid_raw_toc_copy"
+    ]
+  }
+}

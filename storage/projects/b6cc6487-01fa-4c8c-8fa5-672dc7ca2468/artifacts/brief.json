@@ -1,0 +1,46 @@
+{
+  "created_at": "2026-03-24T14:07:26.467760Z",
+  "updated_at": "2026-03-24T14:07:26.467760Z",
+  "id": "44b55866-9dd2-4afa-8f85-ff9e3f0be554",
+  "project_id": "b6cc6487-01fa-4c8c-8fa5-672dc7ca2468",
+  "source_bundle_id": "5b26eda0-1bd1-45b6-9ec7-76c22f11cfd6",
+  "presentation_goal": "Verify dashboard aggregation returns project summary.",
+  "target_audience": "general audience",
+  "core_message": "demo.md: A compact source summary for dashboard tests.",
+  "storyline": "Sources: demo.md",
+  "recommended_page_count": 8,
+  "tone": "professional",
+  "style_preferences": [],
+  "risks": [
+    "user intent is incomplete and may affect narrative accuracy"
+  ],
+  "assumptions": [
+    "research enrichment is not connected yet",
+    "uploaded files are the primary evidence base",
+    "missing clarification fields will be filled in later review"
+  ],
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "clarification": {
+      "is_sufficient": false,
+      "missing_fields": [
+        "audience",
+        "scenario",
+        "purpose",
+        "desired_page_count",
+        "style_preferences",
+        "emphasize_points"
+      ],
+      "suggested_questions": [
+        "这份 PPT 的目标受众是谁？",
+        "这份 PPT 会在什么场景下使用？",
+        "这次演示最核心的目标是什么？",
+        "希望控制在多少页以内？",
+        "有没有明确的风格偏好？",
+        "是否需要重点强调某些数据、图表、案例或观点？"
+      ]
+    },
+    "source_mode": "file"
+  }
+}

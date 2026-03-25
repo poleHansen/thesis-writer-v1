@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI PPT Studio | 项目列表</title>
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <main class="shell shell-page">
+      <header class="site-header">
+        <a class="site-brand" href="./index.html">
+          <span class="site-brand-mark">APS</span>
+          <span>
+            <strong>AI PPT Studio</strong>
+            <small>Research to presentation pipeline</small>
+          </span>
+        </a>
+        <nav class="site-nav">
+          <a class="site-nav-link" href="./index.html">首页</a>
+          <a class="site-nav-link is-active" href="./projects.html">项目列表</a>
+          <a class="site-nav-link" href="./workspace.html">工作区</a>
+        </nav>
+      </header>
+
+      <section class="page-hero">
+        <div>
+          <p class="eyebrow">Portfolio View</p>
+          <h1 class="page-title">项目列表</h1>
+          <p class="summary">从组合视角查看项目状态、搜索目标项目，并跳转到单项目工作区继续推进生成链路。</p>
+        </div>
+        <div class="page-hero-actions">
+          <a class="hero-link hero-link-primary" href="./workspace.html">新建或推进项目</a>
+        </div>
+      </section>
+
+      <section class="toolbar toolbar-page">
+        <label class="api-config">
+          <span>API Base</span>
+          <input id="api-base" type="text" value="http://127.0.0.1:8000" />
+        </label>
+        <label class="filter-control">
+          <span>Status</span>
+          <select id="status-filter">
+            <option value="all">全部状态</option>
+            <option value="draft">draft</option>
+            <option value="briefed">briefed</option>
+            <option value="outlined">outlined</option>
+            <option value="planned">planned</option>
+            <option value="rendered">rendered</option>
+            <option value="exported">exported</option>
+            <option value="finalized">finalized</option>
+            <option value="failed">failed</option>
+          </select>
+        </label>
+        <label class="filter-control filter-search">
+          <span>Search</span>
+          <input id="search-input" type="search" placeholder="项目名 / 标签 / 描述" />
+        </label>
+        <button id="refresh-button" type="button">Refresh Workspace</button>
+      </section>
+
+      <section class="status-banner" id="status-banner">正在加载项目列表...</section>
+      <section class="runtime-banner" id="runtime-banner" hidden></section>
+
+      <section class="metrics-row metrics-row-page">
+        <article class="metric-card metric-card-highlight">
+          <span class="metric-label">Active Projects</span>
+          <strong class="metric-value" id="metric-projects">-</strong>
+        </article>
+        <article class="metric-card">
+          <span class="metric-label">Deliverables Ready</span>
+          <strong class="metric-value" id="metric-exports">-</strong>
+        </article>
+        <article class="metric-card">
+          <span class="metric-label">Pipeline Risks</span>
+          <strong class="metric-value" id="metric-risks">-</strong>
+        </article>
+      </section>
+
+      <section class="dashboard-grid dashboard-grid-page" id="dashboard-grid"></section>
+    </main>
+
+    <template id="project-card-template">
+      <article class="project-card">
+        <div class="project-card-head">
+          <p class="project-kicker"></p>
+          <span class="status-pill"></span>
+        </div>
+        <h3 class="project-title"></h3>
+        <p class="project-description"></p>
+        <div class="project-stats"></div>
+        <section class="project-panel">
+          <span>Inputs</span>
+          <div class="panel-inputs"></div>
+        </section>
+        <section class="project-panel">
+          <span>Planning</span>
+          <div class="panel-planning"></div>
+        </section>
+        <section class="project-panel">
+          <span>Output</span>
+          <div class="panel-output"></div>
+        </section>
+      </article>
+    </template>
+
+    <script type="module" src="./src/pages/projects/main.js"></script>
+  </body>
+</html>

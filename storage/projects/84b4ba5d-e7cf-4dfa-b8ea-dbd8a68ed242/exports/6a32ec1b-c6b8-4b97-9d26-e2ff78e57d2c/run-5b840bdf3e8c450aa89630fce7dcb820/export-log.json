@@ -1,0 +1,11 @@
+{
+  "project_id": "84b4ba5d-e7cf-4dfa-b8ea-dbd8a68ed242",
+  "artifact_id": "6a32ec1b-c6b8-4b97-9d26-e2ff78e57d2c",
+  "export_id": "19f62420-3b29-44c4-b5d9-fb4246f9f1f3",
+  "run_id": "run-5b840bdf3e8c450aa89630fce7dcb820",
+  "status": "succeeded",
+  "export_format": "pptx",
+  "archive_manifest_path": "storage\\projects\\84b4ba5d-e7cf-4dfa-b8ea-dbd8a68ed242\\exports\\6a32ec1b-c6b8-4b97-9d26-e2ff78e57d2c\\run-5b840bdf3e8c450aa89630fce7dcb820\\archive-manifest.json",
+  "export_path": "storage\\projects\\84b4ba5d-e7cf-4dfa-b8ea-dbd8a68ed242\\exports\\6a32ec1b-c6b8-4b97-9d26-e2ff78e57d2c\\run-5b840bdf3e8c450aa89630fce7dcb820\\6a32ec1b-c6b8-4b97-9d26-e2ff78e57d2c-run-5b840bdf3e8c450aa89630fce7dcb820.pptx",
+  "preview_pdf_path": null
+}

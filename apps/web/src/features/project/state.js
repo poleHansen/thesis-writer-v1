@@ -4,14 +4,17 @@ export function createAppState() {
     currentProjectDetail: null,
     currentProjectId: "",
     availableTemplates: [],
+    currentProjectFiles: [],
+    selectedExportId: "",
+    currentLlmSettings: null,
   };
 }
 
 export function getProjectHash(projectId) {
-  return `#project-${encodeURIComponent(projectId)}`;
+  return `./workspace.html?project=${encodeURIComponent(projectId)}`;
 }
 
 export function getActiveProjectId() {
-  const match = window.location.hash.match(/^#project-(.+)$/);
-  return match ? decodeURIComponent(match[1]) : "";
+  const params = new URLSearchParams(window.location.search);
+  return params.get("project") || "";
 }

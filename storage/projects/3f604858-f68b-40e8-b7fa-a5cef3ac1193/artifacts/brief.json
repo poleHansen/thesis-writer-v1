@@ -1,0 +1,31 @@
+{
+  "created_at": "2026-03-25T10:39:35.418087Z",
+  "updated_at": "2026-03-25T10:39:35.418087Z",
+  "id": "6907dd21-6c78-4392-aa32-2a531b38f4a1",
+  "project_id": "3f604858-f68b-40e8-b7fa-a5cef3ac1193",
+  "source_bundle_id": "2f0db823-acc6-49fd-a929-35a9cb691d70",
+  "presentation_goal": "形成稳健、规范、层次清晰的正式汇报",
+  "target_audience": "主管部门与领导班子",
+  "core_message": "政府汇报场景，强调政策语境、指标进展、重点项目与风险事项。",
+  "storyline": "Context: 政府汇报 | Sources: government-reporting-pack.md | Highlights: 政府汇报场景，强调政策语境、指标进展、重点项目与风险事项。 -> 区域数字治理年度汇报",
+  "recommended_page_count": 10,
+  "tone": "government",
+  "style_preferences": [
+    "government"
+  ],
+  "risks": [],
+  "assumptions": [
+    "research enrichment is not connected yet",
+    "uploaded files are the primary evidence base"
+  ],
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "clarification": {
+      "is_sufficient": true,
+      "missing_fields": [],
+      "suggested_questions": []
+    },
+    "source_mode": "mixed"
+  }
+}

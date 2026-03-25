@@ -1,0 +1,30 @@
+{
+  "created_at": "2026-03-25T10:39:27.459306Z",
+  "updated_at": "2026-03-25T10:39:27.459306Z",
+  "id": "4c27e088-1cd1-4789-8d2e-a97b2839512e",
+  "project_id": "c335bf09-aa6a-45dc-b6ac-a54febabcef9",
+  "source_bundle_id": "d9942778-2ccb-4b37-8160-a9920b6818c5",
+  "presentation_goal": "突出产品差异化与发布会舞台表达",
+  "target_audience": "客户与合作伙伴",
+  "core_message": "产品发布会场景，强调卖点、能力演示、场景价值与节奏感。",
+  "storyline": "Context: 产品发布会 | Highlights: 产品发布会场景，强调卖点、能力演示、场景价值与节奏感。 -> 新一代 AI 办公助手发布会",
+  "recommended_page_count": 10,
+  "tone": "technology",
+  "style_preferences": [
+    "technology"
+  ],
+  "risks": [],
+  "assumptions": [
+    "research enrichment is not connected yet"
+  ],
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "clarification": {
+      "is_sufficient": true,
+      "missing_fields": [],
+      "suggested_questions": []
+    },
+    "source_mode": "chat"
+  }
+}

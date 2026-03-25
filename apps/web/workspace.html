@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI PPT Studio | 项目工作区</title>
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <main class="shell shell-page">
+      <header class="site-header">
+        <a class="site-brand" href="./index.html">
+          <span class="site-brand-mark">APS</span>
+          <span>
+            <strong>AI PPT Studio</strong>
+            <small>Research to presentation pipeline</small>
+          </span>
+        </a>
+        <nav class="site-nav">
+          <a class="site-nav-link" href="./index.html">首页</a>
+          <a class="site-nav-link" href="./projects.html">项目列表</a>
+          <a class="site-nav-link is-active" href="./workspace.html">工作区</a>
+        </nav>
+      </header>
+
+      <section class="page-hero page-hero-workspace">
+        <div>
+          <p class="eyebrow">Project Workspace</p>
+          <h1 class="page-title">项目工作区</h1>
+          <p class="summary">在单项目上下文里完成创建、上传、解析、brief、outline、slide plan、artifact、模板选择和 export。</p>
+        </div>
+        <div class="page-hero-actions page-hero-actions-stack">
+          <a class="hero-link" href="./projects.html">回到项目列表</a>
+        </div>
+      </section>
+
+      <section class="toolbar toolbar-page">
+        <label class="api-config">
+          <span>API Base</span>
+          <input id="api-base" type="text" value="http://127.0.0.1:8000" />
+        </label>
+        <label class="filter-control filter-search">
+          <span>Search Project</span>
+          <input id="search-input" type="search" placeholder="项目名 / 标签 / 描述" />
+        </label>
+        <label class="filter-control">
+          <span>Status</span>
+          <select id="status-filter">
+            <option value="all">全部状态</option>
+            <option value="draft">draft</option>
+            <option value="briefed">briefed</option>
+            <option value="outlined">outlined</option>
+            <option value="planned">planned</option>
+            <option value="rendered">rendered</option>
+            <option value="exported">exported</option>
+            <option value="finalized">finalized</option>
+            <option value="failed">failed</option>
+          </select>
+        </label>
+        <button id="refresh-button" type="button">Refresh Workspace</button>
+      </section>
+
+      <section class="status-banner" id="status-banner">正在加载项目工作区...</section>
+      <section class="runtime-banner" id="runtime-banner" hidden></section>
+
+      <section class="workspace-layout">
+        <section class="intake-shell intake-shell-page">
+          <section class="intake-panel" id="intake-panel">
+            <div class="intake-panel-copy">
+              <p class="eyebrow">Live Intake</p>
+              <h2>Project Intake Pipeline</h2>
+              <p>在单项目工作区内完成项目创建、源材料上传、解析，以及初始 Brief 与 Outline 生成。</p>
+              <div class="intake-panel-note">
+                <strong>Real API</strong>
+                <span>这里的动作都直接调用真实后端接口，并把结果送入下方审阅与导出区。</span>
+              </div>
+            </div>
+            <div class="intake-grid">
+              <section class="intake-card">
+                <div class="section-heading section-heading-inline">
+                  <h3>1. Create Project</h3>
+                  <p>定义主题、来源模式与交付语境。</p>
+                </div>
+                <div class="intake-form-grid">
+                  <label>
+                    <span>Project Name</span>
+                    <input id="intake-project-name" type="text" placeholder="例如：AI 产品发布会 / 城市更新汇报 / 硕士答辩" />
+                  </label>
+                  <label>
+                    <span>Source Mode</span>
+                    <select id="intake-source-mode">
+                      <option value="mixed">mixed</option>
+                      <option value="file">file</option>
+                      <option value="chat">chat</option>
+                    </select>
+                  </label>
+                  <label class="full-span">
+                    <span>Description</span>
+                    <textarea id="intake-project-description" rows="3" placeholder="补充项目背景、受众、交付目标、页数边界、风格要求"></textarea>
+                  </label>
+                  <label class="full-span">
+                    <span>Tags</span>
+                    <input id="intake-project-tags" type="text" placeholder="使用逗号分隔，例如 launch, consulting, defence, product, training" />
+                  </label>
+                </div>
+                <div class="intake-actions">
+                  <button id="create-project-button" type="button">Create Project</button>
+                </div>
+              </section>
+
+              <section class="intake-card">
+                <div class="section-heading section-heading-inline">
+                  <h3>2. Upload Sources</h3>
+                  <p>上传本地文件，或以 URL / 纯文本方式补充来源材料。</p>
+                </div>
+                <div class="intake-form-grid">
+                  <label class="full-span">
+                    <span>Selected Project</span>
+                    <select id="intake-project-select">
+                      <option value="">先创建或选择一个项目</option>
+                    </select>
+                  </label>
+                  <label>
+                    <span>File Type</span>
+                    <select id="intake-file-type">
+                      <option value="auto_detected">auto_detected</option>
+                      <option value="pdf">pdf</option>
+                      <option value="docx">docx</option>
+                      <option value="markdown">markdown</option>
+                      <option value="url">url</option>
+                      <option value="txt">txt</option>
+                      <option value="image">image</option>
+                      <option value="other">other</option>
+                    </select>
+                  </label>
+                  <label>
+                    <span>Local File</span>
+                    <input id="intake-local-file" type="file" />
+                  </label>
+                  <label class="full-span">
+                    <span>URL / Text Source</span>
+                    <textarea id="intake-inline-content" rows="5" placeholder="没有本地文件时，可直接粘贴 URL、Markdown、报告摘要、纪要、调研笔记或演讲提纲"></textarea>
+                  </label>
+                  <label>
+                    <span>Virtual File Name</span>
+                    <input id="intake-inline-file-name" type="text" placeholder="例如 source.md 或 references.txt" />
+                  </label>
+                  <label>
+                    <span>MIME Type</span>
+                    <input id="intake-mime-type" type="text" placeholder="例如 text/markdown" />
+                  </label>
+                </div>
+                <div class="intake-actions">
+                  <button id="upload-file-button" type="button">Upload Source</button>
+                </div>
+              </section>
+
+              <section class="intake-card">
+                <div class="section-heading section-heading-inline">
+                  <h3>3. Parse And Generate</h3>
+                  <p>先解析资料，再生成初始 Brief 与 Outline。</p>
+                </div>
+                <div class="intake-form-grid">
+                  <label class="full-span">
+                    <span>Available Files</span>
+                    <select id="intake-file-select" multiple size="6"></select>
+                  </label>
+                  <label class="full-span">
+                    <span>User Intent</span>
+                    <textarea id="intake-user-intent" rows="5" placeholder="说明这次 PPT 的目标、听众、页数期望、风格偏好、必须覆盖的结论与章节"></textarea>
+                  </label>
+                  <label class="checkbox-row">
+                    <input id="intake-rebuild-bundle" type="checkbox" checked />
+                    <span>Parse 时强制重建 source bundle</span>
+                  </label>
+                  <label class="checkbox-row">
+                    <input id="intake-force-brief" type="checkbox" />
+                    <span>生成 Brief 时强制重算</span>
+                  </label>
+                  <label class="checkbox-row">
+                    <input id="intake-force-outline" type="checkbox" />
+                    <span>生成 Outline 时强制重算</span>
+                  </label>
+                </div>
+                <div class="intake-actions intake-actions-split">
+                  <button id="parse-files-button" type="button">Parse Files</button>
+                  <button id="generate-brief-button" type="button">Generate Brief</button>
+                  <button id="generate-outline-button" type="button">Generate Outline</button>
+                </div>
+              </section>
+            </div>
+            <div class="intake-stream" id="intake-stream"></div>
+          </section>
+        </section>
+
+        <aside class="review-panel review-panel-page" id="review-panel">
+          <div class="review-panel-empty" id="review-empty-state">
+            <p class="eyebrow">Review Workspace</p>
+            <h2>Presentation Review Workspace</h2>
+            <p>从项目列表选择项目后，这里会加载 latest brief、outline、slide plan 与渲染摘要，支持对各阶段进行审阅、修订与重生成。</p>
+            <div class="review-empty-grid">
+              <article>
+                <strong>1. Select a live project</strong>
+                <span>可从上方项目下拉选择，也可从列表页跳转带入项目 id。</span>
+              </article>
+              <article>
+                <strong>2. Review planning layers</strong>
+                <span>沿着 brief、outline、slide plan 逐层检查内容与结构。</span>
+              </article>
+              <article>
+                <strong>3. Render and export</strong>
+                <span>在模板、artifact 和 export 历史之间完成闭环。</span>
+              </article>
+            </div>
+          </div>
+          <div class="review-panel-content" id="review-content" hidden>
+            <section class="review-surface-band">
+              <article>
+                <p>Planning Surface</p>
+                <strong>Review the narrative stack before rendering changes.</strong>
+              </article>
+              <article>
+                <p>Render Control</p>
+                <strong>Keep template choice, rerun actions, preview, and export in one path.</strong>
+              </article>
+            </section>
+
+            <section class="review-section review-section-llm">
+              <div class="review-section-header">
+                <div>
+                  <p class="review-section-kicker">LLM</p>
+                  <h3>Model Settings And Connectivity</h3>
+                </div>
+                <div class="review-section-actions">
+                  <button type="button" class="secondary-button" id="save-llm-settings-button">保存模型设置</button>
+                  <button type="button" class="secondary-button" id="test-llm-settings-button">测试连接</button>
+                </div>
+              </div>
+              <div class="review-form-grid">
+                <label><span>Provider</span><input id="llm-provider" type="text" value="openai_compatible" /></label>
+                <label><span>Model</span><input id="llm-model" type="text" placeholder="例如 gpt-4o-mini / qwen-max / deepseek-chat" /></label>
+                <label class="full-span"><span>Base URL</span><input id="llm-base-url" type="text" placeholder="例如 https://api.openai.com/v1" /></label>
+                <label class="full-span"><span>API Key</span><input id="llm-api-key" type="password" placeholder="输入后按保存写入项目级配置" /></label>
+                <label><span>Temperature</span><input id="llm-temperature" type="number" min="0" max="2" step="0.1" value="0.2" /></label>
+                <label><span>Max Tokens</span><input id="llm-max-tokens" type="number" min="256" max="16000" step="1" value="4000" /></label>
+                <label class="checkbox-row full-span">
+                  <input id="llm-enabled" type="checkbox" />
+                  <span>启用项目级 LLM 生成。关闭时将回退到当前规则引擎。</span>
+                </label>
+              </div>
+              <div class="llm-status-panel" id="llm-status-panel">当前未加载模型设置。</div>
+            </section>
+
+            <header class="review-header">
+              <div>
+                <p class="review-kicker" id="review-kicker"></p>
+                <h2 class="review-title" id="review-title"></h2>
+              </div>
+              <span class="status-pill" id="review-status"></span>
+            </header>
+
+            <p class="review-description" id="review-description"></p>
+            <div class="review-meta" id="review-meta"></div>
+
+            <section class="review-section">
+              <div class="review-section-header">
+                <div>
+                  <p class="review-section-kicker">Brief</p>
+                  <h3>Presentation Brief Review</h3>
+                </div>
+                <button type="button" class="secondary-button" id="save-brief-button">保存 Brief</button>
+              </div>
+              <div class="review-form-grid">
+                <label><span>Presentation Goal</span><textarea id="brief-goal" rows="3"></textarea></label>
+                <label><span>Target Audience</span><textarea id="brief-audience" rows="2"></textarea></label>
+                <label><span>Core Message</span><textarea id="brief-core-message" rows="3"></textarea></label>
+                <label><span>Storyline</span><textarea id="brief-storyline" rows="4"></textarea></label>
+                <label><span>Tone</span><input id="brief-tone" type="text" /></label>
+                <label><span>Recommended Page Count</span><input id="brief-page-count" type="number" min="1" /></label>
+                <label><span>Style Preferences</span><textarea id="brief-style-preferences" rows="2" placeholder="使用逗号分隔"></textarea></label>
+                <label><span>Risks</span><textarea id="brief-risks" rows="2" placeholder="使用换行分隔"></textarea></label>
+                <label><span>Assumptions</span><textarea id="brief-assumptions" rows="2" placeholder="使用换行分隔"></textarea></label>
+              </div>
+            </section>
+
+            <section class="review-section">
+              <div class="review-section-header">
+                <div>
+                  <p class="review-section-kicker">Outline</p>
+                  <h3>Presentation Outline Review</h3>
+                </div>
+                <button type="button" class="secondary-button" id="save-outline-button">保存 Outline</button>
+              </div>
+              <div class="review-form-grid">
+                <label><span>Outline Title</span><input id="outline-title" type="text" /></label>
+                <label class="full-span"><span>Executive Summary</span><textarea id="outline-summary" rows="3"></textarea></label>
+                <label class="full-span"><span>Chapters</span><textarea id="outline-chapters" rows="8" placeholder="每行一个章节：标题 | 目标 | 关键点1, 关键点2"></textarea></label>
+              </div>
+            </section>
+
+            <section class="review-section">
+              <div class="review-section-header">
+                <div>
+                  <p class="review-section-kicker">Slide Plan</p>
+                  <h3>Page Direction And Generation</h3>
+                </div>
+                <div class="review-section-actions">
+                  <button type="button" class="secondary-button" id="save-slide-plan-button">保存 Slide Plan</button>
+                  <button type="button" class="secondary-button" id="rerun-slide-plan-button">重新生成 Slide Plan</button>
+                </div>
+              </div>
+              <div class="review-form-grid">
+                <label class="full-span"><span>Direction</span><textarea id="slide-plan-direction" rows="3"></textarea></label>
+                <label><span>Page Count</span><input id="slide-plan-page-count" type="number" min="1" /></label>
+                <label class="full-span"><span>Slides</span><textarea id="slide-plan-slides" rows="8" placeholder="每行一个页面：标题 | 意图 | 布局"></textarea></label>
+              </div>
+            </section>
+
+            <section class="review-section">
+              <div class="review-section-header">
+                <div>
+                  <p class="review-section-kicker">Template</p>
+                  <h3>Template Selection And Artifact Render</h3>
+                </div>
+                <button type="button" class="secondary-button" id="rerender-artifact-button">生成 Artifact</button>
+              </div>
+              <div class="review-form-grid review-form-grid-template">
+                <label><span>Scenario</span><select id="template-scenario-filter"><option value="">全部场景</option></select></label>
+                <label><span>Style</span><select id="template-style-filter"><option value="">全部风格</option></select></label>
+                <label><span>Density</span><select id="template-density-filter"><option value="">全部密度</option></select></label>
+                <label><span>Industry</span><input id="template-industry-filter" type="text" placeholder="例如 defence / consulting / research" /></label>
+                <label class="full-span"><span>Template</span><select id="template-select"><option value="">自动选择模板</option></select></label>
+              </div>
+              <p class="template-filter-hint" id="template-filter-hint"></p>
+              <div class="template-preview-grid" id="template-preview-grid"></div>
+            </section>
+
+            <section class="review-section">
+              <div class="review-section-header">
+                <div>
+                  <p class="review-section-kicker">Artifact</p>
+                  <h3>Render Output Summary</h3>
+                </div>
+              </div>
+              <div class="artifact-summary" id="artifact-summary"></div>
+              <div class="artifact-preview-grid" id="artifact-preview-grid"></div>
+            </section>
+
+            <section class="review-section">
+              <div class="review-section-header">
+                <div>
+                  <p class="review-section-kicker">Export</p>
+                  <h3>Export And Delivery History</h3>
+                </div>
+                <button type="button" class="secondary-button" id="run-export-button">执行导出</button>
+              </div>
+              <div class="review-form-grid">
+                <label><span>Export Format</span><select id="export-format-select"><option value="pptx">pptx</option><option value="pdf">pdf</option><option value="html">html</option></select></label>
+                <label><span>Artifact ID</span><input id="export-artifact-id" type="text" placeholder="默认使用 latest artifact" /></label>
+              </div>
+              <div class="artifact-summary artifact-summary-soft" id="export-delta"></div>
+              <div class="export-history" id="export-history"></div>
+            </section>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <script type="module" src="./src/pages/workspace/main.js"></script>
+  </body>
+</html>

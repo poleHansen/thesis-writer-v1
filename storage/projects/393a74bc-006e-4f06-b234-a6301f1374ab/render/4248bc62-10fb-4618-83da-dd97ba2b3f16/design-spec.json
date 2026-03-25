@@ -1,0 +1,91 @@
+{
+  "project_id": "393a74bc-006e-4f06-b234-a6301f1374ab",
+  "project_name": "区域市场三年增长战略",
+  "template": {
+    "template_id": "consulting-premium",
+    "name": "高端咨询风",
+    "style_tags": [
+      "consulting",
+      "executive",
+      "premium",
+      "clean"
+    ],
+    "scenario_tags": [
+      "strategy",
+      "management",
+      "business",
+      "analysis"
+    ],
+    "color_scheme": [
+      "#0F172A",
+      "#E2E8F0",
+      "#C48A3A"
+    ],
+    "density_range": "medium-high",
+    "design_spec_path": "builtin://templates/consulting-premium/design-spec.json",
+    "preview_image_path": "builtin://templates/consulting-premium/preview.png",
+    "metadata": {
+      "default_for": [
+        "strategy",
+        "management",
+        "analysis"
+      ],
+      "font_family": "Source Han Sans",
+      "inspiration_sources": [
+        "LandPPT:商务",
+        "ppt-master:顶级咨询风_甘孜州经济财政分析"
+      ],
+      "visual_direction": "executive_light_panels"
+    }
+  },
+  "design_direction": "consulting-premium",
+  "page_count": 5,
+  "render_mode": "placeholder",
+  "slides": [
+    {
+      "slide_id": "slide-1",
+      "slide_number": 1,
+      "title": "Scenario and Core Challenge",
+      "conclusion": "The presentation should anchor on: 企业战略汇报场景，强调高层判断、增长机会、行动路径与管理摘要。",
+      "layout_mode": "cover",
+      "content_block_count": 1,
+      "visual_priority": "high"
+    },
+    {
+      "slide_id": "slide-2",
+      "slide_number": 2,
+      "title": "Audience Priorities",
+      "conclusion": "Audience Priorities defines what the audience must understand before details.",
+      "layout_mode": "toc",
+      "content_block_count": 1,
+      "visual_priority": "balanced"
+    },
+    {
+      "slide_id": "slide-3",
+      "slide_number": 3,
+      "title": "Evidence and Analysis",
+      "conclusion": "Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+      "layout_mode": "chart_focus",
+      "content_block_count": 2,
+      "visual_priority": "medium"
+    },
+    {
+      "slide_id": "slide-4",
+      "slide_number": 4,
+      "title": "Implications and Choices",
+      "conclusion": "Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+      "layout_mode": "hero",
+      "content_block_count": 1,
+      "visual_priority": "high"
+    },
+    {
+      "slide_id": "slide-5",
+      "slide_number": 5,
+      "title": "Recommendation and Next Steps",
+      "conclusion": "Recommendation and Next Steps converts the storyline into a final recommendation.",
+      "layout_mode": "ending",
+      "content_block_count": 1,
+      "visual_priority": "high"
+    }
+  ]
+}

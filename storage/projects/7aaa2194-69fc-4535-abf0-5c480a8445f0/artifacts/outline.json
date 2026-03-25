@@ -1,0 +1,93 @@
+{
+  "created_at": "2026-03-25T03:20:30.226885Z",
+  "updated_at": "2026-03-25T03:20:30.226885Z",
+  "id": "298bd10a-5dcb-4bc6-9408-8bb6fa18f681",
+  "project_id": "7aaa2194-69fc-4535-abf0-5c480a8445f0",
+  "brief_id": "dcf8ffb7-7b65-4199-86f2-b3fb02ffb3e3",
+  "title": "Dashboard Planned Project outline",
+  "chapters": [
+    {
+      "section_id": "section-1",
+      "title": "Context and Problem",
+      "objective": "Establish the presentation mainline and stakes",
+      "key_message": "The presentation should anchor on: demo.md: A compact source summary for dashboard planning-state isolation tests.",
+      "supporting_points": [
+        "Verify dashboard keeps planned projects isolated.",
+        "Sources: demo.md",
+        "Audience focus: general audience",
+        "Evidence source: demo.md"
+      ],
+      "estimated_slides": 1,
+      "children": []
+    },
+    {
+      "section_id": "section-2",
+      "title": "What Matters Most",
+      "objective": "Clarify the decision focus and evaluation lens",
+      "key_message": "What Matters Most defines what the audience must understand before details.",
+      "supporting_points": [
+        "Verify dashboard keeps planned projects isolated.",
+        "Sources: demo.md",
+        "Audience focus: general audience",
+        "Evidence source: demo.md"
+      ],
+      "estimated_slides": 1,
+      "children": []
+    },
+    {
+      "section_id": "section-3",
+      "title": "Evidence and Analysis",
+      "objective": "Present the strongest supporting evidence",
+      "key_message": "Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+      "supporting_points": [
+        "Verify dashboard keeps planned projects isolated.",
+        "Sources: demo.md",
+        "Audience focus: general audience",
+        "Evidence source: demo.md"
+      ],
+      "estimated_slides": 1,
+      "children": []
+    },
+    {
+      "section_id": "section-4",
+      "title": "Implications and Choices",
+      "objective": "Explain tradeoffs, impacts, and implications",
+      "key_message": "Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+      "supporting_points": [
+        "Verify dashboard keeps planned projects isolated.",
+        "Sources: demo.md",
+        "Audience focus: general audience",
+        "Evidence source: demo.md"
+      ],
+      "estimated_slides": 1,
+      "children": []
+    },
+    {
+      "section_id": "section-5",
+      "title": "Recommendation and Next Steps",
+      "objective": "Drive toward a concrete takeaway and action",
+      "key_message": "Recommendation and Next Steps converts the storyline into a final recommendation.",
+      "supporting_points": [
+        "Verify dashboard keeps planned projects isolated.",
+        "Sources: demo.md",
+        "Audience focus: general audience",
+        "Evidence source: demo.md"
+      ],
+      "estimated_slides": 1,
+      "children": []
+    }
+  ],
+  "summary": "Outline generated from brief dcf8ffb7-7b65-4199-86f2-b3fb02ffb3e3 with 5 chapters.",
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "source": "brief",
+    "source_mode": "file",
+    "generation_principles": [
+      "mainline_before_chapters",
+      "explicit_chapter_role",
+      "explicit_key_message",
+      "avoid_raw_toc_copy"
+    ]
+  }
+}

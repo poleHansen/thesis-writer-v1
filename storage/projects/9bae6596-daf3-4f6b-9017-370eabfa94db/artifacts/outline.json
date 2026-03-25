@@ -1,0 +1,88 @@
+{
+  "created_at": "2026-03-25T06:32:44.066376Z",
+  "updated_at": "2026-03-25T06:32:44.066376Z",
+  "id": "b5e8af0a-43b9-4432-b1f4-5d9fb6d2d35b",
+  "project_id": "9bae6596-daf3-4f6b-9017-370eabfa94db",
+  "brief_id": "77a0257a-deb9-46d1-8c85-3263403df29e",
+  "title": "新一代 AI 办公助手发布会 outline",
+  "chapters": [
+    {
+      "section_id": "section-1",
+      "title": "Scenario and Core Challenge",
+      "objective": "Establish the presentation mainline and stakes",
+      "key_message": "The presentation should anchor on: 产品发布会场景，强调卖点、能力演示、场景价值与节奏感。",
+      "supporting_points": [
+        "突出产品差异化与发布会舞台表达",
+        "Context: 产品发布会 | Highlights: 产品发布会场景，强调卖点、能力演示、场景价值与节奏感。 -> 新一代 AI 办公助手发布会",
+        "Audience focus: 客户与合作伙伴"
+      ],
+      "estimated_slides": 2,
+      "children": []
+    },
+    {
+      "section_id": "section-2",
+      "title": "Audience Priorities",
+      "objective": "Clarify the decision focus and evaluation lens",
+      "key_message": "Audience Priorities defines what the audience must understand before details.",
+      "supporting_points": [
+        "突出产品差异化与发布会舞台表达",
+        "Context: 产品发布会 | Highlights: 产品发布会场景，强调卖点、能力演示、场景价值与节奏感。 -> 新一代 AI 办公助手发布会",
+        "Audience focus: 客户与合作伙伴"
+      ],
+      "estimated_slides": 2,
+      "children": []
+    },
+    {
+      "section_id": "section-3",
+      "title": "Evidence and Analysis",
+      "objective": "Present the strongest supporting evidence",
+      "key_message": "Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+      "supporting_points": [
+        "突出产品差异化与发布会舞台表达",
+        "Context: 产品发布会 | Highlights: 产品发布会场景，强调卖点、能力演示、场景价值与节奏感。 -> 新一代 AI 办公助手发布会",
+        "Audience focus: 客户与合作伙伴"
+      ],
+      "estimated_slides": 2,
+      "children": []
+    },
+    {
+      "section_id": "section-4",
+      "title": "Implications and Choices",
+      "objective": "Explain tradeoffs, impacts, and implications",
+      "key_message": "Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+      "supporting_points": [
+        "突出产品差异化与发布会舞台表达",
+        "Context: 产品发布会 | Highlights: 产品发布会场景，强调卖点、能力演示、场景价值与节奏感。 -> 新一代 AI 办公助手发布会",
+        "Audience focus: 客户与合作伙伴"
+      ],
+      "estimated_slides": 2,
+      "children": []
+    },
+    {
+      "section_id": "section-5",
+      "title": "Recommendation and Next Steps",
+      "objective": "Drive toward a concrete takeaway and action",
+      "key_message": "Recommendation and Next Steps converts the storyline into a final recommendation.",
+      "supporting_points": [
+        "突出产品差异化与发布会舞台表达",
+        "Context: 产品发布会 | Highlights: 产品发布会场景，强调卖点、能力演示、场景价值与节奏感。 -> 新一代 AI 办公助手发布会",
+        "Audience focus: 客户与合作伙伴"
+      ],
+      "estimated_slides": 2,
+      "children": []
+    }
+  ],
+  "summary": "Outline generated from brief 77a0257a-deb9-46d1-8c85-3263403df29e with 5 chapters.",
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "source": "brief",
+    "source_mode": "chat",
+    "generation_principles": [
+      "mainline_before_chapters",
+      "explicit_chapter_role",
+      "explicit_key_message",
+      "avoid_raw_toc_copy"
+    ]
+  }
+}

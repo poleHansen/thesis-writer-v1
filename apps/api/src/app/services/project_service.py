@@ -13,8 +13,9 @@ from core_types.task.models import TaskRun
 from core_types.enums import BundleStatus, ExportStatus, FileUploadStatus, ParseStatus, ProjectStatus, RenderStatus, ReviewStatus, TaskStatus, TaskType
 from ingestion import DocumentNormalizer, IngestionParser
 from methodology_engine import BriefGenerator, OutlineGenerator, SlidePlanner
+from app.services.llm_gateway import LlmGateway, LlmGatewayError, LlmGatewaySettings
 
-from app.models.project import CreateProjectRequest, GenerateBriefRequest, GenerateExportRequest, GenerateOutlineRequest, GenerateSlideArtifactRequest, GenerateSlidePlanRequest, ParseProjectFilesRequest, RegisterProjectFileRequest, UpdateBriefRequest, UpdateOutlineRequest, UpdateSlidePlanRequest
+from app.models.project import CreateProjectRequest, GenerateBriefRequest, GenerateExportRequest, GenerateOutlineRequest, GenerateSlideArtifactRequest, GenerateSlidePlanRequest, ParseProjectFilesRequest, ProjectLlmSettings, ProjectLlmSettingsUpdateRequest, RegisterProjectFileRequest, UpdateBriefRequest, UpdateOutlineRequest, UpdateSlidePlanRequest
 from app.models.project import UploadProjectFileRequest
 from app.repositories.project_repository import SqlAlchemyProjectRepository
 from app.services.design_spec_builder import DesignSpecBuilder
@@ -42,6 +43,46 @@ class ProjectService:
         self._storage_service = storage_service or FileStorageService("storage")
         self._export_service = PptxExportService()
         self._pdf_export_service = PdfExportService()
+
+    def get_project_llm_settings(self, project_id: str) -> ProjectLlmSettings:
+        project = self.get_project(project_id)
+        settings_payload = project.metadata.get("llm_settings") or {}
+        if not settings_payload:
+            return ProjectLlmSettings()
+        masked_payload = {
+            **settings_payload,
+            "api_key": self._mask_secret(settings_payload.get("api_key", "")),
+        }
+        return ProjectLlmSettings.model_validate(masked_payload)
+
+    def update_project_llm_settings(self, project_id: str, payload: ProjectLlmSettingsUpdateRequest) -> ProjectLlmSettings:
+        project = self.get_project(project_id)
+        stored_payload = payload.model_dump()
+        updated_project = project.model_copy(
+            update={
+                "metadata": {
+                    **project.metadata,
+                    "llm_settings": stored_payload,
+                }
+            }
+        )
+        self._repository.update_project(updated_project)
+        return self.get_project_llm_settings(project_id)
+
+    def test_project_llm_settings(self, project_id: str) -> dict[str, object]:
+        project = self.get_project(project_id)
+        settings = self._load_project_llm_settings(project)
+        gateway = LlmGateway(settings)
+        try:
+            result = gateway.test_connection()
+        except LlmGatewayError as exc:
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(exc)) from exc
+        return {
+            "ok": bool(result.get("ok", True)),
+            "provider": str(result.get("provider", settings.provider)),
+            "model": str(result.get("model", settings.model)),
+            "message": "LLM connection succeeded",
+        }
 
     def create_project(self, payload: CreateProjectRequest) -> Project:
         project = Project(
@@ -236,6 +277,11 @@ class ProjectService:
 
         succeeded_count = len([project_file for project_file in parsed_files if project_file.parse_status == ParseStatus.SUCCEEDED])
         failed_count = len([project_file for project_file in parsed_files if project_file.parse_status == ParseStatus.FAILED])
+        if failed_count > 0 and succeeded_count == 0:
+            self._repository.update_project_links(
+                project_id,
+                status=ProjectStatus.PARSE_FAILED,
+            )
         task_run = TaskRun(
             project_id=project_id,
             task_type=TaskType.PARSE,
@@ -254,6 +300,7 @@ class ProjectService:
         project = self.get_project(project_id)
         project_files = self._repository.list_project_files(project_id)
         latest_source_bundle = self._repository.get_latest_source_bundle(project_id)
+        effective_user_intent = payload.user_intent_override
         if latest_source_bundle is not None and not payload.force_regenerate:
             source_bundle = latest_source_bundle
         else:
@@ -272,14 +319,10 @@ class ProjectService:
             generated_from="project_files",
         )
             self._repository.create_source_bundle(source_bundle)
+        if effective_user_intent is None:
+            effective_user_intent = source_bundle.user_intent
 
-        brief = self._brief_generator.generate(
-            project=project,
-            source_bundle=source_bundle,
-            project_files=project_files,
-            user_intent=payload.user_intent_override,
-            force_regenerate=payload.force_regenerate,
-        )
+        brief = self._generate_brief(project, source_bundle, project_files, effective_user_intent, payload.force_regenerate)
         self._repository.create_brief(brief)
         self._persist_project_artifact(project_id, "brief.json", brief)
 
@@ -310,11 +353,7 @@ class ProjectService:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Project has no brief to outline")
 
         source_bundle = self._repository.get_source_bundle(brief.source_bundle_id)
-        outline = self._outline_generator.generate(
-            project=project,
-            brief=brief,
-            source_bundle=source_bundle,
-        )
+        outline = self._generate_outline(project, brief, source_bundle)
         self._repository.create_outline(outline)
         self._persist_project_artifact(project_id, "outline.json", outline)
         updated_project = self._repository.update_project_links(
@@ -337,7 +376,7 @@ class ProjectService:
         return outline, task_run
 
     def generate_slide_plan(self, project_id: str, payload: GenerateSlidePlanRequest) -> tuple[SlidePlan, TaskRun]:
-        self.get_project(project_id)
+        project = self.get_project(project_id)
         outline = self._repository.get_outline(payload.outline_id) if payload.outline_id else self._repository.get_latest_outline(project_id)
         if outline is None:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Project has no outline to plan")
@@ -346,12 +385,7 @@ class ProjectService:
         if brief is None:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Outline has no linked brief")
 
-        slide_plan = self._slide_planner.generate(
-            project_id=project_id,
-            brief=brief,
-            outline=outline,
-            preferred_template_id=payload.preferred_template_id,
-        )
+        slide_plan = self._generate_slide_plan(project, brief, outline, payload.preferred_template_id)
         self._repository.create_slide_plan(slide_plan)
         self._persist_project_artifact(project_id, "slide-plan.json", slide_plan)
         updated_project = self._repository.update_project_links(
@@ -814,4 +848,226 @@ class ProjectService:
         if user_intent.desired_page_count:
             lines.append(f"# Desired Page Count\n\n{user_intent.desired_page_count}")
         return "\n\n".join(lines)
+
+    def _load_project_llm_settings(self, project: Project) -> LlmGatewaySettings:
+        settings_payload = project.metadata.get("llm_settings") or {}
+        if not settings_payload or not settings_payload.get("enabled"):
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Project LLM settings are not configured")
+        return LlmGatewaySettings.model_validate(settings_payload)
+
+    def _mask_secret(self, value: str) -> str:
+        if not value:
+            return ""
+        if len(value) <= 8:
+            return "*" * len(value)
+        return f"{value[:4]}{'*' * max(4, len(value) - 8)}{value[-4:]}"
+
+    def _generate_brief(
+        self,
+        project: Project,
+        source_bundle: SourceBundle,
+        project_files: list[ProjectFile],
+        user_intent: UserIntent | None,
+        force_regenerate: bool,
+    ) -> PresentationBrief:
+        try:
+            settings = self._load_project_llm_settings(project)
+        except HTTPException:
+            return self._brief_generator.generate(
+                project=project,
+                source_bundle=source_bundle,
+                project_files=project_files,
+                user_intent=user_intent,
+                force_regenerate=force_regenerate,
+            )
+
+        gateway = LlmGateway(settings)
+        prompt = self._build_brief_prompt(project, source_bundle, user_intent)
+        try:
+            payload = gateway.generate_json(
+                system_prompt="You create concise, production-ready presentation briefs in Chinese. Return JSON only.",
+                user_prompt=prompt,
+                response_schema={
+                    "type": "object",
+                    "properties": {
+                        "presentation_goal": {"type": "string"},
+                        "target_audience": {"type": "string"},
+                        "core_message": {"type": "string"},
+                        "storyline": {"type": "string"},
+                        "recommended_page_count": {"type": "integer"},
+                        "tone": {"type": "string"},
+                        "style_preferences": {"type": "array", "items": {"type": "string"}},
+                        "risks": {"type": "array", "items": {"type": "string"}},
+                        "assumptions": {"type": "array", "items": {"type": "string"}},
+                    },
+                    "required": ["presentation_goal", "target_audience", "core_message", "storyline", "recommended_page_count", "tone", "style_preferences", "risks", "assumptions"],
+                },
+            )
+        except LlmGatewayError:
+            return self._brief_generator.generate(
+                project=project,
+                source_bundle=source_bundle,
+                project_files=project_files,
+                user_intent=user_intent,
+                force_regenerate=force_regenerate,
+            )
+
+        return PresentationBrief(
+            project_id=project.id,
+            source_bundle_id=source_bundle.id,
+            presentation_goal=str(payload["presentation_goal"]),
+            target_audience=str(payload["target_audience"]),
+            core_message=str(payload["core_message"]),
+            storyline=str(payload["storyline"]),
+            recommended_page_count=int(payload["recommended_page_count"]),
+            tone=str(payload["tone"]),
+            style_preferences=[str(item) for item in payload.get("style_preferences", [])],
+            risks=[str(item) for item in payload.get("risks", [])],
+            assumptions=[str(item) for item in payload.get("assumptions", [])],
+            metadata={"generation_mode": "llm", "provider": settings.provider, "model": settings.model},
+        )
+
+    def _generate_outline(self, project: Project, brief: PresentationBrief, source_bundle: SourceBundle | None) -> Outline:
+        try:
+            settings = self._load_project_llm_settings(project)
+        except HTTPException:
+            return self._outline_generator.generate(project=project, brief=brief, source_bundle=source_bundle)
+
+        gateway = LlmGateway(settings)
+        prompt = self._build_outline_prompt(project, brief, source_bundle)
+        try:
+            payload = gateway.generate_json(
+                system_prompt="You create structured presentation outlines in Chinese. Return JSON only.",
+                user_prompt=prompt,
+                response_schema={
+                    "type": "object",
+                    "properties": {
+                        "title": {"type": "string"},
+                        "summary": {"type": "string"},
+                        "chapters": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "section_id": {"type": "string"},
+                                    "title": {"type": "string"},
+                                    "objective": {"type": "string"},
+                                    "key_message": {"type": "string"},
+                                    "supporting_points": {"type": "array", "items": {"type": "string"}},
+                                    "estimated_slides": {"type": "integer"},
+                                },
+                                "required": ["section_id", "title", "objective", "key_message", "supporting_points", "estimated_slides"],
+                            },
+                        },
+                    },
+                    "required": ["title", "summary", "chapters"],
+                },
+            )
+        except LlmGatewayError:
+            return self._outline_generator.generate(project=project, brief=brief, source_bundle=source_bundle)
+
+        return Outline(
+            project_id=project.id,
+            brief_id=brief.id,
+            title=str(payload["title"]),
+            summary=str(payload.get("summary") or ""),
+            chapters=[OutlineSection.model_validate(chapter) for chapter in payload.get("chapters", [])],
+            metadata={"generation_mode": "llm", "provider": settings.provider, "model": settings.model},
+        )
+
+    def _generate_slide_plan(self, project: Project, brief: PresentationBrief, outline: Outline, preferred_template_id: str | None) -> SlidePlan:
+        try:
+            settings = self._load_project_llm_settings(project)
+        except HTTPException:
+            return self._slide_planner.generate(
+                project_id=project.id,
+                brief=brief,
+                outline=outline,
+                preferred_template_id=preferred_template_id,
+            )
+
+        gateway = LlmGateway(settings)
+        prompt = self._build_slide_plan_prompt(project, brief, outline, preferred_template_id)
+        try:
+            payload = gateway.generate_json(
+                system_prompt="You create slide-by-slide presentation plans in Chinese. Return JSON only.",
+                user_prompt=prompt,
+                response_schema={
+                    "type": "object",
+                    "properties": {
+                        "page_count": {"type": "integer"},
+                        "design_direction": {"type": "string"},
+                        "slides": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "slide_id": {"type": "string"},
+                                    "slide_number": {"type": "integer"},
+                                    "title": {"type": "string"},
+                                    "conclusion": {"type": "string"},
+                                    "layout_mode": {"type": "string"},
+                                    "content_blocks": {"type": "array", "items": {"type": "object"}},
+                                    "speaker_notes": {"type": ["string", "null"]},
+                                    "data_refs": {"type": "array", "items": {"type": "string"}},
+                                    "visual_priority": {"type": ["string", "null"]},
+                                },
+                                "required": ["slide_id", "slide_number", "title", "conclusion", "layout_mode", "content_blocks", "data_refs"],
+                            },
+                        },
+                    },
+                    "required": ["page_count", "design_direction", "slides"],
+                },
+            )
+        except LlmGatewayError:
+            return self._slide_planner.generate(
+                project_id=project.id,
+                brief=brief,
+                outline=outline,
+                preferred_template_id=preferred_template_id,
+            )
+
+        return SlidePlan(
+            project_id=project.id,
+            brief_id=brief.id,
+            outline_id=outline.id,
+            page_count=int(payload["page_count"]),
+            design_direction=str(payload.get("design_direction") or ""),
+            slides=[SlidePlanItem.model_validate(slide) for slide in payload.get("slides", [])],
+            metadata={"generation_mode": "llm", "provider": settings.provider, "model": settings.model, "preferred_template_id": preferred_template_id},
+        )
+
+    def _build_brief_prompt(self, project: Project, source_bundle: SourceBundle, user_intent: UserIntent | None) -> str:
+        return json.dumps(
+            {
+                "project": project.model_dump(mode="json"),
+                "source_bundle": source_bundle.model_dump(mode="json"),
+                "user_intent": user_intent.model_dump(mode="json") if user_intent else None,
+                "task": "Generate a concise presentation brief for an AI PPT workflow.",
+            },
+            ensure_ascii=False,
+        )
+
+    def _build_outline_prompt(self, project: Project, brief: PresentationBrief, source_bundle: SourceBundle | None) -> str:
+        return json.dumps(
+            {
+                "project": project.model_dump(mode="json"),
+                "brief": brief.model_dump(mode="json"),
+                "source_bundle": source_bundle.model_dump(mode="json") if source_bundle else None,
+                "task": "Generate a presentation outline with chapters, objectives, and key messages.",
+            },
+            ensure_ascii=False,
+        )
+
+    def _build_slide_plan_prompt(self, project: Project, brief: PresentationBrief, outline: Outline, preferred_template_id: str | None) -> str:
+        return json.dumps(
+            {
+                "project": project.model_dump(mode="json"),
+                "brief": brief.model_dump(mode="json"),
+                "outline": outline.model_dump(mode="json"),
+                "preferred_template_id": preferred_template_id,
+                "task": "Generate a page-by-page slide plan with layout mode and content blocks.",
+            },
+            ensure_ascii=False,
+        )
 

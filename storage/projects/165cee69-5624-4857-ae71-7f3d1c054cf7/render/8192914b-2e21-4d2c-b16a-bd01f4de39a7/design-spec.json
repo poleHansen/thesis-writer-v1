@@ -1,0 +1,83 @@
+{
+  "project_id": "165cee69-5624-4857-ae71-7f3d1c054cf7",
+  "project_name": "多模态大模型辅助学术答辩",
+  "template": {
+    "template_id": "academic-defense",
+    "name": "学术答辩风",
+    "style_tags": [
+      "academic",
+      "defense",
+      "precise"
+    ],
+    "scenario_tags": [
+      "thesis",
+      "research",
+      "defense"
+    ],
+    "color_scheme": [
+      "#1E3A8A",
+      "#F8FAFC",
+      "#DC2626"
+    ],
+    "density_range": "medium-high",
+    "design_spec_path": "builtin://templates/academic-defense/design-spec.json",
+    "preview_image_path": "builtin://templates/academic-defense/preview.png",
+    "metadata": {
+      "default_for": [
+        "thesis",
+        "research"
+      ],
+      "font_family": "Noto Serif SC"
+    }
+  },
+  "design_direction": "academic-defense",
+  "page_count": 5,
+  "render_mode": "placeholder",
+  "slides": [
+    {
+      "slide_id": "slide-1",
+      "slide_number": 1,
+      "title": "Scenario and Core Challenge",
+      "conclusion": "The presentation should anchor on: 学术答辩场景，强调研究问题、方法、实验结果与答辩讲述节奏。",
+      "layout_mode": "cover",
+      "content_block_count": 1,
+      "visual_priority": "high"
+    },
+    {
+      "slide_id": "slide-2",
+      "slide_number": 2,
+      "title": "Audience Priorities",
+      "conclusion": "Audience Priorities defines what the audience must understand before details.",
+      "layout_mode": "toc",
+      "content_block_count": 1,
+      "visual_priority": "balanced"
+    },
+    {
+      "slide_id": "slide-3",
+      "slide_number": 3,
+      "title": "Evidence and Analysis",
+      "conclusion": "Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+      "layout_mode": "chart_focus",
+      "content_block_count": 2,
+      "visual_priority": "medium"
+    },
+    {
+      "slide_id": "slide-4",
+      "slide_number": 4,
+      "title": "Implications and Choices",
+      "conclusion": "Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+      "layout_mode": "hero",
+      "content_block_count": 1,
+      "visual_priority": "high"
+    },
+    {
+      "slide_id": "slide-5",
+      "slide_number": 5,
+      "title": "Recommendation and Next Steps",
+      "conclusion": "Recommendation and Next Steps converts the storyline into a final recommendation.",
+      "layout_mode": "ending",
+      "content_block_count": 1,
+      "visual_priority": "high"
+    }
+  ]
+}

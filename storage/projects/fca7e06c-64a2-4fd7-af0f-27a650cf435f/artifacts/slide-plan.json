@@ -1,0 +1,181 @@
+{
+  "created_at": "2026-03-25T10:39:20.946789Z",
+  "updated_at": "2026-03-25T10:39:20.946789Z",
+  "id": "3bda3634-92e2-48c9-86fe-248ff5b5479a",
+  "project_id": "fca7e06c-64a2-4fd7-af0f-27a650cf435f",
+  "brief_id": "bfd49dfc-9d38-45ad-8551-b663e2311525",
+  "outline_id": "c4a34397-9fbc-4f74-9d50-355b01610b9a",
+  "page_count": 5,
+  "slides": [
+    {
+      "slide_id": "slide-1",
+      "slide_number": 1,
+      "title": "Scenario and Core Challenge",
+      "conclusion": "The presentation should anchor on: 企业战略汇报场景，强调高层判断、增长机会、行动路径与管理摘要。",
+      "layout_mode": "cover",
+      "content_blocks": [
+        {
+          "block_id": "slide-1-hero",
+          "block_type": "hero",
+          "heading": "Scenario and Core Challenge",
+          "body": "The presentation should anchor on: 企业战略汇报场景，强调高层判断、增长机会、行动路径与管理摘要。",
+          "bullets": [
+            "形成战略判断、优先级与落地路线图",
+            "Context: 企业战略汇报 | Sources: enterprise-strategy-review.md | Highlights: 企业战略汇报场景，强调高层判断、增长机会、行动路径与管理摘要。 -> 区域市场三年增长战略"
+          ],
+          "asset_refs": [],
+          "chart_hint": null,
+          "emphasis": "primary"
+        }
+      ],
+      "speaker_notes": "Keep the slide anchored on one conclusion: The presentation should anchor on: 企业战略汇报场景，强调高层判断、增长机会、行动路径与管理摘要。",
+      "data_refs": [],
+      "visual_priority": "high"
+    },
+    {
+      "slide_id": "slide-2",
+      "slide_number": 2,
+      "title": "Audience Priorities",
+      "conclusion": "Audience Priorities defines what the audience must understand before details.",
+      "layout_mode": "toc",
+      "content_blocks": [
+        {
+          "block_id": "slide-2-toc",
+          "block_type": "agenda",
+          "heading": "Presentation Flow",
+          "body": "Clarify the decision focus and evaluation lens",
+          "bullets": [
+            "形成战略判断、优先级与落地路线图",
+            "Context: 企业战略汇报 | Sources: enterprise-strategy-review.md | Highlights: 企业战略汇报场景，强调高层判断、增长机会、行动路径与管理摘要。 -> 区域市场三年增长战略",
+            "Audience focus: 经营管理层"
+          ],
+          "asset_refs": [],
+          "chart_hint": null,
+          "emphasis": "primary"
+        }
+      ],
+      "speaker_notes": "Keep the slide anchored on one conclusion: Audience Priorities defines what the audience must understand before details.",
+      "data_refs": [],
+      "visual_priority": "balanced"
+    },
+    {
+      "slide_id": "slide-3",
+      "slide_number": 3,
+      "title": "Evidence and Analysis",
+      "conclusion": "Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+      "layout_mode": "chart_focus",
+      "content_blocks": [
+        {
+          "block_id": "slide-3-insight",
+          "block_type": "insight",
+          "heading": "Evidence and Analysis",
+          "body": "Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+          "bullets": [],
+          "asset_refs": [],
+          "chart_hint": "compare key evidence",
+          "emphasis": "primary"
+        },
+        {
+          "block_id": "slide-3-evidence",
+          "block_type": "evidence",
+          "heading": "Key Evidence",
+          "body": null,
+          "bullets": [
+            "形成战略判断、优先级与落地路线图",
+            "Context: 企业战略汇报 | Sources: enterprise-strategy-review.md | Highlights: 企业战略汇报场景，强调高层判断、增长机会、行动路径与管理摘要。 -> 区域市场三年增长战略",
+            "Audience focus: 经营管理层"
+          ],
+          "asset_refs": [],
+          "chart_hint": "bar_or_line",
+          "emphasis": "secondary"
+        }
+      ],
+      "speaker_notes": "Keep the slide anchored on one conclusion: Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+      "data_refs": [],
+      "visual_priority": "medium"
+    },
+    {
+      "slide_id": "slide-4",
+      "slide_number": 4,
+      "title": "Implications and Choices",
+      "conclusion": "Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+      "layout_mode": "hero",
+      "content_blocks": [
+        {
+          "block_id": "slide-4-recommendation",
+          "block_type": "recommendation",
+          "heading": "Implications and Choices",
+          "body": "Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+          "bullets": [
+            "形成战略判断、优先级与落地路线图",
+            "Context: 企业战略汇报 | Sources: enterprise-strategy-review.md | Highlights: 企业战略汇报场景，强调高层判断、增长机会、行动路径与管理摘要。 -> 区域市场三年增长战略",
+            "Audience focus: 经营管理层"
+          ],
+          "asset_refs": [],
+          "chart_hint": null,
+          "emphasis": "primary"
+        }
+      ],
+      "speaker_notes": "Keep the slide anchored on one conclusion: Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+      "data_refs": [],
+      "visual_priority": "high"
+    },
+    {
+      "slide_id": "slide-5",
+      "slide_number": 5,
+      "title": "Recommendation and Next Steps",
+      "conclusion": "Recommendation and Next Steps converts the storyline into a final recommendation.",
+      "layout_mode": "ending",
+      "content_blocks": [
+        {
+          "block_id": "slide-5-ending",
+          "block_type": "ending",
+          "heading": "Next Step",
+          "body": "Recommendation and Next Steps converts the storyline into a final recommendation.",
+          "bullets": [
+            "形成战略判断、优先级与落地路线图",
+            "Context: 企业战略汇报 | Sources: enterprise-strategy-review.md | Highlights: 企业战略汇报场景，强调高层判断、增长机会、行动路径与管理摘要。 -> 区域市场三年增长战略"
+          ],
+          "asset_refs": [],
+          "chart_hint": null,
+          "emphasis": "primary"
+        }
+      ],
+      "speaker_notes": "Keep the slide anchored on one conclusion: Recommendation and Next Steps converts the storyline into a final recommendation.",
+      "data_refs": [],
+      "visual_priority": "high"
+    }
+  ],
+  "design_direction": "consulting-premium",
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "source": "outline",
+    "preferred_template_id": "consulting-premium",
+    "audience_tag": "经营管理层",
+    "tone": "consulting",
+    "style_tags": [
+      "consulting"
+    ],
+    "scenario_tags": [
+      "general"
+    ],
+    "planning_principles": [
+      "single_conclusion_per_slide",
+      "controlled_information_density",
+      "limited_content_blocks",
+      "layout_matches_content_type"
+    ],
+    "supported_layout_modes": [
+      "cover",
+      "toc",
+      "section",
+      "hero",
+      "two_column",
+      "bento",
+      "chart_focus",
+      "timeline",
+      "ending"
+    ]
+  }
+}

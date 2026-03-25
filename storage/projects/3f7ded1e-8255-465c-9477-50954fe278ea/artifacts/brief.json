@@ -1,0 +1,46 @@
+{
+  "created_at": "2026-03-25T06:25:01.758028Z",
+  "updated_at": "2026-03-25T06:25:01.758028Z",
+  "id": "ae9f3d93-12df-47d5-ab16-4fc30f38c443",
+  "project_id": "3f7ded1e-8255-465c-9477-50954fe278ea",
+  "source_bundle_id": "6651f319-a9ef-4f22-b851-7b679b3bddeb",
+  "presentation_goal": "企业战略汇报场景，强调高层判断、增长机会、行动路径与管理摘要。",
+  "target_audience": "general audience",
+  "core_message": "enterprise-strategy-review.md: # 区域市场三年增长战略",
+  "storyline": "Sources: enterprise-strategy-review.md",
+  "recommended_page_count": 8,
+  "tone": "professional",
+  "style_preferences": [],
+  "risks": [
+    "user intent is incomplete and may affect narrative accuracy"
+  ],
+  "assumptions": [
+    "research enrichment is not connected yet",
+    "uploaded files are the primary evidence base",
+    "missing clarification fields will be filled in later review"
+  ],
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "clarification": {
+      "is_sufficient": false,
+      "missing_fields": [
+        "audience",
+        "scenario",
+        "purpose",
+        "desired_page_count",
+        "style_preferences",
+        "emphasize_points"
+      ],
+      "suggested_questions": [
+        "这份 PPT 的目标受众是谁？",
+        "这份 PPT 会在什么场景下使用？",
+        "这次演示最核心的目标是什么？",
+        "希望控制在多少页以内？",
+        "有没有明确的风格偏好？",
+        "是否需要重点强调某些数据、图表、案例或观点？"
+      ]
+    },
+    "source_mode": "file"
+  }
+}

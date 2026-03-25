@@ -16,9 +16,13 @@ def _normalize_database_url(database_url: str) -> str:
     return database_url
 
 
-def get_engine():
+def get_database_url() -> str:
     settings = get_settings()
-    return create_engine(_normalize_database_url(settings.database_url), future=True)
+    return _normalize_database_url(settings.database_url)
+
+
+def get_engine():
+    return create_engine(get_database_url(), future=True)
 
 
 engine = get_engine()

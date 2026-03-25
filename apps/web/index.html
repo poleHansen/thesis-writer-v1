@@ -3,138 +3,119 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Thesis Writer Dashboard</title>
+    <title>AI PPT Studio</title>
     <link rel="stylesheet" href="./src/styles.css" />
   </head>
   <body>
-    <main class="shell">
-      <section class="hero">
+    <main class="shell shell-home">
+      <header class="site-header">
+        <a class="site-brand" href="./index.html">
+          <span class="site-brand-mark">APS</span>
+          <span>
+            <strong>AI PPT Studio</strong>
+            <small>Research to presentation pipeline</small>
+          </span>
+        </a>
+        <nav class="site-nav">
+          <a class="site-nav-link is-active" href="./index.html">首页</a>
+          <a class="site-nav-link" href="./projects.html">项目列表</a>
+          <a class="site-nav-link" href="./workspace.html">工作区</a>
+        </nav>
+      </header>
+
+      <section class="hero hero-home">
         <div class="hero-copy">
-          <p class="eyebrow">Phase 6.1 Dashboard</p>
-          <h1>Project Delivery Board</h1>
+          <p class="eyebrow">AI PPT Studio</p>
+          <h1>把资料、规划、渲染和导出拆成真正可用的网站产品。</h1>
           <p class="summary">
-            汇总项目阶段、输入材料、最新 Brief / Outline / Slide Plan，以及渲染与导出结果，作为后续审阅闭环的入口。
+            参考 LandPPT 的产品组织方式，把 thesis-writer 从单页工作台改成多页面站点：首页承接产品入口，项目列表负责组合视角，项目工作区专注 intake、审阅与导出链路。
           </p>
-        </div>
-        <div class="hero-metrics" id="hero-metrics">
-          <article class="metric-card">
-            <span class="metric-label">Projects</span>
-            <strong class="metric-value" id="metric-projects">-</strong>
-          </article>
-          <article class="metric-card">
-            <span class="metric-label">Exports Ready</span>
-            <strong class="metric-value" id="metric-exports">-</strong>
-          </article>
-          <article class="metric-card">
-            <span class="metric-label">Render Risks</span>
-            <strong class="metric-value" id="metric-risks">-</strong>
-          </article>
-        </div>
-      </section>
-
-      <section class="toolbar">
-        <label class="api-config">
-          <span>API Base</span>
-          <input id="api-base" type="text" value="http://127.0.0.1:8000" />
-        </label>
-        <label class="filter-control">
-          <span>Status</span>
-          <select id="status-filter">
-            <option value="all">全部状态</option>
-            <option value="draft">draft</option>
-            <option value="briefed">briefed</option>
-            <option value="outlined">outlined</option>
-            <option value="planned">planned</option>
-            <option value="rendered">rendered</option>
-            <option value="exported">exported</option>
-            <option value="finalized">finalized</option>
-            <option value="failed">failed</option>
-          </select>
-        </label>
-        <label class="filter-control filter-search">
-          <span>Search</span>
-          <input id="search-input" type="search" placeholder="项目名 / 标签 / 描述" />
-        </label>
-        <button id="refresh-button" type="button">Refresh Dashboard</button>
-      </section>
-
-      <section class="status-banner" id="status-banner">正在加载项目看板...</section>
-
-      <section class="workspace-grid">
-        <section class="dashboard-column">
-          <section class="dashboard-grid" id="dashboard-grid"></section>
-        </section>
-        <aside class="review-panel" id="review-panel">
-          <div class="review-panel-empty" id="review-empty-state">
-            <p class="eyebrow">Phase 6.2 Review</p>
-            <h2>Stage Review Workspace</h2>
-            <p>
-              选中左侧项目卡片后，这里会加载 latest brief、outline、slide plan 与渲染摘要，支持阶段性审阅与手工修订。
-            </p>
+          <div class="hero-actions">
+            <a class="hero-link hero-link-primary" href="./workspace.html">进入工作区</a>
+            <a class="hero-link" href="./projects.html">查看项目列表</a>
           </div>
-          <div class="review-panel-content" id="review-content" hidden>
-            <header class="review-header">
-              <div>
-                <p class="review-kicker" id="review-kicker"></p>
-                <h2 class="review-title" id="review-title"></h2>
-              </div>
-              <span class="status-pill" id="review-status"></span>
-            </header>
+          <div class="hero-strip hero-strip-home">
+            <article>
+              <span>Intake</span>
+              <strong>prompt + file + URL</strong>
+            </article>
+            <article>
+              <span>Planning</span>
+              <strong>brief to outline to slide plan</strong>
+            </article>
+            <article>
+              <span>Delivery</span>
+              <strong>artifact to export history</strong>
+            </article>
+          </div>
+        </div>
+        <div class="hero-side hero-side-home">
+          <article class="hero-spotlight">
+            <p class="hero-spotlight-label">Product Surface</p>
+            <h2>首页不再承载所有表单，只负责说明系统和引导入口。</h2>
+            <p>这让列表页和工作区页可以各自承担清晰职责，避免一个页面塞满项目创建、文件上传、审阅修改、模板筛选和导出历史。</p>
+          </article>
+          <div class="hero-metrics hero-metrics-home">
+            <article class="metric-card metric-card-highlight">
+              <span class="metric-label">Multi Page</span>
+              <strong class="metric-value">3</strong>
+            </article>
+            <article class="metric-card">
+              <span class="metric-label">Core Flow</span>
+              <strong class="metric-value">Intake</strong>
+            </article>
+            <article class="metric-card">
+              <span class="metric-label">Backed By API</span>
+              <strong class="metric-value">FastAPI</strong>
+            </article>
+          </div>
+        </div>
+      </section>
 
-            <p class="review-description" id="review-description"></p>
+      <section class="hero-band">
+        <article class="band-card">
+          <p class="band-kicker">首页</p>
+          <h2>用来承接产品定位、入口导航和链路说明。</h2>
+          <p>告诉使用者系统能做什么，以及应该去哪个页面开始工作，而不是让用户一上来就面对巨大表单。</p>
+        </article>
+        <article class="band-card band-card-contrast">
+          <p class="band-kicker">项目工作区</p>
+          <h2>保留真实 API 驱动的项目 intake 与审阅链路。</h2>
+          <p>项目创建、资料上传、解析、brief、outline、slide-plan、artifact 和 export 都在同一条生产路径内推进。</p>
+        </article>
+      </section>
 
-            <div class="review-meta" id="review-meta"></div>
+      <section class="section-intro section-intro-home">
+        <div>
+          <p class="eyebrow">Product Map</p>
+          <h2>现在的页面分工</h2>
+        </div>
+        <p>按 LandPPT 的思路拆出页面层级，让导航、组合浏览、项目执行各自独立，同时继续复用现有前端模块和后端接口。</p>
+      </section>
 
-            <section class="review-section">
-              <div class="review-section-header">
-                <div>
-                  <p class="review-section-kicker">Brief</p>
-                  <h3>Presentation Brief Review</h3>
-                </div>
-                <button type="button" class="secondary-button" id="save-brief-button">保存 Brief</button>
-              </div>
-              <div class="review-form-grid">
-                <label>
-                  <span>Presentation Goal</span>
-                  <textarea id="brief-goal" rows="3"></textarea>
-                </label>
-                <label>
-                  <span>Target Audience</span>
-                  <textarea id="brief-audience" rows="2"></textarea>
-                </label>
-                <label>
-                  <span>Core Message</span>
-                  <textarea id="brief-core-message" rows="3"></textarea>
-                </label>
-                <label>
-                  <span>Storyline</span>
-                  <textarea id="brief-storyline" rows="4"></textarea>
-                </label>
-                <label>
-                  <span>Tone</span>
-                  <input id="brief-tone" type="text" />
-                </label>
-                <label>
-                  <span>Recommended Page Count</span>
-                  <input id="brief-page-count" type="number" min="1" />
-                </label>
-                <label>
-                  <span>Style Preferences</span>
-                  <textarea id="brief-style-preferences" rows="2" placeholder="使用逗号分隔"></textarea>
-                </label>
-                <label>
-                  <span>Risks</span>
-                  <textarea id="brief-risks" rows="2" placeholder="使用换行分隔"></textarea>
-                </label>
-                <label>
-                  <span>Assumptions</span>
-                  <textarea id="brief-assumptions" rows="2" placeholder="使用换行分隔"></textarea>
-                </label>
-              </div>
-            </section>
-
-            <section class="review-section">
-              <div class="review-section-header">
+      <section class="page-map-grid">
+        <article class="page-map-card">
+          <span>01</span>
+          <h3>首页</h3>
+          <p>承接产品介绍、入口导航与流程说明。</p>
+          <a class="hero-link" href="./index.html">查看首页</a>
+        </article>
+        <article class="page-map-card">
+          <span>02</span>
+          <h3>项目列表</h3>
+          <p>展示项目组合状态、搜索筛选、风险与交付概览。</p>
+          <a class="hero-link" href="./projects.html">打开列表</a>
+        </article>
+        <article class="page-map-card">
+          <span>03</span>
+          <h3>项目工作区</h3>
+          <p>执行 intake、规划审阅、模板筛选、生成和导出。</p>
+          <a class="hero-link hero-link-primary" href="./workspace.html">进入工作区</a>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
                 <div>
                   <p class="review-section-kicker">Outline</p>
                   <h3>Story Outline Review</h3>
@@ -282,9 +263,10 @@
     <template id="project-card-template">
       <article class="project-card">
         <header class="project-card-header">
-          <div>
+          <div class="project-card-heading">
             <p class="project-kicker"></p>
             <h2 class="project-title"></h2>
+            <p class="project-rhythm-line">Inputs, planning, and delivery signals aligned on one card.</p>
           </div>
           <span class="status-pill"></span>
         </header>

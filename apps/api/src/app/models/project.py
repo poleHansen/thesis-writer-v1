@@ -83,6 +83,37 @@ class GenerateBriefRequest(BaseModel):
     user_intent_override: UserIntent | None = None
 
 
+class ProjectLlmSettings(BaseModel):
+    provider: str = Field(default="openai_compatible", min_length=1)
+    base_url: str = Field(default="", min_length=1)
+    api_key: str = Field(default="", min_length=1)
+    model: str = Field(default="", min_length=1)
+    temperature: float = Field(default=0.2, ge=0.0, le=2.0)
+    max_tokens: int = Field(default=4000, ge=256, le=16000)
+    enabled: bool = False
+
+
+class ProjectLlmSettingsUpdateRequest(BaseModel):
+    provider: str = Field(default="openai_compatible", min_length=1)
+    base_url: str = Field(min_length=1)
+    api_key: str = Field(min_length=1)
+    model: str = Field(min_length=1)
+    temperature: float = Field(default=0.2, ge=0.0, le=2.0)
+    max_tokens: int = Field(default=4000, ge=256, le=16000)
+    enabled: bool = True
+
+
+class ProjectLlmSettingsResponse(BaseModel):
+    settings: ProjectLlmSettings
+
+
+class TestProjectLlmResponse(BaseModel):
+    ok: bool
+    provider: str
+    model: str
+    message: str
+
+
 class BriefResponse(BaseModel):
     brief: PresentationBrief
     task_run: TaskRun | None = None

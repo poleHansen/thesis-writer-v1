@@ -1,0 +1,31 @@
+{
+  "created_at": "2026-03-25T06:32:43.272396Z",
+  "updated_at": "2026-03-25T06:32:43.272396Z",
+  "id": "424d8e77-b530-4424-afc8-f536fff5499b",
+  "project_id": "07383a4e-0159-4c37-84b3-d19a4bd7d019",
+  "source_bundle_id": "1743d968-259c-42d0-be1c-2ae8d6de0ec7",
+  "presentation_goal": "形成战略判断、优先级与落地路线图",
+  "target_audience": "经营管理层",
+  "core_message": "企业战略汇报场景，强调高层判断、增长机会、行动路径与管理摘要。",
+  "storyline": "Context: 企业战略汇报 | Sources: enterprise-strategy-review.md | Highlights: 企业战略汇报场景，强调高层判断、增长机会、行动路径与管理摘要。 -> 区域市场三年增长战略",
+  "recommended_page_count": 10,
+  "tone": "consulting",
+  "style_preferences": [
+    "consulting"
+  ],
+  "risks": [],
+  "assumptions": [
+    "research enrichment is not connected yet",
+    "uploaded files are the primary evidence base"
+  ],
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "clarification": {
+      "is_sufficient": true,
+      "missing_fields": [],
+      "suggested_questions": []
+    },
+    "source_mode": "mixed"
+  }
+}

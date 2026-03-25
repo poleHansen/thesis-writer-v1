@@ -1,0 +1,93 @@
+{
+  "created_at": "2026-03-25T06:41:50.954640Z",
+  "updated_at": "2026-03-25T06:41:50.954640Z",
+  "id": "cad7056e-c3e9-46be-9888-2c34bf695555",
+  "project_id": "614664a9-ecb8-4b1e-b3d3-d1194accb0d3",
+  "brief_id": "2a990031-9f79-4d7b-9944-80b2109c1f76",
+  "title": "多模态大模型辅助学术答辩 outline",
+  "chapters": [
+    {
+      "section_id": "section-1",
+      "title": "Scenario and Core Challenge",
+      "objective": "Establish the presentation mainline and stakes",
+      "key_message": "The presentation should anchor on: 学术答辩场景，强调研究问题、方法、实验结果与答辩讲述节奏。",
+      "supporting_points": [
+        "用 12 页以内说明研究价值、方法与结论",
+        "Context: 学术论文答辩 | Sources: academic-thesis-defense.md | Highlights: 学术答辩场景，强调研究问题、方法、实验结果与答辩讲述节奏。 -> 多模态大模型辅助学术答辩",
+        "Audience focus: 导师与答辩委员会",
+        "Evidence source: academic-thesis-defense.md"
+      ],
+      "estimated_slides": 2,
+      "children": []
+    },
+    {
+      "section_id": "section-2",
+      "title": "Audience Priorities",
+      "objective": "Clarify the decision focus and evaluation lens",
+      "key_message": "Audience Priorities defines what the audience must understand before details.",
+      "supporting_points": [
+        "用 12 页以内说明研究价值、方法与结论",
+        "Context: 学术论文答辩 | Sources: academic-thesis-defense.md | Highlights: 学术答辩场景，强调研究问题、方法、实验结果与答辩讲述节奏。 -> 多模态大模型辅助学术答辩",
+        "Audience focus: 导师与答辩委员会",
+        "Evidence source: academic-thesis-defense.md"
+      ],
+      "estimated_slides": 2,
+      "children": []
+    },
+    {
+      "section_id": "section-3",
+      "title": "Evidence and Analysis",
+      "objective": "Present the strongest supporting evidence",
+      "key_message": "Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+      "supporting_points": [
+        "用 12 页以内说明研究价值、方法与结论",
+        "Context: 学术论文答辩 | Sources: academic-thesis-defense.md | Highlights: 学术答辩场景，强调研究问题、方法、实验结果与答辩讲述节奏。 -> 多模态大模型辅助学术答辩",
+        "Audience focus: 导师与答辩委员会",
+        "Evidence source: academic-thesis-defense.md"
+      ],
+      "estimated_slides": 2,
+      "children": []
+    },
+    {
+      "section_id": "section-4",
+      "title": "Implications and Choices",
+      "objective": "Explain tradeoffs, impacts, and implications",
+      "key_message": "Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+      "supporting_points": [
+        "用 12 页以内说明研究价值、方法与结论",
+        "Context: 学术论文答辩 | Sources: academic-thesis-defense.md | Highlights: 学术答辩场景，强调研究问题、方法、实验结果与答辩讲述节奏。 -> 多模态大模型辅助学术答辩",
+        "Audience focus: 导师与答辩委员会",
+        "Evidence source: academic-thesis-defense.md"
+      ],
+      "estimated_slides": 2,
+      "children": []
+    },
+    {
+      "section_id": "section-5",
+      "title": "Recommendation and Next Steps",
+      "objective": "Drive toward a concrete takeaway and action",
+      "key_message": "Recommendation and Next Steps converts the storyline into a final recommendation.",
+      "supporting_points": [
+        "用 12 页以内说明研究价值、方法与结论",
+        "Context: 学术论文答辩 | Sources: academic-thesis-defense.md | Highlights: 学术答辩场景，强调研究问题、方法、实验结果与答辩讲述节奏。 -> 多模态大模型辅助学术答辩",
+        "Audience focus: 导师与答辩委员会",
+        "Evidence source: academic-thesis-defense.md"
+      ],
+      "estimated_slides": 2,
+      "children": []
+    }
+  ],
+  "summary": "Outline generated from brief 2a990031-9f79-4d7b-9944-80b2109c1f76 with 5 chapters.",
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "source": "brief",
+    "source_mode": "mixed",
+    "generation_principles": [
+      "mainline_before_chapters",
+      "explicit_chapter_role",
+      "explicit_key_message",
+      "avoid_raw_toc_copy"
+    ]
+  }
+}

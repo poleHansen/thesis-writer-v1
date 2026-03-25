@@ -1,0 +1,88 @@
+{
+  "created_at": "2026-03-25T06:42:49.889305Z",
+  "updated_at": "2026-03-25T06:42:49.889305Z",
+  "id": "fa1c63a5-1e94-4730-8b18-92859a572646",
+  "project_id": "e54b19f7-e330-47e1-b783-d9c90f6d92ab",
+  "brief_id": "4f87dbdf-c1b8-4d48-b18f-dc9e3833000a",
+  "title": "Agent 系统工程化实践分享 outline",
+  "chapters": [
+    {
+      "section_id": "section-1",
+      "title": "Scenario and Core Challenge",
+      "objective": "Establish the presentation mainline and stakes",
+      "key_message": "The presentation should anchor on: 技术分享场景，强调架构分层、关键原理、案例与工程经验。",
+      "supporting_points": [
+        "帮助技术听众快速理解架构与实践经验",
+        "Context: 技术分享 | Highlights: 技术分享场景，强调架构分层、关键原理、案例与工程经验。 -> Agent 系统工程化实践分享",
+        "Audience focus: 工程团队"
+      ],
+      "estimated_slides": 2,
+      "children": []
+    },
+    {
+      "section_id": "section-2",
+      "title": "Audience Priorities",
+      "objective": "Clarify the decision focus and evaluation lens",
+      "key_message": "Audience Priorities defines what the audience must understand before details.",
+      "supporting_points": [
+        "帮助技术听众快速理解架构与实践经验",
+        "Context: 技术分享 | Highlights: 技术分享场景，强调架构分层、关键原理、案例与工程经验。 -> Agent 系统工程化实践分享",
+        "Audience focus: 工程团队"
+      ],
+      "estimated_slides": 2,
+      "children": []
+    },
+    {
+      "section_id": "section-3",
+      "title": "Evidence and Analysis",
+      "objective": "Present the strongest supporting evidence",
+      "key_message": "Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+      "supporting_points": [
+        "帮助技术听众快速理解架构与实践经验",
+        "Context: 技术分享 | Highlights: 技术分享场景，强调架构分层、关键原理、案例与工程经验。 -> Agent 系统工程化实践分享",
+        "Audience focus: 工程团队"
+      ],
+      "estimated_slides": 2,
+      "children": []
+    },
+    {
+      "section_id": "section-4",
+      "title": "Implications and Choices",
+      "objective": "Explain tradeoffs, impacts, and implications",
+      "key_message": "Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+      "supporting_points": [
+        "帮助技术听众快速理解架构与实践经验",
+        "Context: 技术分享 | Highlights: 技术分享场景，强调架构分层、关键原理、案例与工程经验。 -> Agent 系统工程化实践分享",
+        "Audience focus: 工程团队"
+      ],
+      "estimated_slides": 2,
+      "children": []
+    },
+    {
+      "section_id": "section-5",
+      "title": "Recommendation and Next Steps",
+      "objective": "Drive toward a concrete takeaway and action",
+      "key_message": "Recommendation and Next Steps converts the storyline into a final recommendation.",
+      "supporting_points": [
+        "帮助技术听众快速理解架构与实践经验",
+        "Context: 技术分享 | Highlights: 技术分享场景，强调架构分层、关键原理、案例与工程经验。 -> Agent 系统工程化实践分享",
+        "Audience focus: 工程团队"
+      ],
+      "estimated_slides": 2,
+      "children": []
+    }
+  ],
+  "summary": "Outline generated from brief 4f87dbdf-c1b8-4d48-b18f-dc9e3833000a with 5 chapters.",
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "source": "brief",
+    "source_mode": "chat",
+    "generation_principles": [
+      "mainline_before_chapters",
+      "explicit_chapter_role",
+      "explicit_key_message",
+      "avoid_raw_toc_copy"
+    ]
+  }
+}

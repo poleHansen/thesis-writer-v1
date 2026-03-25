@@ -1,0 +1,30 @@
+{
+  "created_at": "2026-03-25T06:26:12.469499Z",
+  "updated_at": "2026-03-25T06:26:12.469499Z",
+  "id": "a1929bca-aa6e-4277-9b18-62b2fb78272e",
+  "project_id": "0124b5ac-62fa-4713-9425-3561d0b052b0",
+  "source_bundle_id": "1dbcef2e-5662-4188-901b-e2c35a0de6cf",
+  "presentation_goal": "帮助技术听众快速理解架构与实践经验",
+  "target_audience": "工程团队",
+  "core_message": "技术分享场景，强调架构分层、关键原理、案例与工程经验。",
+  "storyline": "Context: 技术分享 | Highlights: 技术分享场景，强调架构分层、关键原理、案例与工程经验。 -> Agent 系统工程化实践分享",
+  "recommended_page_count": 10,
+  "tone": "technology",
+  "style_preferences": [
+    "technology"
+  ],
+  "risks": [],
+  "assumptions": [
+    "research enrichment is not connected yet"
+  ],
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "clarification": {
+      "is_sufficient": true,
+      "missing_fields": [],
+      "suggested_questions": []
+    },
+    "source_mode": "chat"
+  }
+}

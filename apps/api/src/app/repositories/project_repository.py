@@ -133,6 +133,10 @@ class InMemoryProjectRepository:
     def list_project_exports(self, project_id: str, limit: int = 5) -> list[ExportJob]:
         return []
 
+    def update_project(self, project: Project) -> Project:
+        self._projects[project.id] = project
+        return project
+
     def update_project_links(
         self,
         project_id: str,
@@ -155,7 +159,9 @@ class InMemoryProjectRepository:
             "latest_artifact_id": latest_artifact_id,
             "status": status,
         }
-        return project.model_copy(update={k: v for k, v in updates.items() if v is not None})
+        updated_project = project.model_copy(update={k: v for k, v in updates.items() if v is not None})
+        self._projects[project_id] = updated_project
+        return updated_project
 
 
 class SqlAlchemyProjectRepository:
@@ -236,6 +242,29 @@ class SqlAlchemyProjectRepository:
         stmt = select(ProjectRecord).order_by(ProjectRecord.created_at.desc())
         records = self._session.execute(stmt).scalars().all()
         return [self.get_project(record.id) for record in records if self.get_project(record.id) is not None]
+
+    def update_project(self, project: Project) -> Project:
+        record = self._session.get(ProjectRecord, project.id)
+        if record is None:
+            raise ValueError(f"Project not found: {project.id}")
+        record.name = project.name
+        record.description = project.description
+        record.status = project.status
+        record.source_mode = project.source_mode
+        record.owner_id = project.owner_id
+        record.tags = project.tags
+        record.current_template_id = project.current_template_id
+        record.latest_source_bundle_id = project.latest_source_bundle_id
+        record.latest_brief_id = project.latest_brief_id
+        record.latest_outline_id = project.latest_outline_id
+        record.latest_slide_plan_id = project.latest_slide_plan_id
+        record.latest_artifact_id = project.latest_artifact_id
+        record.last_error_code = project.last_error_code
+        record.metadata_json = project.metadata
+        record.updated_at = project.updated_at
+        self._session.add(record)
+        self._session.commit()
+        return self.get_project(project.id) or project
 
     def list_project_tasks(self, project_id: str) -> list[TaskRun]:
         stmt = (

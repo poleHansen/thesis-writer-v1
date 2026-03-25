@@ -1,0 +1,60 @@
+{
+  "created_at": "2026-03-25T10:39:32.172689Z",
+  "updated_at": "2026-03-25T10:39:32.172689Z",
+  "id": "dae6cd19-e729-44a3-b09a-e2a2ac3c5606",
+  "project_id": "2f8326db-f600-4f60-b6bb-87dc8860359d",
+  "slide_plan_id": "3888e132-204f-4197-a8d9-a22868878dae",
+  "template_id": "35a7d89f-8a8e-4544-b826-18e9f9b9e8b3",
+  "svg_output_dir": "storage\\projects\\2f8326db-f600-4f60-b6bb-87dc8860359d\\render\\dae6cd19-e729-44a3-b09a-e2a2ac3c5606\\svg_output",
+  "svg_final_dir": "storage\\projects\\2f8326db-f600-4f60-b6bb-87dc8860359d\\render\\dae6cd19-e729-44a3-b09a-e2a2ac3c5606\\svg_final",
+  "preview_image_paths": [
+    "storage\\projects\\2f8326db-f600-4f60-b6bb-87dc8860359d\\render\\dae6cd19-e729-44a3-b09a-e2a2ac3c5606\\svg_final\\slide-01.svg",
+    "storage\\projects\\2f8326db-f600-4f60-b6bb-87dc8860359d\\render\\dae6cd19-e729-44a3-b09a-e2a2ac3c5606\\svg_final\\slide-02.svg",
+    "storage\\projects\\2f8326db-f600-4f60-b6bb-87dc8860359d\\render\\dae6cd19-e729-44a3-b09a-e2a2ac3c5606\\svg_final\\slide-03.svg",
+    "storage\\projects\\2f8326db-f600-4f60-b6bb-87dc8860359d\\render\\dae6cd19-e729-44a3-b09a-e2a2ac3c5606\\svg_final\\slide-04.svg",
+    "storage\\projects\\2f8326db-f600-4f60-b6bb-87dc8860359d\\render\\dae6cd19-e729-44a3-b09a-e2a2ac3c5606\\svg_final\\slide-05.svg"
+  ],
+  "render_status": "succeeded",
+  "failed_slide_ids": [],
+  "log_path": "storage\\projects\\2f8326db-f600-4f60-b6bb-87dc8860359d\\render\\dae6cd19-e729-44a3-b09a-e2a2ac3c5606\\render-log.json",
+  "metadata": {
+    "generated_from": "slide_plan",
+    "page_count": 5,
+    "design_direction": "academic-defense",
+    "slide_titles": [
+      "Scenario and Core Challenge",
+      "Audience Priorities",
+      "Evidence and Analysis",
+      "Implications and Choices",
+      "Recommendation and Next Steps"
+    ],
+    "render_mode": "builtin_svg_v1",
+    "template_id": "academic-defense",
+    "template_name": "学术答辩风",
+    "design_spec_path": "storage\\projects\\2f8326db-f600-4f60-b6bb-87dc8860359d\\render\\dae6cd19-e729-44a3-b09a-e2a2ac3c5606\\design-spec.json",
+    "generated_svg_files": [
+      "storage\\projects\\2f8326db-f600-4f60-b6bb-87dc8860359d\\render\\dae6cd19-e729-44a3-b09a-e2a2ac3c5606\\svg_final\\slide-01.svg",
+      "storage\\projects\\2f8326db-f600-4f60-b6bb-87dc8860359d\\render\\dae6cd19-e729-44a3-b09a-e2a2ac3c5606\\svg_final\\slide-02.svg",
+      "storage\\projects\\2f8326db-f600-4f60-b6bb-87dc8860359d\\render\\dae6cd19-e729-44a3-b09a-e2a2ac3c5606\\svg_final\\slide-03.svg",
+      "storage\\projects\\2f8326db-f600-4f60-b6bb-87dc8860359d\\render\\dae6cd19-e729-44a3-b09a-e2a2ac3c5606\\svg_final\\slide-04.svg",
+      "storage\\projects\\2f8326db-f600-4f60-b6bb-87dc8860359d\\render\\dae6cd19-e729-44a3-b09a-e2a2ac3c5606\\svg_final\\slide-05.svg"
+    ],
+    "validation_summary": {
+      "checked_file_count": 5,
+      "valid_file_count": 5,
+      "invalid_file_count": 0,
+      "finalization_summary": {
+        "page_count": 5,
+        "normalized_xml_declaration_count": 5,
+        "resource_path_rewrite_count": 0,
+        "width_height_alignment_count": 0
+      }
+    },
+    "finalization_summary": {
+      "page_count": 5,
+      "normalized_xml_declaration_count": 5,
+      "resource_path_rewrite_count": 0,
+      "width_height_alignment_count": 0
+    }
+  }
+}

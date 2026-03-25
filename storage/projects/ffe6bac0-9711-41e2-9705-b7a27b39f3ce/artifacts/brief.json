@@ -1,0 +1,46 @@
+{
+  "created_at": "2026-03-25T02:10:39.057458Z",
+  "updated_at": "2026-03-25T02:10:39.057458Z",
+  "id": "4371625d-9a24-4267-82e1-6dac27b534d1",
+  "project_id": "ffe6bac0-9711-41e2-9705-b7a27b39f3ce",
+  "source_bundle_id": "4578264a-07c7-488c-9f56-2ce070117e57",
+  "presentation_goal": "Verify briefing state stays aligned before outline generation begins.",
+  "target_audience": "general audience",
+  "core_message": "demo.md: A compact source summary for briefing state tests.",
+  "storyline": "Sources: demo.md",
+  "recommended_page_count": 8,
+  "tone": "professional",
+  "style_preferences": [],
+  "risks": [
+    "user intent is incomplete and may affect narrative accuracy"
+  ],
+  "assumptions": [
+    "research enrichment is not connected yet",
+    "uploaded files are the primary evidence base",
+    "missing clarification fields will be filled in later review"
+  ],
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "clarification": {
+      "is_sufficient": false,
+      "missing_fields": [
+        "audience",
+        "scenario",
+        "purpose",
+        "desired_page_count",
+        "style_preferences",
+        "emphasize_points"
+      ],
+      "suggested_questions": [
+        "这份 PPT 的目标受众是谁？",
+        "这份 PPT 会在什么场景下使用？",
+        "这次演示最核心的目标是什么？",
+        "希望控制在多少页以内？",
+        "有没有明确的风格偏好？",
+        "是否需要重点强调某些数据、图表、案例或观点？"
+      ]
+    },
+    "source_mode": "file"
+  }
+}

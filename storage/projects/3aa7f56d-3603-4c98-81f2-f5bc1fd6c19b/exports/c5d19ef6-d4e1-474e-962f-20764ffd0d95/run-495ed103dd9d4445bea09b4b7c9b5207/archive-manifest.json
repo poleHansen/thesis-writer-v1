@@ -1,0 +1,34 @@
+{
+  "project_id": "3aa7f56d-3603-4c98-81f2-f5bc1fd6c19b",
+  "artifact_id": "c5d19ef6-d4e1-474e-962f-20764ffd0d95",
+  "export_id": "285c29b2-4177-4a9d-981c-c39f46f75d92",
+  "run_id": "run-495ed103dd9d4445bea09b4b7c9b5207",
+  "export_format": "pptx",
+  "export_path": "storage\\projects\\3aa7f56d-3603-4c98-81f2-f5bc1fd6c19b\\exports\\c5d19ef6-d4e1-474e-962f-20764ffd0d95\\run-495ed103dd9d4445bea09b4b7c9b5207\\c5d19ef6-d4e1-474e-962f-20764ffd0d95-run-495ed103dd9d4445bea09b4b7c9b5207.pptx",
+  "preview_pdf_path": null,
+  "source_svg_final_dir": "storage\\projects\\3aa7f56d-3603-4c98-81f2-f5bc1fd6c19b\\render\\c5d19ef6-d4e1-474e-962f-20764ffd0d95\\svg_final",
+  "source_files": [
+    "storage\\projects\\3aa7f56d-3603-4c98-81f2-f5bc1fd6c19b\\render\\c5d19ef6-d4e1-474e-962f-20764ffd0d95\\svg_final\\slide-01.svg",
+    "storage\\projects\\3aa7f56d-3603-4c98-81f2-f5bc1fd6c19b\\render\\c5d19ef6-d4e1-474e-962f-20764ffd0d95\\svg_final\\slide-02.svg",
+    "storage\\projects\\3aa7f56d-3603-4c98-81f2-f5bc1fd6c19b\\render\\c5d19ef6-d4e1-474e-962f-20764ffd0d95\\svg_final\\slide-03.svg",
+    "storage\\projects\\3aa7f56d-3603-4c98-81f2-f5bc1fd6c19b\\render\\c5d19ef6-d4e1-474e-962f-20764ffd0d95\\svg_final\\slide-04.svg",
+    "storage\\projects\\3aa7f56d-3603-4c98-81f2-f5bc1fd6c19b\\render\\c5d19ef6-d4e1-474e-962f-20764ffd0d95\\svg_final\\slide-05.svg"
+  ],
+  "artifacts": {
+    "slide_artifact": "storage\\projects\\3aa7f56d-3603-4c98-81f2-f5bc1fd6c19b\\artifacts\\slide-artifact.json",
+    "export_output": "storage\\projects\\3aa7f56d-3603-4c98-81f2-f5bc1fd6c19b\\exports\\c5d19ef6-d4e1-474e-962f-20764ffd0d95\\run-495ed103dd9d4445bea09b4b7c9b5207\\c5d19ef6-d4e1-474e-962f-20764ffd0d95-run-495ed103dd9d4445bea09b4b7c9b5207.pptx"
+  },
+  "metadata": {
+    "source_svg_final_dir": "storage\\projects\\3aa7f56d-3603-4c98-81f2-f5bc1fd6c19b\\render\\c5d19ef6-d4e1-474e-962f-20764ffd0d95\\svg_final",
+    "export_kind": "pptx_from_svg_pages",
+    "file_count": 5,
+    "rendered_files": [
+      "slide-01.svg",
+      "slide-02.svg",
+      "slide-03.svg",
+      "slide-04.svg",
+      "slide-05.svg"
+    ],
+    "renderer": "cairosvg+python-pptx"
+  }
+}

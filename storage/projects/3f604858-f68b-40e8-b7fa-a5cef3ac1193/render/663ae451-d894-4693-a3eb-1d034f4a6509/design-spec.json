@@ -1,0 +1,91 @@
+{
+  "project_id": "3f604858-f68b-40e8-b7fa-a5cef3ac1193",
+  "project_name": "区域数字治理年度汇报",
+  "template": {
+    "template_id": "government-blue",
+    "name": "政务蓝风",
+    "style_tags": [
+      "government",
+      "formal",
+      "blue",
+      "clean"
+    ],
+    "scenario_tags": [
+      "policy",
+      "report",
+      "public-sector",
+      "regional-analysis"
+    ],
+    "color_scheme": [
+      "#0F3D75",
+      "#F8FAFC",
+      "#D4A017"
+    ],
+    "density_range": "medium-high",
+    "design_spec_path": "builtin://templates/government-blue/design-spec.json",
+    "preview_image_path": "builtin://templates/government-blue/preview.png",
+    "metadata": {
+      "default_for": [
+        "policy",
+        "report",
+        "regional-analysis"
+      ],
+      "font_family": "Source Han Sans",
+      "inspiration_sources": [
+        "LandPPT:商务",
+        "ppt-master:顶级咨询风_甘孜州经济财政分析"
+      ],
+      "visual_direction": "formal_light_cards"
+    }
+  },
+  "design_direction": "government-blue",
+  "page_count": 5,
+  "render_mode": "placeholder",
+  "slides": [
+    {
+      "slide_id": "slide-1",
+      "slide_number": 1,
+      "title": "Scenario and Core Challenge",
+      "conclusion": "The presentation should anchor on: 政府汇报场景，强调政策语境、指标进展、重点项目与风险事项。",
+      "layout_mode": "cover",
+      "content_block_count": 1,
+      "visual_priority": "high"
+    },
+    {
+      "slide_id": "slide-2",
+      "slide_number": 2,
+      "title": "Audience Priorities",
+      "conclusion": "Audience Priorities defines what the audience must understand before details.",
+      "layout_mode": "toc",
+      "content_block_count": 1,
+      "visual_priority": "balanced"
+    },
+    {
+      "slide_id": "slide-3",
+      "slide_number": 3,
+      "title": "Evidence and Analysis",
+      "conclusion": "Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+      "layout_mode": "chart_focus",
+      "content_block_count": 2,
+      "visual_priority": "medium"
+    },
+    {
+      "slide_id": "slide-4",
+      "slide_number": 4,
+      "title": "Implications and Choices",
+      "conclusion": "Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+      "layout_mode": "hero",
+      "content_block_count": 1,
+      "visual_priority": "high"
+    },
+    {
+      "slide_id": "slide-5",
+      "slide_number": 5,
+      "title": "Recommendation and Next Steps",
+      "conclusion": "Recommendation and Next Steps converts the storyline into a final recommendation.",
+      "layout_mode": "ending",
+      "content_block_count": 1,
+      "visual_priority": "high"
+    }
+  ]
+}

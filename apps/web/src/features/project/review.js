@@ -196,6 +196,15 @@ export function createReviewController(dom, state) {
 
   function setReviewDisabledState(disabled) {
     [
+      dom.llmProvider,
+      dom.llmModel,
+      dom.llmBaseUrl,
+      dom.llmApiKey,
+      dom.llmTemperature,
+      dom.llmMaxTokens,
+      dom.llmEnabled,
+      dom.saveLlmSettingsButton,
+      dom.testLlmSettingsButton,
       dom.briefGoal,
       dom.briefAudience,
       dom.briefCoreMessage,
@@ -229,6 +238,24 @@ export function createReviewController(dom, state) {
     });
   }
 
+  function renderLlmSettings(settings) {
+    state.currentLlmSettings = settings || null;
+    dom.llmProvider.value = settings && settings.provider ? settings.provider : "openai_compatible";
+    dom.llmModel.value = settings && settings.model ? settings.model : "";
+    dom.llmBaseUrl.value = settings && settings.base_url ? settings.base_url : "";
+    dom.llmApiKey.value = settings && settings.api_key ? settings.api_key : "";
+    dom.llmTemperature.value = settings && typeof settings.temperature === "number" ? String(settings.temperature) : "0.2";
+    dom.llmMaxTokens.value = settings && typeof settings.max_tokens === "number" ? String(settings.max_tokens) : "4000";
+    dom.llmEnabled.checked = Boolean(settings && settings.enabled);
+
+    if (!settings || !settings.enabled) {
+      dom.llmStatusPanel.textContent = "当前项目未启用 LLM，生成链路将回退到规则引擎。";
+      return;
+    }
+
+    dom.llmStatusPanel.textContent = `当前模型：${settings.provider || "openai_compatible"} / ${settings.model || "-"}。保存后可直接测试连接并用于生成。`;
+  }
+
   function renderTemplateOptions(selectedTemplateId) {
     renderTemplateFilterOptions();
     const filteredTemplates = filterTemplates();
@@ -254,6 +281,9 @@ export function createReviewController(dom, state) {
 
   function clearReviewFields() {
     [
+      dom.llmModel,
+      dom.llmBaseUrl,
+      dom.llmApiKey,
       dom.briefGoal,
       dom.briefAudience,
       dom.briefCoreMessage,
@@ -277,6 +307,11 @@ export function createReviewController(dom, state) {
     dom.templateScenarioFilter.value = "";
     dom.templateStyleFilter.value = "";
     dom.templateDensityFilter.value = "";
+    dom.llmProvider.value = "openai_compatible";
+    dom.llmTemperature.value = "0.2";
+    dom.llmMaxTokens.value = "4000";
+    dom.llmEnabled.checked = false;
+    dom.llmStatusPanel.textContent = "当前未加载模型设置。";
     dom.templatePreviewGrid.innerHTML = "";
     dom.exportFormatSelect.value = "pptx";
   }
@@ -624,6 +659,18 @@ export function createReviewController(dom, state) {
     setReviewDisabledState(true);
   }
 
+  function getLlmSettingsPayload() {
+    return {
+      provider: dom.llmProvider.value.trim() || "openai_compatible",
+      model: dom.llmModel.value.trim(),
+      base_url: dom.llmBaseUrl.value.trim(),
+      api_key: dom.llmApiKey.value.trim(),
+      temperature: dom.llmTemperature.value ? Number(dom.llmTemperature.value) : 0.2,
+      max_tokens: dom.llmMaxTokens.value ? Number(dom.llmMaxTokens.value) : 4000,
+      enabled: dom.llmEnabled.checked,
+    };
+  }
+
   function getBriefPayload() {
     const briefId = state.currentProjectDetail && state.currentProjectDetail.latest_brief ? state.currentProjectDetail.latest_brief.id : null;
     return {
@@ -687,6 +734,7 @@ export function createReviewController(dom, state) {
   return {
     setReviewDisabledState,
     renderTemplateOptions,
+    renderLlmSettings,
     populateReview,
     renderArtifactSummary,
     renderArtifactPreview,
@@ -694,6 +742,7 @@ export function createReviewController(dom, state) {
     resetReviewPanel,
     renderExportHistory,
     renderTemplateFilterOptions,
+    getLlmSettingsPayload,
     getBriefPayload,
     getOutlinePayload,
     getSlidePlanPayload,

@@ -1,0 +1,60 @@
+{
+  "created_at": "2026-03-25T04:21:32.249590",
+  "updated_at": "2026-03-25T04:21:32.249590",
+  "id": "fb550226-6a0f-4f02-9596-47d2ad37adbc",
+  "project_id": "0c6a0762-6a9a-4206-9cb1-d9f88fd2d5bd",
+  "slide_plan_id": "5d51b7c9-9dd9-41ab-bacc-2ded8e50cda5",
+  "template_id": "87adb1cb-d2f6-41c8-ac45-cc79c76f326e",
+  "svg_output_dir": "storage\\projects\\0c6a0762-6a9a-4206-9cb1-d9f88fd2d5bd\\render\\fb550226-6a0f-4f02-9596-47d2ad37adbc\\svg_output",
+  "svg_final_dir": "storage\\projects\\0c6a0762-6a9a-4206-9cb1-d9f88fd2d5bd\\render\\fb550226-6a0f-4f02-9596-47d2ad37adbc\\svg_final",
+  "preview_image_paths": [
+    "storage\\projects\\0c6a0762-6a9a-4206-9cb1-d9f88fd2d5bd\\render\\fb550226-6a0f-4f02-9596-47d2ad37adbc\\svg_final\\slide-01.svg",
+    "storage\\projects\\0c6a0762-6a9a-4206-9cb1-d9f88fd2d5bd\\render\\fb550226-6a0f-4f02-9596-47d2ad37adbc\\svg_final\\slide-02.svg",
+    "storage\\projects\\0c6a0762-6a9a-4206-9cb1-d9f88fd2d5bd\\render\\fb550226-6a0f-4f02-9596-47d2ad37adbc\\svg_final\\slide-03.svg",
+    "storage\\projects\\0c6a0762-6a9a-4206-9cb1-d9f88fd2d5bd\\render\\fb550226-6a0f-4f02-9596-47d2ad37adbc\\svg_final\\slide-04.svg",
+    "storage\\projects\\0c6a0762-6a9a-4206-9cb1-d9f88fd2d5bd\\render\\fb550226-6a0f-4f02-9596-47d2ad37adbc\\svg_final\\slide-05.svg"
+  ],
+  "render_status": "succeeded",
+  "failed_slide_ids": [],
+  "log_path": "storage\\projects\\0c6a0762-6a9a-4206-9cb1-d9f88fd2d5bd\\render\\fb550226-6a0f-4f02-9596-47d2ad37adbc\\render-log.json",
+  "metadata": {
+    "generated_from": "slide_plan",
+    "page_count": 5,
+    "design_direction": "professional general",
+    "slide_titles": [
+      "Context and Problem",
+      "What Matters Most",
+      "Evidence and Analysis",
+      "Implications and Choices",
+      "Recommendation and Next Steps"
+    ],
+    "render_mode": "builtin_svg_v1",
+    "template_id": "consulting-clean",
+    "template_name": "咨询清晰风",
+    "design_spec_path": "storage\\projects\\0c6a0762-6a9a-4206-9cb1-d9f88fd2d5bd\\render\\fb550226-6a0f-4f02-9596-47d2ad37adbc\\design-spec.json",
+    "generated_svg_files": [
+      "storage\\projects\\0c6a0762-6a9a-4206-9cb1-d9f88fd2d5bd\\render\\fb550226-6a0f-4f02-9596-47d2ad37adbc\\svg_final\\slide-01.svg",
+      "storage\\projects\\0c6a0762-6a9a-4206-9cb1-d9f88fd2d5bd\\render\\fb550226-6a0f-4f02-9596-47d2ad37adbc\\svg_final\\slide-02.svg",
+      "storage\\projects\\0c6a0762-6a9a-4206-9cb1-d9f88fd2d5bd\\render\\fb550226-6a0f-4f02-9596-47d2ad37adbc\\svg_final\\slide-03.svg",
+      "storage\\projects\\0c6a0762-6a9a-4206-9cb1-d9f88fd2d5bd\\render\\fb550226-6a0f-4f02-9596-47d2ad37adbc\\svg_final\\slide-04.svg",
+      "storage\\projects\\0c6a0762-6a9a-4206-9cb1-d9f88fd2d5bd\\render\\fb550226-6a0f-4f02-9596-47d2ad37adbc\\svg_final\\slide-05.svg"
+    ],
+    "validation_summary": {
+      "checked_file_count": 5,
+      "valid_file_count": 5,
+      "invalid_file_count": 0,
+      "finalization_summary": {
+        "page_count": 5,
+        "normalized_xml_declaration_count": 5,
+        "resource_path_rewrite_count": 0,
+        "width_height_alignment_count": 0
+      }
+    },
+    "finalization_summary": {
+      "page_count": 5,
+      "normalized_xml_declaration_count": 5,
+      "resource_path_rewrite_count": 0,
+      "width_height_alignment_count": 0
+    }
+  }
+}

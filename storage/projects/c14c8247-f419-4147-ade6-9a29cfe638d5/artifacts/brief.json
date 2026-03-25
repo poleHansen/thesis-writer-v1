@@ -1,0 +1,46 @@
+{
+  "created_at": "2026-03-25T06:24:21.033737Z",
+  "updated_at": "2026-03-25T06:24:21.033737Z",
+  "id": "82e7672c-bbc5-4dfe-93cf-7addc42b3a4e",
+  "project_id": "c14c8247-f419-4147-ade6-9a29cfe638d5",
+  "source_bundle_id": "d16022d7-9603-4826-8247-151b18ba644d",
+  "presentation_goal": "培训课件场景，强调结构清晰、知识分层和可讲授性。",
+  "target_audience": "general audience",
+  "core_message": "training-courseware.md: # 企业 AI 提效实战培训",
+  "storyline": "Sources: training-courseware.md",
+  "recommended_page_count": 8,
+  "tone": "professional",
+  "style_preferences": [],
+  "risks": [
+    "user intent is incomplete and may affect narrative accuracy"
+  ],
+  "assumptions": [
+    "research enrichment is not connected yet",
+    "uploaded files are the primary evidence base",
+    "missing clarification fields will be filled in later review"
+  ],
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "clarification": {
+      "is_sufficient": false,
+      "missing_fields": [
+        "audience",
+        "scenario",
+        "purpose",
+        "desired_page_count",
+        "style_preferences",
+        "emphasize_points"
+      ],
+      "suggested_questions": [
+        "这份 PPT 的目标受众是谁？",
+        "这份 PPT 会在什么场景下使用？",
+        "这次演示最核心的目标是什么？",
+        "希望控制在多少页以内？",
+        "有没有明确的风格偏好？",
+        "是否需要重点强调某些数据、图表、案例或观点？"
+      ]
+    },
+    "source_mode": "file"
+  }
+}

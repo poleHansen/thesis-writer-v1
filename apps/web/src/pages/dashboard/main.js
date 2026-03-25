@@ -1,11 +1,13 @@
 import { createApiClient } from "../../lib/api.js";
 import { renderDashboard, focusActiveProject } from "../../features/project/dashboard.js";
+import { createIntakeController } from "../../features/project/intake.js";
 import { createReviewController } from "../../features/project/review.js";
 import { createAppState, getActiveProjectId } from "../../features/project/state.js";
 
 const dom = {
   dashboardGrid: document.getElementById("dashboard-grid"),
   statusBanner: document.getElementById("status-banner"),
+  runtimeBanner: document.getElementById("runtime-banner"),
   refreshButton: document.getElementById("refresh-button"),
   apiBaseInput: document.getElementById("api-base"),
   statusFilter: document.getElementById("status-filter"),
@@ -55,6 +57,28 @@ const dom = {
   metricProjects: document.getElementById("metric-projects"),
   metricExports: document.getElementById("metric-exports"),
   metricRisks: document.getElementById("metric-risks"),
+  intakeProjectName: document.getElementById("intake-project-name"),
+  intakeSourceMode: document.getElementById("intake-source-mode"),
+  intakeProjectDescription: document.getElementById("intake-project-description"),
+  intakeProjectTags: document.getElementById("intake-project-tags"),
+  createProjectButton: document.getElementById("create-project-button"),
+  intakeProjectSelect: document.getElementById("intake-project-select"),
+  intakeFileType: document.getElementById("intake-file-type"),
+  intakeLocalFile: document.getElementById("intake-local-file"),
+  intakeInlineContent: document.getElementById("intake-inline-content"),
+  intakeInlineFileName: document.getElementById("intake-inline-file-name"),
+  intakeMimeType: document.getElementById("intake-mime-type"),
+  uploadFileButton: document.getElementById("upload-file-button"),
+  intakeFileSelect: document.getElementById("intake-file-select"),
+  intakeUserIntent: document.getElementById("intake-user-intent"),
+  intakeRebuildBundle: document.getElementById("intake-rebuild-bundle"),
+  intakeForceBrief: document.getElementById("intake-force-brief"),
+  intakeForceOutline: document.getElementById("intake-force-outline"),
+  parseFilesButton: document.getElementById("parse-files-button"),
+  generateBriefButton: document.getElementById("generate-brief-button"),
+  generateOutlineButton: document.getElementById("generate-outline-button"),
+  intakeStream: document.getElementById("intake-stream"),
+  exportDelta: document.getElementById("export-delta"),
 };
 
 const state = createAppState();
@@ -64,7 +88,63 @@ function getApiBase() {
 }
 
 const api = createApiClient(getApiBase);
+const intake = createIntakeController(dom, state);
 const review = createReviewController(dom, state);
+
+function showRuntimeError(message) {
+  if (!dom.runtimeBanner) {
+    return;
+  }
+  dom.runtimeBanner.hidden = false;
+  dom.runtimeBanner.textContent = message;
+}
+
+function clearRuntimeError() {
+  if (!dom.runtimeBanner) {
+    return;
+  }
+  dom.runtimeBanner.hidden = true;
+  dom.runtimeBanner.textContent = "";
+}
+
+function wrapEvent(handler, fallbackMessage) {
+  return async function wrappedHandler(...args) {
+    clearRuntimeError();
+    try {
+      await handler(...args);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      showRuntimeError(`${fallbackMessage}：${message}`);
+      dom.statusBanner.textContent = `${fallbackMessage}：${message}`;
+    }
+  };
+}
+
+function buildUserIntentPayload() {
+  const text = dom.intakeUserIntent.value.trim();
+  if (!text) {
+    return null;
+  }
+  return {
+    raw_text: text,
+    user_notes: text,
+  };
+}
+
+async function refreshProjectFiles(projectId) {
+  if (!projectId) {
+    state.currentProjectFiles = [];
+    intake.renderProjectFiles([]);
+    return;
+  }
+  const payload = await api.getProjectFiles(projectId);
+  state.currentProjectFiles = payload.files || [];
+  intake.renderProjectFiles(state.currentProjectFiles);
+}
+
+function syncIntakeProjectOptions(selectedProjectId = "") {
+  intake.renderProjectOptions(state.dashboardItems, selectedProjectId || state.currentProjectId || getActiveProjectId());
+}
 
 function createExportSelectionHandler(exportHistory, latestExport) {
   return async function handleExportSelection(exportId) {
@@ -72,7 +152,7 @@ function createExportSelectionHandler(exportHistory, latestExport) {
       return;
     }
     state.selectedExportId = exportId;
-    dom.statusBanner.textContent = "正在切换导出历史版本...";
+    dom.statusBanner.textContent = "正在切换交付历史版本...";
     try {
       const exportPayload = await api.getProjectExport(state.currentProjectId, exportId);
       review.renderArtifactSummary(state.currentProjectDetail.latest_artifact, exportPayload.export_job);
@@ -81,9 +161,9 @@ function createExportSelectionHandler(exportHistory, latestExport) {
         selectedExportId: state.selectedExportId,
         onSelectExport: createExportSelectionHandler(exportHistory, latestExport),
       });
-      dom.statusBanner.textContent = `已切换到导出版本 ${exportPayload.export_job.run_id}。`;
+      dom.statusBanner.textContent = `已切换到交付版本 ${exportPayload.export_job.run_id}。`;
     } catch (error) {
-      dom.statusBanner.textContent = `切换导出版本失败：${error.message}`;
+      dom.statusBanner.textContent = `切换交付版本失败：${error.message}`;
     }
   };
 }
@@ -103,7 +183,7 @@ async function loadProjectDetail(projectId, options = {}) {
   const { preserveBanner = false } = options;
   review.setReviewDisabledState(true);
   if (!preserveBanner) {
-    dom.statusBanner.textContent = `正在加载项目 ${projectId} 的审阅详情...`;
+    dom.statusBanner.textContent = `正在加载项目 ${projectId} 的 PPT 审阅详情...`;
   }
   try {
     const [detail, exportHistory] = await Promise.all([
@@ -120,6 +200,8 @@ async function loadProjectDetail(projectId, options = {}) {
       state.selectedExportId = "";
     }
     review.populateReview(detail);
+    await refreshProjectFiles(projectId);
+    syncIntakeProjectOptions(projectId);
     review.renderArtifactSummary(detail.latest_artifact, selectedExport);
     review.renderArtifactPreview(detail.latest_artifact);
     review.renderExportDelta(selectedExport, detail.latest_export);
@@ -128,7 +210,7 @@ async function loadProjectDetail(projectId, options = {}) {
       onSelectExport: createExportSelectionHandler(exportHistory, detail.latest_export),
     });
     if (!preserveBanner) {
-      dom.statusBanner.textContent = `已加载项目 ${detail.project.name} 的阶段审阅详情。`;
+      dom.statusBanner.textContent = `已加载项目 ${detail.project.name} 的 PPT 审阅详情。`;
     }
   } catch (error) {
     review.resetReviewPanel(`项目详情加载失败：${error.message}`);
@@ -144,7 +226,7 @@ async function loadTemplates() {
   } catch (error) {
     state.availableTemplates = [];
     review.renderTemplateOptions("");
-    dom.statusBanner.textContent = `模板列表加载失败：${error.message}。当前仍可继续审阅，但无法在页面内切换模板。`;
+    dom.statusBanner.textContent = `模板列表加载失败：${error.message}。当前仍可继续审阅，但暂时无法在页面内切换模板。`;
   }
 }
 
@@ -155,13 +237,14 @@ function handleTemplateFilterChange() {
 async function loadDashboard(options = {}) {
   const { preserveSelection = false, preserveBanner = false } = options;
   if (!preserveBanner) {
-    dom.statusBanner.textContent = "正在同步项目摘要...";
+    dom.statusBanner.textContent = "正在同步 PPT 项目摘要...";
   }
   dom.refreshButton.disabled = true;
   try {
     const payload = await api.getProjects();
     state.dashboardItems = payload.projects || [];
     renderDashboard(state.dashboardItems, dom);
+    syncIntakeProjectOptions();
     const activeProjectId = preserveSelection ? state.currentProjectId || getActiveProjectId() : getActiveProjectId();
     if (activeProjectId) {
       const exists = state.dashboardItems.some((item) => item.project.id === activeProjectId);
@@ -180,6 +263,8 @@ async function loadDashboard(options = {}) {
     dom.metricExports.textContent = "0";
     dom.metricRisks.textContent = "0";
     review.resetReviewPanel(`当前无法获取项目列表：${error.message}`);
+    intake.renderProjectOptions([], "");
+    intake.renderProjectFiles([]);
     dom.statusBanner.textContent = `加载失败：${error.message}。请确认 API 已在 ${getApiBase()} 启动，并允许跨域访问。`;
   } finally {
     dom.refreshButton.disabled = false;
@@ -225,7 +310,7 @@ async function triggerExport(payload, successMessage) {
     return;
   }
   review.setReviewDisabledState(true);
-  dom.statusBanner.textContent = "正在生成导出文件...";
+  dom.statusBanner.textContent = "正在生成交付文件...";
   try {
     await api.triggerExport(state.currentProjectId, payload);
     await loadDashboard({ preserveSelection: true, preserveBanner: true });
@@ -250,6 +335,140 @@ async function handleHashSelection() {
   }
   await loadProjectDetail(activeProjectId, { preserveBanner: true });
 }
+
+dom.createProjectButton.addEventListener("click", wrapEvent(async () => {
+  const payload = intake.getCreateProjectPayload();
+  if (!payload) {
+    dom.statusBanner.textContent = "请先填写项目名称。";
+    return;
+  }
+
+  intake.setBusyState(true);
+  dom.statusBanner.textContent = "正在创建项目...";
+  try {
+    const response = await api.createProject(payload);
+    intake.pushEvent(`已创建项目 ${response.project.name}。`);
+    await loadDashboard({ preserveSelection: true, preserveBanner: true });
+    location.hash = `#${response.project.id}`;
+    await loadProjectDetail(response.project.id, { preserveBanner: true });
+    dom.statusBanner.textContent = `项目 ${response.project.name} 已创建，可继续上传材料。`;
+  } catch (error) {
+    dom.statusBanner.textContent = `创建项目失败：${error.message}`;
+  } finally {
+    intake.setBusyState(false);
+  }
+}, "创建项目时发生运行时错误"));
+
+dom.intakeProjectSelect.addEventListener("change", wrapEvent(async () => {
+  const projectId = dom.intakeProjectSelect.value;
+  if (!projectId) {
+    intake.renderProjectFiles([]);
+    return;
+  }
+  location.hash = `#${projectId}`;
+  await loadProjectDetail(projectId, { preserveBanner: true });
+}, "切换项目时发生运行时错误"));
+
+dom.uploadFileButton.addEventListener("click", wrapEvent(async () => {
+  const projectId = dom.intakeProjectSelect.value;
+  if (!projectId) {
+    dom.statusBanner.textContent = "请先选择项目。";
+    return;
+  }
+
+  intake.setBusyState(true);
+  dom.statusBanner.textContent = "正在上传源材料...";
+  try {
+    const payload = await intake.getUploadPayload();
+    if (!payload) {
+      dom.statusBanner.textContent = "请选择本地文件，或填写 URL / 文本来源。";
+      return;
+    }
+    const response = await api.uploadProjectFile(projectId, payload);
+    intake.pushEvent(`已上传文件 ${response.file.file_name}。`);
+    await refreshProjectFiles(projectId);
+    await loadDashboard({ preserveSelection: true, preserveBanner: true });
+    await loadProjectDetail(projectId, { preserveBanner: true });
+    dom.statusBanner.textContent = `文件 ${response.file.file_name} 上传完成。`;
+  } catch (error) {
+    dom.statusBanner.textContent = `上传失败：${error.message}`;
+  } finally {
+    intake.setBusyState(false);
+  }
+}, "上传文件时发生运行时错误"));
+
+dom.parseFilesButton.addEventListener("click", wrapEvent(async () => {
+  const projectId = dom.intakeProjectSelect.value;
+  if (!projectId) {
+    dom.statusBanner.textContent = "请先选择项目。";
+    return;
+  }
+
+  intake.setBusyState(true);
+  dom.statusBanner.textContent = "正在解析文件并构建 source bundle...";
+  try {
+    const response = await api.parseProjectFiles(projectId, intake.getParsePayload(buildUserIntentPayload()));
+    intake.pushEvent(`解析完成：${response.files.length} 个文件进入 bundle。`);
+    await refreshProjectFiles(projectId);
+    await loadDashboard({ preserveSelection: true, preserveBanner: true });
+    await loadProjectDetail(projectId, { preserveBanner: true });
+    dom.statusBanner.textContent = "文件解析完成，可继续生成 Brief。";
+  } catch (error) {
+    dom.statusBanner.textContent = `解析失败：${error.message}`;
+  } finally {
+    intake.setBusyState(false);
+  }
+}, "解析文件时发生运行时错误"));
+
+dom.generateBriefButton.addEventListener("click", wrapEvent(async () => {
+  const projectId = dom.intakeProjectSelect.value;
+  if (!projectId) {
+    dom.statusBanner.textContent = "请先选择项目。";
+    return;
+  }
+
+  intake.setBusyState(true);
+  dom.statusBanner.textContent = "正在生成初始 Brief...";
+  try {
+    const response = await api.generateBrief(projectId, intake.getBriefGenerationPayload(buildUserIntentPayload()));
+    intake.pushEvent(`Brief 已生成：${response.brief.id}。`);
+    await loadDashboard({ preserveSelection: true, preserveBanner: true });
+    await loadProjectDetail(projectId, { preserveBanner: true });
+    dom.statusBanner.textContent = "Brief 已生成，审阅区已同步。";
+  } catch (error) {
+    dom.statusBanner.textContent = `Brief 生成失败：${error.message}`;
+  } finally {
+    intake.setBusyState(false);
+  }
+}, "生成 Brief 时发生运行时错误"));
+
+dom.generateOutlineButton.addEventListener("click", wrapEvent(async () => {
+  const projectId = dom.intakeProjectSelect.value;
+  if (!projectId) {
+    dom.statusBanner.textContent = "请先选择项目。";
+    return;
+  }
+
+  const detail = state.currentProjectDetail;
+  if (!detail || !detail.latest_brief) {
+    dom.statusBanner.textContent = "请先生成 Brief，再生成 Outline。";
+    return;
+  }
+
+  intake.setBusyState(true);
+  dom.statusBanner.textContent = "正在生成初始 Outline...";
+  try {
+    const response = await api.generateOutline(projectId, intake.getOutlineGenerationPayload(detail.latest_brief.id));
+    intake.pushEvent(`Outline 已生成：${response.outline.id}。`);
+    await loadDashboard({ preserveSelection: true, preserveBanner: true });
+    await loadProjectDetail(projectId, { preserveBanner: true });
+    dom.statusBanner.textContent = "Outline 已生成，下一步可进入 Slide Plan 审阅。";
+  } catch (error) {
+    dom.statusBanner.textContent = `Outline 生成失败：${error.message}`;
+  } finally {
+    intake.setBusyState(false);
+  }
+}, "生成 Outline 时发生运行时错误"));
 
 dom.saveBriefButton.addEventListener("click", async () => {
   await saveReviewSection("brief", review.getBriefPayload(), "Brief 已更新并重新同步看板摘要。");
@@ -288,6 +507,13 @@ dom.templateDensityFilter.addEventListener("change", handleTemplateFilterChange)
 dom.templateIndustryFilter.addEventListener("input", handleTemplateFilterChange);
 dom.templateSelect.addEventListener("change", handleTemplateFilterChange);
 window.addEventListener("hashchange", handleHashSelection);
+window.addEventListener("error", (event) => {
+  showRuntimeError(`页面脚本异常：${event.message}`);
+});
+window.addEventListener("unhandledrejection", (event) => {
+  const reason = event.reason instanceof Error ? event.reason.message : String(event.reason);
+  showRuntimeError(`未处理的异步异常：${reason}`);
+});
 
 review.setReviewDisabledState(true);
 loadTemplates().finally(() => loadDashboard());

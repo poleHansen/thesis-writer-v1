@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, Query, status
 
 from app.models.project import CreateProjectRequest
 from app.models.project import BriefResponse
@@ -15,10 +15,12 @@ from app.models.project import GenerateSlidePlanRequest
 from app.models.project import OutlineResponse
 from app.models.project import ParseProjectFilesRequest
 from app.models.project import ParseProjectFilesResponse
+from app.models.project import ProjectLlmSettingsResponse
 from app.models.project import ProjectFileResponse
 from app.models.project import ProjectDetailResponse
 from app.models.project import ProjectDashboardResponse
 from app.models.project import ProjectFilesResponse
+from app.models.project import ProjectLlmSettingsUpdateRequest
 from app.models.project import ProjectResponse
 from app.models.project import ProjectStatusResponse
 from app.models.project import RegisterProjectFileRequest
@@ -33,6 +35,7 @@ from app.models.project import UpdateOutlineResponse
 from app.models.project import UpdateSlidePlanRequest
 from app.models.project import UpdateSlidePlanResponse
 from app.models.project import UploadProjectFileRequest
+from app.models.project import TestProjectLlmResponse
 from app.services.project_service import ProjectService
 from app.state import get_project_service
 
@@ -71,10 +74,35 @@ def get_project(
     return ProjectDetailResponse(**detail)
 
 
+@router.get("/{project_id}/llm-settings", response_model=ProjectLlmSettingsResponse)
+def get_project_llm_settings(
+    project_id: str,
+    service: ProjectService = Depends(get_project_service),
+) -> ProjectLlmSettingsResponse:
+    return ProjectLlmSettingsResponse(settings=service.get_project_llm_settings(project_id))
+
+
+@router.put("/{project_id}/llm-settings", response_model=ProjectLlmSettingsResponse)
+def update_project_llm_settings(
+    project_id: str,
+    payload: ProjectLlmSettingsUpdateRequest,
+    service: ProjectService = Depends(get_project_service),
+) -> ProjectLlmSettingsResponse:
+    return ProjectLlmSettingsResponse(settings=service.update_project_llm_settings(project_id, payload))
+
+
+@router.post("/{project_id}/llm-settings:test", response_model=TestProjectLlmResponse)
+def test_project_llm_settings(
+    project_id: str,
+    service: ProjectService = Depends(get_project_service),
+) -> TestProjectLlmResponse:
+    return TestProjectLlmResponse(**service.test_project_llm_settings(project_id))
+
+
 @router.get("/{project_id}/exports", response_model=ExportHistoryResponse)
 def list_project_exports(
     project_id: str,
-    limit: int = 5,
+    limit: int = Query(default=5, ge=1),
     service: ProjectService = Depends(get_project_service),
 ) -> ExportHistoryResponse:
     exports = service.list_project_exports(project_id, limit)

@@ -3,12 +3,13 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "thesis-writer-v1"
+name = "ai-ppt-studio"
 version = "0.1.0"
-description = "Thesis writer monorepo for research-to-presentation generation"
+description = "AI PPT generation platform monorepo for research-to-presentation workflows"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+  "alembic>=1.14,<2.0",
   "fastapi>=0.116,<1.0",
   "uvicorn[standard]>=0.35,<1.0",
   "pydantic>=2.11,<3.0",
@@ -27,5 +28,5 @@ dependencies = [
 package-dir = {"" = "."}
 
 [tool.setuptools.packages.find]
-where = ["apps/api/src", "packages/core-types/src", "packages/ingestion/src", "packages/methodology-engine/src"]
-include = ["app*", "core_types*", "ingestion*", "methodology_engine*"]
+where = ["apps/api/src", "packages/core-types/src", "packages/ingestion/src", "packages/methodology-engine/src", "packages/llm-gateway/src"]
+include = ["app*", "core_types*", "ingestion*", "methodology_engine*", "llm_gateway*"]

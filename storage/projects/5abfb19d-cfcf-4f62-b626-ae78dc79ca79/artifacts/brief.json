@@ -1,0 +1,31 @@
+{
+  "created_at": "2026-03-25T06:34:50.439566Z",
+  "updated_at": "2026-03-25T06:34:50.439566Z",
+  "id": "8a06ac56-8a96-4dd2-b0bc-30c4475fce1b",
+  "project_id": "5abfb19d-cfcf-4f62-b626-ae78dc79ca79",
+  "source_bundle_id": "dea6d1d3-8d1c-4988-8680-a4dc0bd3c0db",
+  "presentation_goal": "用 12 页以内说明研究价值、方法与结论",
+  "target_audience": "导师与答辩委员会",
+  "core_message": "学术答辩场景，强调研究问题、方法、实验结果与答辩讲述节奏。",
+  "storyline": "Context: 学术论文答辩 | Sources: academic-thesis-defense.md | Highlights: 学术答辩场景，强调研究问题、方法、实验结果与答辩讲述节奏。 -> 多模态大模型辅助学术答辩",
+  "recommended_page_count": 10,
+  "tone": "academic",
+  "style_preferences": [
+    "academic"
+  ],
+  "risks": [],
+  "assumptions": [
+    "research enrichment is not connected yet",
+    "uploaded files are the primary evidence base"
+  ],
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "clarification": {
+      "is_sufficient": true,
+      "missing_fields": [],
+      "suggested_questions": []
+    },
+    "source_mode": "mixed"
+  }
+}

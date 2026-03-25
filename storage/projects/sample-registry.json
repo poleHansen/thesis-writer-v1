@@ -1,0 +1,106 @@
+{
+  "samples": [
+    {
+      "sample_id": "academic-thesis-defense",
+      "category": "学术论文答辩",
+      "project_name": "多模态大模型辅助学术答辩",
+      "source_mode": "file",
+      "source_asset": {
+        "kind": "inline-markdown",
+        "path": "storage/projects/sample-assets/academic-thesis-defense/source.md"
+      },
+      "recommended_template_id": "academic-defense",
+      "summary": "学术答辩场景，强调研究问题、方法、实验结果与答辩讲述节奏。",
+      "brief": {
+        "audience": "导师与答辩委员会",
+        "goal": "用 12 页以内说明研究价值、方法与结论",
+        "style": "academic"
+      }
+    },
+    {
+      "sample_id": "enterprise-strategy-review",
+      "category": "企业战略汇报",
+      "project_name": "区域市场三年增长战略",
+      "source_mode": "file",
+      "source_asset": {
+        "kind": "inline-markdown",
+        "path": "storage/projects/sample-assets/enterprise-strategy-review/source.md"
+      },
+      "recommended_template_id": "consulting-premium",
+      "summary": "企业战略汇报场景，强调高层判断、增长机会、行动路径与管理摘要。",
+      "brief": {
+        "audience": "经营管理层",
+        "goal": "形成战略判断、优先级与落地路线图",
+        "style": "consulting"
+      }
+    },
+    {
+      "sample_id": "product-launch-deck",
+      "category": "产品发布会",
+      "project_name": "新一代 AI 办公助手发布会",
+      "source_mode": "chat",
+      "source_asset": {
+        "kind": "prompt-markdown",
+        "path": "storage/projects/sample-assets/product-launch-deck/source.md"
+      },
+      "recommended_template_id": "technology-grid",
+      "summary": "产品发布会场景，强调卖点、能力演示、场景价值与节奏感。",
+      "brief": {
+        "audience": "客户与合作伙伴",
+        "goal": "突出产品差异化与发布会舞台表达",
+        "style": "technology"
+      }
+    },
+    {
+      "sample_id": "training-courseware",
+      "category": "培训课件",
+      "project_name": "企业 AI 提效实战培训",
+      "source_mode": "file",
+      "source_asset": {
+        "kind": "inline-markdown",
+        "path": "storage/projects/sample-assets/training-courseware/source.md"
+      },
+      "recommended_template_id": "consulting-clean",
+      "summary": "培训课件场景，强调结构清晰、知识分层和可讲授性。",
+      "brief": {
+        "audience": "内部培训学员",
+        "goal": "便于分章节讲解和课堂互动",
+        "style": "training"
+      }
+    },
+    {
+      "sample_id": "government-reporting-pack",
+      "category": "政府汇报",
+      "project_name": "区域数字治理年度汇报",
+      "source_mode": "file",
+      "source_asset": {
+        "kind": "inline-markdown",
+        "path": "storage/projects/sample-assets/government-reporting-pack/source.md"
+      },
+      "recommended_template_id": "government-blue",
+      "summary": "政府汇报场景，强调政策语境、指标进展、重点项目与风险事项。",
+      "brief": {
+        "audience": "主管部门与领导班子",
+        "goal": "形成稳健、规范、层次清晰的正式汇报",
+        "style": "government"
+      }
+    },
+    {
+      "sample_id": "technical-sharing-session",
+      "category": "技术分享",
+      "project_name": "Agent 系统工程化实践分享",
+      "source_mode": "chat",
+      "source_asset": {
+        "kind": "prompt-markdown",
+        "path": "storage/projects/sample-assets/technical-sharing-session/source.md"
+      },
+      "recommended_template_id": "technology-grid",
+      "summary": "技术分享场景，强调架构分层、关键原理、案例与工程经验。",
+      "brief": {
+        "audience": "工程团队",
+        "goal": "帮助技术听众快速理解架构与实践经验",
+        "style": "technology"
+      }
+    }
+  ]
+}

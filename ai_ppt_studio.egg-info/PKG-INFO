@@ -1,0 +1,121 @@
+Metadata-Version: 2.4
+Name: ai-ppt-studio
+Version: 0.1.0
+Summary: AI PPT generation platform monorepo for research-to-presentation workflows
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: alembic<2.0,>=1.14
+Requires-Dist: fastapi<1.0,>=0.116
+Requires-Dist: uvicorn[standard]<1.0,>=0.35
+Requires-Dist: pydantic<3.0,>=2.11
+Requires-Dist: pydantic-settings<3.0,>=2.10
+Requires-Dist: sqlalchemy<3.0,>=2.0
+Requires-Dist: psycopg[binary]<4.0,>=3.2
+Requires-Dist: httpx<0.29,>=0.28
+Requires-Dist: pytest<9.0,>=8.3
+Requires-Dist: pypdf<6.0,>=5.4
+Requires-Dist: python-docx<2.0,>=1.1
+Requires-Dist: python-pptx<2.0,>=1.0
+Requires-Dist: cairosvg<3.0,>=2.7
+
+# AI PPT Studio
+
+融合 Linux.do 方法论、LandPPT 平台能力与 ppt-master 渲染链路的 AI PPT 生成网站
+
+## 项目定位
+
+这个仓库的目标不是做“论文初稿生成器”，而是做一个面向多场景的 AI PPT 生成平台。
+
+核心能力包括：
+
+- 对话生成 PPT：用户通过对话描述主题、目标、受众、场景与风格，系统先澄清，再规划，再生成。
+- 材料生成 PPT：用户上传 Word、PDF、Markdown、网页链接、文本等资料，系统先解析，再研究，再规划，再生成。
+- 统一内容中台：无论输入来自对话还是文件，都统一进入 `SourceBundle -> PresentationBrief -> Outline -> SlidePlan -> SlideArtifact -> ExportJob` 链路。
+- SVG-first 交付：最终页面以 SVG-first 方式渲染，并支持导出 PPTX / PDF 与保留版本化结果归档。
+
+当前优先支持的典型场景包括：
+
+- 论文答辩
+- 企业汇报
+- 战略咨询
+- 产品发布
+- 培训课件
+- 政府或园区汇报
+- 技术分享
+
+其中“论文答辩”只是支持场景之一，不再代表整个产品定位。
+
+## 环境要求
+
+- Python 3.11+
+- uv
+
+## 安装依赖
+
+在仓库根目录执行：
+
+```bash
+uv sync
+```
+
+## 本地启动
+
+默认 `.env` 已按宿主机本地开发配置为 `127.0.0.1`。如果你用 Docker Compose 启动，容器内的 `DATABASE_URL` 和 `REDIS_URL` 会由 `docker-compose.yml` 自动覆盖为服务名。
+
+### 初始化数据库
+
+在首次启动 API 前，先执行正式数据库迁移：
+
+```bash
+uv run alembic upgrade head
+```
+
+`AUTO_CREATE_TABLES` 仅保留给本地开发和部分测试夹具兜底，标准 schema 变更入口是 Alembic。
+
+### 启动 API
+
+在仓库根目录执行：
+
+```bash
+uv run uvicorn app.main:app --host 0.0.0.0 --port 8000 --app-dir apps/api/src --reload
+```
+
+访问地址：
+
+- API: http://127.0.0.1:8000
+- Swagger UI: http://127.0.0.1:8000/docs
+- ReDoc: http://127.0.0.1:8000/redoc
+
+### 启动 Web
+
+在仓库根目录执行：
+
+```bash
+uv run python apps/web/server.py
+```
+
+如果 3000 端口已被占用，可先设置其他端口再启动：
+
+```bash
+$env:WEB_PORT=3001
+uv run python apps/web/server.py
+```
+
+访问地址：
+
+- Web: http://127.0.0.1:3000
+
+## 子应用说明
+
+- Web 说明见 `apps/web/README.md`
+- API 说明见 `apps/api/README.md`
+
+## Docker Compose
+
+如果需要使用容器启动依赖服务和应用，可在仓库根目录执行：
+
+```bash
+docker compose up --build
+```
+
+容器内 API 会先执行一次 `alembic upgrade head`，再启动 FastAPI 服务。

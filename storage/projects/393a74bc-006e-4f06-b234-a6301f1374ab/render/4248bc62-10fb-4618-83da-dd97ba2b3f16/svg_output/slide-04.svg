@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#E2E8F0" />
+  <rect x="0" y="0" width="1280" height="18" fill="#C48A3A" />
+        <text x="80" y="110" font-size="20" font-family="Arial" fill="#C48A3A" data-max-width="1120" data-line-height="1.0" data-max-height="24">hero</text>
+    <text x="80" y="170" font-size="38" font-family="Arial" fill="#0F172A" data-max-width="1120" data-line-height="1.18" data-max-height="92" font-weight="700">Implications and Choices</text>
+    <text x="80" y="230" font-size="20" font-family="Arial" fill="#0F172A" data-max-width="1120" data-line-height="1.2" data-max-height="48" fill-opacity="0.72">Implications and Choices turns findings into interpretable decisions and tradeoffs.</text>
+  <rect x="760" y="260" width="420" height="220" rx="28" fill="#C48A3A" fill-opacity="0.1" />
+    <text x="800" y="330" font-size="24" font-family="Arial" fill="#0F172A" data-max-width="340" data-line-height="1.35" data-max-height="120">Implications and Choices<tspan x="800" dy="32.4">turns findings into</tspan><tspan x="800" dy="32.4">interpretable decisions…</tspan></text><circle cx="88" cy="314" r="5" fill="#C48A3A" /><text x="104" y="320" font-size="18" font-family="Arial" fill="#0F172A" data-max-width="280" data-line-height="1.2" data-max-height="44">形成战略判断、优先级与落地路线图</text><circle cx="88" cy="351" r="5" fill="#C48A3A" /><text x="104" y="357" font-size="18" font-family="Arial" fill="#0F172A" data-max-width="280" data-line-height="1.2" data-max-height="44">Context: 企业战略汇报 | Sources:<tspan x="104" dy="21.6">enterprise-strategy-review…</tspan></text><circle cx="88" cy="410" r="5" fill="#C48A3A" /><text x="104" y="416" font-size="18" font-family="Arial" fill="#0F172A" data-max-width="280" data-line-height="1.2" data-max-height="44">Audience focus: 经营管理层</text>
+  <line x1="80" y1="650" x2="1200" y2="650" stroke="#0F172A" stroke-opacity="0.18" />
+    <text x="80" y="685" font-size="18" font-family="Arial" fill="#0F172A" data-max-width="1120" data-line-height="1.0" data-max-height="22" fill-opacity="0.65">4/5 高端咨询风</text>
+</svg>

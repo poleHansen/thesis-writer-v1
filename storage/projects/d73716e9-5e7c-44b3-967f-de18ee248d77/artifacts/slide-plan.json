@@ -1,0 +1,181 @@
+{
+  "created_at": "2026-03-25T06:35:02.637932Z",
+  "updated_at": "2026-03-25T06:35:02.637932Z",
+  "id": "263fb094-a451-4f6d-bce8-faca98c966df",
+  "project_id": "d73716e9-5e7c-44b3-967f-de18ee248d77",
+  "brief_id": "7872240c-8cff-4a8d-a732-4da9817cee71",
+  "outline_id": "71893293-54e8-4a25-ab67-92ab5346664c",
+  "page_count": 5,
+  "slides": [
+    {
+      "slide_id": "slide-1",
+      "slide_number": 1,
+      "title": "Scenario and Core Challenge",
+      "conclusion": "The presentation should anchor on: 技术分享场景，强调架构分层、关键原理、案例与工程经验。",
+      "layout_mode": "cover",
+      "content_blocks": [
+        {
+          "block_id": "slide-1-hero",
+          "block_type": "hero",
+          "heading": "Scenario and Core Challenge",
+          "body": "The presentation should anchor on: 技术分享场景，强调架构分层、关键原理、案例与工程经验。",
+          "bullets": [
+            "帮助技术听众快速理解架构与实践经验",
+            "Context: 技术分享 | Highlights: 技术分享场景，强调架构分层、关键原理、案例与工程经验。 -> Agent 系统工程化实践分享"
+          ],
+          "asset_refs": [],
+          "chart_hint": null,
+          "emphasis": "primary"
+        }
+      ],
+      "speaker_notes": "Keep the slide anchored on one conclusion: The presentation should anchor on: 技术分享场景，强调架构分层、关键原理、案例与工程经验。",
+      "data_refs": [],
+      "visual_priority": "high"
+    },
+    {
+      "slide_id": "slide-2",
+      "slide_number": 2,
+      "title": "Audience Priorities",
+      "conclusion": "Audience Priorities defines what the audience must understand before details.",
+      "layout_mode": "toc",
+      "content_blocks": [
+        {
+          "block_id": "slide-2-toc",
+          "block_type": "agenda",
+          "heading": "Presentation Flow",
+          "body": "Clarify the decision focus and evaluation lens",
+          "bullets": [
+            "帮助技术听众快速理解架构与实践经验",
+            "Context: 技术分享 | Highlights: 技术分享场景，强调架构分层、关键原理、案例与工程经验。 -> Agent 系统工程化实践分享",
+            "Audience focus: 工程团队"
+          ],
+          "asset_refs": [],
+          "chart_hint": null,
+          "emphasis": "primary"
+        }
+      ],
+      "speaker_notes": "Keep the slide anchored on one conclusion: Audience Priorities defines what the audience must understand before details.",
+      "data_refs": [],
+      "visual_priority": "balanced"
+    },
+    {
+      "slide_id": "slide-3",
+      "slide_number": 3,
+      "title": "Evidence and Analysis",
+      "conclusion": "Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+      "layout_mode": "chart_focus",
+      "content_blocks": [
+        {
+          "block_id": "slide-3-insight",
+          "block_type": "insight",
+          "heading": "Evidence and Analysis",
+          "body": "Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+          "bullets": [],
+          "asset_refs": [],
+          "chart_hint": "compare key evidence",
+          "emphasis": "primary"
+        },
+        {
+          "block_id": "slide-3-evidence",
+          "block_type": "evidence",
+          "heading": "Key Evidence",
+          "body": null,
+          "bullets": [
+            "帮助技术听众快速理解架构与实践经验",
+            "Context: 技术分享 | Highlights: 技术分享场景，强调架构分层、关键原理、案例与工程经验。 -> Agent 系统工程化实践分享",
+            "Audience focus: 工程团队"
+          ],
+          "asset_refs": [],
+          "chart_hint": "bar_or_line",
+          "emphasis": "secondary"
+        }
+      ],
+      "speaker_notes": "Keep the slide anchored on one conclusion: Evidence and Analysis substantiates the storyline with the most relevant evidence.",
+      "data_refs": [],
+      "visual_priority": "medium"
+    },
+    {
+      "slide_id": "slide-4",
+      "slide_number": 4,
+      "title": "Implications and Choices",
+      "conclusion": "Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+      "layout_mode": "hero",
+      "content_blocks": [
+        {
+          "block_id": "slide-4-recommendation",
+          "block_type": "recommendation",
+          "heading": "Implications and Choices",
+          "body": "Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+          "bullets": [
+            "帮助技术听众快速理解架构与实践经验",
+            "Context: 技术分享 | Highlights: 技术分享场景，强调架构分层、关键原理、案例与工程经验。 -> Agent 系统工程化实践分享",
+            "Audience focus: 工程团队"
+          ],
+          "asset_refs": [],
+          "chart_hint": null,
+          "emphasis": "primary"
+        }
+      ],
+      "speaker_notes": "Keep the slide anchored on one conclusion: Implications and Choices turns findings into interpretable decisions and tradeoffs.",
+      "data_refs": [],
+      "visual_priority": "high"
+    },
+    {
+      "slide_id": "slide-5",
+      "slide_number": 5,
+      "title": "Recommendation and Next Steps",
+      "conclusion": "Recommendation and Next Steps converts the storyline into a final recommendation.",
+      "layout_mode": "ending",
+      "content_blocks": [
+        {
+          "block_id": "slide-5-ending",
+          "block_type": "ending",
+          "heading": "Next Step",
+          "body": "Recommendation and Next Steps converts the storyline into a final recommendation.",
+          "bullets": [
+            "帮助技术听众快速理解架构与实践经验",
+            "Context: 技术分享 | Highlights: 技术分享场景，强调架构分层、关键原理、案例与工程经验。 -> Agent 系统工程化实践分享"
+          ],
+          "asset_refs": [],
+          "chart_hint": null,
+          "emphasis": "primary"
+        }
+      ],
+      "speaker_notes": "Keep the slide anchored on one conclusion: Recommendation and Next Steps converts the storyline into a final recommendation.",
+      "data_refs": [],
+      "visual_priority": "high"
+    }
+  ],
+  "design_direction": "technology-grid",
+  "status": "draft",
+  "metadata": {
+    "generation_mode": "methodology_engine_v1",
+    "source": "outline",
+    "preferred_template_id": "technology-grid",
+    "audience_tag": "工程团队",
+    "tone": "technology",
+    "style_tags": [
+      "technology"
+    ],
+    "scenario_tags": [
+      "general"
+    ],
+    "planning_principles": [
+      "single_conclusion_per_slide",
+      "controlled_information_density",
+      "limited_content_blocks",
+      "layout_matches_content_type"
+    ],
+    "supported_layout_modes": [
+      "cover",
+      "toc",
+      "section",
+      "hero",
+      "two_column",
+      "bento",
+      "chart_focus",
+      "timeline",
+      "ending"
+    ]
+  }
+}
